@@ -9,6 +9,7 @@ license: []
 tags: []
 dependencies: {}
 # dependencies:
+#    'geerlingguy.k8s': '0.9.0'  # just testing dependencies
 #   'osbuild.composer': 'v59'
 repository: http://example.com/repository
 documentation: http://docs.example.com

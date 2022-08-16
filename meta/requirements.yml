@@ -3,4 +3,4 @@ roles: []
 
 collections:
   - name: osbuild.composer
-    src: git+https://github.com/ansible-collections/osbuild.composer
+    source: git+https://github.com/ansible-collections/osbuild.composer

@@ -16,7 +16,7 @@ cd fdo
 # Install community.general collection, since we like to have stdout_callback=community.general.yaml in ansible.cfg
 ansible-galaxy collection install community.general
 # Install dependencies needed by the collection (TODO - can be listed in galaxy.yml?)
-ansible-galaxy collection install -r requirements.yml
+ansible-galaxy collection install -r meta/requirements.yml
 # Optional, if you want to run "ansible-test --venv ..."
 # pip install -r test.requirements.txt -r sanity.requirements
 ```
@@ -55,3 +55,10 @@ Sample ansible.cfg is there to ensure collection does not need to be installed.
 ```yaml
 ansible-playbook -i localhost, sample-playbook.yml -v
 ```
+
+# TODO
+- add mock sample to tests/unit/plugins/conftest.py
+- add integration test, unit test
+- add tests/integration/integration_config.yml.template if needed
+- add docs/
+- fix 'osbuild.composer' collection is not auto-installed. It is not on galaxy.
