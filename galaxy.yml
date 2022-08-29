@@ -1,0 +1,29 @@
+namespace: community
+name: fdo
+version: 0.0.1
+readme: README.md
+authors:
+- your name <example@domain.com>
+description: your collection description
+license: []
+tags: []
+dependencies: {}
+# dependencies:
+#    'geerlingguy.k8s': '0.9.0'  # just testing dependencies
+#   'osbuild.composer': 'v59'
+repository: http://example.com/repository
+documentation: http://docs.example.com
+homepage: http://example.com
+issues: http://example.com/issue/tracker
+build_ignore:
+- .idea
+- .gitignore
+- .flake8
+- DEVELOPMENT.md
+- Makefile
+- sanity.requirements
+- test.requirements
+- tests
+# files used during local testing/building
+- ansible.cfg
+- sample*

@@ -1,0 +1,13 @@
+---
+- environment:
+    MY_VAR: "{{ my_var }}"
+
+  block:
+    - name: Show MY_VAR value - not what I would expect
+      ansible.builtin.debug:
+        msg: "MY_VAR has value {{ lookup('ansible.builtin.env', 'MY_VAR') }}, my_var={{ my_var }}"
+
+    - name: Show MY_VAR value in real subprocess
+      ansible.builtin.command:
+        cmd: /bin/echo "in real subprocess MY_VAR=$MY_VAR"
+      changed_when: False

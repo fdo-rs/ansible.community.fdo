@@ -1,0 +1,6 @@
+---
+roles: []
+
+collections:
+  - name: osbuild.composer
+    source: git+https://github.com/ansible-collections/osbuild.composer
