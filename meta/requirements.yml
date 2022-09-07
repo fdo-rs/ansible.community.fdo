@@ -2,5 +2,7 @@
 roles: []
 
 collections:
-  - name: osbuild.composer
-    source: git+https://github.com/ansible-collections/osbuild.composer
+  - name: ansible.posix
+  - name: https://github.com/ansible-collections/osbuild.composer
+    type: git
+    version: main

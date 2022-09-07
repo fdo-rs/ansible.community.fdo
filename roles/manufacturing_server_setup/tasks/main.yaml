@@ -1,0 +1,63 @@
+---
+- name: Check RHEL Subscription
+  command: subscription-manager status
+  register: subscriptionStatus
+  ignore_errors: true
+
+- name: RHEL Subscription
+  fail:
+    msg: RHEL Subscription not available.
+  when: '"Overall Status: Current" not in subscriptionStatus.stdout'
+
+- name: Install Packages
+  dnf:
+    state: latest
+    name:
+      - fdo-admin-cli
+      - fdo-manufacturing-server
+
+- name: Creates FDO Keys Directory
+  file:
+    path: /etc/fdo/keys
+    state: directory
+    mode: 0775
+
+- name: Generate FDO Certs and Keys
+  shell: |
+    for i in manufacturer owner device-ca diun ; do
+    
+    fdo-admin-tool generate-key-and-cert \
+    --destination-dir /etc/fdo/keys $i
+    
+    done
+
+- name: Create Manufacturer Service Keys Stores
+  file:
+    path: "{{ item }}"
+    state: directory
+    mode: 0775
+    recurse: yes
+  loop:
+    - /etc/fdo/stores/manufacturer_keys
+    - /etc/fdo/stores/manufacturing_sessions
+    - /etc/fdo/stores/owner_vouchers
+
+# TODO: add option to edit the default config
+- name: Copy Manufacturing Server Config
+  copy:
+    src: /usr/share/doc/fdo/manufacturing-server.yml
+    dest: /etc/fdo/manufacturing-server.yml
+    remote_src: yes
+
+- name: Start and Enable FDO Manufacturing Server Service
+  systemd:
+    name: fdo-manufacturing-server
+    state: started
+    enabled: yes
+
+- name: Open Required Ports
+  ansible.posix.firewalld:
+    port: 8080/tcp
+    permanent: yes
+    state: enabled
+    immediate: true
