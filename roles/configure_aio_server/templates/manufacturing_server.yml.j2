@@ -1,0 +1,32 @@
+---
+session_store_driver:
+  Directory:
+    path: /etc/fdo/aio/stores/manufacturing_sessions
+ownership_voucher_store_driver:
+  Directory:
+    path: /etc/fdo/aio/stores/owner_vouchers
+public_key_store_driver:
+  Directory:
+    path: /etc/fdo/aio/stores/manufacturer_keys
+bind: "0.0.0.0:{{ manufacturing_server_port }}"
+protocols:
+  plain_di: false
+  diun:
+    mfg_string_type: SerialNumber
+    key_type: SECP384R1
+    allowed_key_storage_types:
+      - Tpm
+      - FileSystem
+    key_path: /etc/fdo/aio/keys/diun_key.der
+    cert_path: /etc/fdo/aio/keys/diun_cert.pem
+rendezvous_info:
+  - deviceport: {{ rendezvous_server_port }}
+    ip_address: {{ server_ip_address }}
+    ownerport: {{ rendezvous_server_port }}
+    protocol: http
+manufacturing:
+  manufacturer_cert_path: /etc/fdo/aio/keys/manufacturer_cert.pem
+  device_cert_ca_private_key: /etc/fdo/aio/keys/device_ca_key.der
+  device_cert_ca_chain: /etc/fdo/aio/keys/device_ca_cert.pem
+  owner_cert_path: /etc/fdo/aio/keys/owner_cert.pem
+  manufacturer_private_key: /etc/fdo/aio/keys/manufacturer_key.der

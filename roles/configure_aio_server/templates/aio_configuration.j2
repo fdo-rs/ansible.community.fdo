@@ -1,0 +1,18 @@
+---
+cert_organization: FDO AIO
+cert_country: US
+listen_ip_address: 0.0.0.0
+listen_port_manufacturing_server: {{ manufacturing_server_port }}
+listen_port_owner_onboarding_server: {{ owner_onboarding_server_port }}
+listen_port_rendezvous_server: {{ rendezvous_server_port }}
+listen_port_serviceinfo_api_server: {{ serviceinfo_api_server_port }}
+separate_manufacturing_and_owner_voucher_store: false
+manufacturing_enable_plain_di: false
+manufacturing_disable_key_storage_filesystem: false
+manufacturing_disable_key_storage_tpm: false
+manufacturing_use_secp256r1: false
+contact_hostname: ~
+contact_addresses:
+  - IpAddr: {{ server_ip_address}}
+serviceinfo_api_auth_token: GQJr8WcJixk7beYxvyfFQuqRB/caOcY4t39MdyEFhfc=
+serviceinfo_api_admin_token: WYhNmDPIhkMfKUJsyrQJdrkplveqECgR3du/n+o+QYc=

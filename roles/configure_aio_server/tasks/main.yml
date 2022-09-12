@@ -1,0 +1,56 @@
+---
+#
+# Create backups of old config files and create new ones from templates.
+#
+- name: Copy config files
+  import_tasks: copy_config_files.yml
+
+#
+# Restart FDO AIO Service and check its status after restart.
+#
+- name: Restart FDO AIO Service
+  systemd:
+    name: fdo-aio
+    state: restarted
+    enabled: yes
+
+- name: Check FDO AIO Service Status
+  command: systemctl status fdo-aio
+  ignore_errors: yes
+  changed_when: false
+  register: service_fdo_aio_status
+
+- name: Report Status of FDO AIO Service
+  fail:
+    msg: FDO AIO Service failed to restart after configuration change.
+  ignore_errors: yes
+  when: service_fdo_aio_status.rc != 0
+
+#
+# Reset FDO AIO Configs to the old ones & restart the service - in case FDO AIO Service failed to restart.
+#
+- name: Reset config files
+  import_tasks: reset_config_files.yml
+
+- name: Restart FDO AIO Service
+  systemd:
+    name: fdo-aio
+    state: restarted
+    enabled: yes
+  when: service_fdo_aio_status.rc != 0
+
+#
+# Open required ports - in case config change was successful.
+#
+- name: Open Required Ports
+  ansible.posix.firewalld:
+    port: "{{ item }}"
+    permanent: yes
+    state: enabled
+    immediate: true
+  loop:
+    - "{{ manufacturing_server_port }}/tcp"
+    - "{{ owner_onboarding_server_port }}/tcp"
+    - "{{ rendezvous_server_port }}/tcp"
+    - "{{ serviceinfo_api_server_port }}/tcp"
+  when: service_fdo_aio_status.rc == 0

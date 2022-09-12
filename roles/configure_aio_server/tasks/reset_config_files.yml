@@ -1,0 +1,23 @@
+---
+#
+# Reset FDO AIO Configs to the old ones & restart the service - in case FDO AIO Service failed to restart.
+#
+- name: Reset AIO Config
+  command: mv /etc/fdo/aio/aio_configuration.old /etc/fdo/aio/aio_configuration
+  when: service_fdo_aio_status.rc != 0
+
+- name: Reset Manufacturing Server Config
+  command: mv /etc/fdo/aio/configs/manufacturing_server.yml.old /etc/fdo/aio/configs/manufacturing_server.yml
+  when: service_fdo_aio_status.rc != 0
+
+- name: Reset Rendezvous Server Config
+  command: mv /etc/fdo/aio/configs/rendezvous_server.yml.old /etc/fdo/aio/configs/rendezvous_server.yml
+  when: service_fdo_aio_status.rc != 0
+
+- name: Reset Onboarding Server Config
+  command: mv /etc/fdo/aio/configs/owner_onboarding_server.yml.old /etc/fdo/aio/configs/owner_onboarding_server.yml
+  when: service_fdo_aio_status.rc != 0
+
+- name: Reset ServiceInfo API Server Config
+  command: mv /etc/fdo/aio/configs/serviceinfo_api_server.yml.old /etc/fdo/aio/configs/serviceinfo_api_server.yml
+  when: service_fdo_aio_status.rc != 0

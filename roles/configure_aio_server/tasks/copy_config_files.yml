@@ -1,0 +1,58 @@
+---
+#
+# Create backups of old config files and create new ones from templates.
+#
+- name: Copy Old AIO Config
+  copy:
+    src: /etc/fdo/aio/aio_configuration
+    dest: /etc/fdo/aio/aio_configuration.old
+    remote_src: yes
+
+- name: Configure AIO
+  template:
+    src: ../templates/aio_configuration.j2
+    dest: /etc/fdo/aio/aio_configuration
+
+- name: Copy Old Manufacturing Server Config
+  copy:
+    src: /etc/fdo/aio/configs/manufacturing_server.yml
+    dest: /etc/fdo/aio/configs/manufacturing_server.yml.old
+    remote_src: yes
+
+- name: Configure Manufacturing Server
+  template:
+    src: ../templates/manufacturing_server.yml.j2
+    dest: /etc/fdo/aio/configs/manufacturing_server.yml
+
+- name: Copy Old Rendezvous Server Config
+  copy:
+    src: /etc/fdo/aio/configs/rendezvous_server.yml
+    dest: /etc/fdo/aio/configs/rendezvous_server.yml.old
+    remote_src: yes
+
+- name: Configure Rendezvous Server
+  template:
+    src: ../templates/rendezvous_server.yml.j2
+    dest: /etc/fdo/aio/configs/rendezvous_server.yml
+
+- name: Copy Old Owner Onboarding Server Config
+  copy:
+    src: /etc/fdo/aio/configs/owner_onboarding_server.yml
+    dest: /etc/fdo/aio/configs/owner_onboarding_server.yml.old
+    remote_src: yes
+
+- name: Configure Owner Onboarding Server
+  template:
+    src: ../templates/owner_onboarding_server.yml.j2
+    dest: /etc/fdo/aio/configs/owner_onboarding_server.yml
+
+- name: Copy Old ServiceInfo API Server Config
+  copy:
+    src: /etc/fdo/aio/configs/serviceinfo_api_server.yml
+    dest: /etc/fdo/aio/configs/serviceinfo_api_server.yml.old
+    remote_src: yes
+
+- name: Configure ServiceInfo API Server
+  template:
+    src: ../templates/serviceinfo_api_server.yml.j2
+    dest: /etc/fdo/aio/configs/serviceinfo_api_server.yml

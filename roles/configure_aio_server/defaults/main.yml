@@ -1,0 +1,6 @@
+---
+manufacturing_server_port: 8080
+owner_onboarding_server_port: 8081
+rendezvous_server_port: 8082
+serviceinfo_api_server_port: 8083
+server_ip_address: "{{ ansible_eth0.ipv4.address }}"
