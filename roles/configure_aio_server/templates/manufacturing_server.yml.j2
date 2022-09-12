@@ -1,32 +1,32 @@
 ---
 session_store_driver:
   Directory:
-    path: /etc/fdo/aio/stores/manufacturing_sessions
+    path: {{ manufacturing_server_session_store_driver_path }}
 ownership_voucher_store_driver:
   Directory:
-    path: /etc/fdo/aio/stores/owner_vouchers
+    path: {{ manufacturing_server_ownership_voucher_store_driver_path }}
 public_key_store_driver:
   Directory:
-    path: /etc/fdo/aio/stores/manufacturer_keys
-bind: "0.0.0.0:{{ manufacturing_server_port }}"
+    path: {{ manufacturing_server_public_key_store_driver_path }}
+bind: "{{ aio_configuration_listen_ip_address }}:{{ aio_configuration_listen_port_manufacturing_server }}"
 protocols:
-  plain_di: false
+  plain_di: {{ manufacturing_server_protocols_plain_di | bool | lower }}
   diun:
     mfg_string_type: SerialNumber
     key_type: SECP384R1
     allowed_key_storage_types:
       - Tpm
       - FileSystem
-    key_path: /etc/fdo/aio/keys/diun_key.der
-    cert_path: /etc/fdo/aio/keys/diun_cert.pem
+    key_path: {{ manufacturing_server_protocols_key_path }}
+    cert_path: {{ manufacturing_server_protocols_cert_path }}
 rendezvous_info:
-  - deviceport: {{ rendezvous_server_port }}
-    ip_address: {{ server_ip_address }}
-    ownerport: {{ rendezvous_server_port }}
-    protocol: http
+  - deviceport: {{ aio_configuration_listen_port_rendezvous_server }}
+    ip_address: {{ aio_configuration_contact_addresses_IpAddr }}
+    ownerport: {{ aio_configuration_listen_port_rendezvous_server }}
+    protocol: {{ manufacturing_server_rendezvous_info_protocol }}
 manufacturing:
-  manufacturer_cert_path: /etc/fdo/aio/keys/manufacturer_cert.pem
-  device_cert_ca_private_key: /etc/fdo/aio/keys/device_ca_key.der
-  device_cert_ca_chain: /etc/fdo/aio/keys/device_ca_cert.pem
-  owner_cert_path: /etc/fdo/aio/keys/owner_cert.pem
-  manufacturer_private_key: /etc/fdo/aio/keys/manufacturer_key.der
+  manufacturer_cert_path: {{ manufacturing_server_manufacturer_cert_path }}
+  device_cert_ca_private_key: {{ manufacturing_server_device_cert_ca_private_key }}
+  device_cert_ca_chain: {{ manufacturing_server_device_cert_ca_chain }}
+  owner_cert_path: {{ manufacturing_server_device_cert_ca_chain }}
+  manufacturer_private_key: {{ manufacturing_server_manufacturer_private_key }}

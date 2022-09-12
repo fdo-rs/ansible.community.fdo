@@ -1,21 +1,21 @@
 ---
 ownership_voucher_store_driver:
   Directory:
-    path: /etc/fdo/aio/stores/owner_vouchers
+    path: {{ owner_onboarding_server_ownership_voucher_store_driver_path }}
 session_store_driver:
   Directory:
-    path: /etc/fdo/aio/stores/owner_onboarding_sessions
-trusted_device_keys_path: /etc/fdo/aio/keys/device_ca_cert.pem
-owner_private_key_path: /etc/fdo/aio/keys/owner_key.der
-owner_public_key_path: /etc/fdo/aio/keys/owner_cert.pem
-bind: "0.0.0.0:{{ owner_onboarding_server_port }}"
-service_info_api_url: "http://localhost:{{ serviceinfo_api_server_port }}/device_info"
+    path: {{ owner_onboarding_server_session_store_driver_path }}
+trusted_device_keys_path: {{ owner_onboarding_server_trusted_device_keys_path }}
+owner_private_key_path: {{ owner_onboarding_server_owner_private_key_path }}
+owner_public_key_path: {{ owner_onboarding_server_owner_public_key_path }}
+bind: "{{ aio_configuration_listen_ip_address }}:{{ aio_configuration_listen_port_owner_onboarding_server }}"
+service_info_api_url: "http://localhost:{{ aio_configuration_listen_port_serviceinfo_api_server }}/device_info"
 service_info_api_authentication:
   BearerToken:
-    token: GQJr8WcJixk7beYxvyfFQuqRB/caOcY4t39MdyEFhfc=
+    token: {{ owner_onboarding_server_service_info_api_authentication_token }}
 owner_addresses:
-  - transport: http
+  - transport: {{ owner_onboarding_server_owner_addresses_transport }}
     addresses:
-      - ip_address: {{ server_ip_address }}
-    port: {{ owner_onboarding_server_port }}
-report_to_rendezvous_endpoint_enabled: true
+      - ip_address: {{ aio_configuration_contact_addresses_IpAddr }}
+    port: {{ aio_configuration_listen_port_owner_onboarding_server }}
+report_to_rendezvous_endpoint_enabled: {{ owner_onboarding_server_report_to_rendezvous_endpoint_enabled | bool | lower }}

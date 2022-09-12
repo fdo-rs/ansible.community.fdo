@@ -1,10 +1,10 @@
 ---
 storage_driver:
   Directory:
-    path: /etc/fdo/aio/stores/rendezvous_registered
+    path: {{ rendezvous_server_storage_driver_path }}
 session_store_driver:
   Directory:
-    path: /etc/fdo/aio/stores/rendezvous_sessions
-trusted_manufacturer_keys_path: /etc/fdo/aio/keys/manufacturer_cert.pem
-max_wait_seconds: ~
-bind: "0.0.0.0:{{ rendezvous_server_port }}"
+    path: {{ rendezvous_server_session_store_driver_path }}
+trusted_manufacturer_keys_path: {{ rendezvous_server_trusted_manufacturer_keys_path }}
+max_wait_seconds: {{ rendezvous_server_max_wait_seconds }}
+bind: "{{ aio_configuration_listen_ip_address }}:{{ aio_configuration_listen_port_rendezvous_server }}"

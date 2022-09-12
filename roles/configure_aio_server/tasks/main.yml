@@ -13,18 +13,23 @@
     name: fdo-aio
     state: restarted
     enabled: yes
+  when: not aio_configuration.failed and not manufacturing_server.failed and
+          not rendezvous_server.failed and not owner_onboarding_server.failed
 
 - name: Check FDO AIO Service Status
   command: systemctl status fdo-aio
   ignore_errors: yes
-  changed_when: false
   register: service_fdo_aio_status
+  when: not aio_configuration.failed and not manufacturing_server.failed and
+          not rendezvous_server.failed and not owner_onboarding_server.failed
 
 - name: Report Status of FDO AIO Service
   fail:
     msg: FDO AIO Service failed to restart after configuration change.
   ignore_errors: yes
-  when: service_fdo_aio_status.rc != 0
+  when: not aio_configuration.failed and not manufacturing_server.failed and
+          not rendezvous_server.failed and not owner_onboarding_server.failed and
+          service_fdo_aio_status.rc != 0
 
 #
 # Reset FDO AIO Configs to the old ones & restart the service - in case FDO AIO Service failed to restart.
@@ -37,7 +42,9 @@
     name: fdo-aio
     state: restarted
     enabled: yes
-  when: service_fdo_aio_status.rc != 0
+  when: not aio_configuration.failed and not manufacturing_server.failed and
+          not rendezvous_server.failed and not owner_onboarding_server.failed and
+          service_fdo_aio_status.rc != 0
 
 #
 # Open required ports - in case config change was successful.
@@ -49,8 +56,10 @@
     state: enabled
     immediate: true
   loop:
-    - "{{ manufacturing_server_port }}/tcp"
-    - "{{ owner_onboarding_server_port }}/tcp"
-    - "{{ rendezvous_server_port }}/tcp"
-    - "{{ serviceinfo_api_server_port }}/tcp"
-  when: service_fdo_aio_status.rc == 0
+    - "{{ aio_configuration_listen_port_manufacturing_server }}/tcp"
+    - "{{ aio_configuration_listen_port_owner_onboarding_server }}/tcp"
+    - "{{ aio_configuration_listen_port_rendezvous_server }}/tcp"
+    - "{{ aio_configuration_listen_port_serviceinfo_api_server }}/tcp"
+  when: not aio_configuration.failed and not manufacturing_server.failed and
+          not rendezvous_server.failed and not owner_onboarding_server.failed and
+          service_fdo_aio_status.rc != 0
