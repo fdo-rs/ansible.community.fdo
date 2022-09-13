@@ -36,6 +36,7 @@
 #
 - name: Reset config files
   import_tasks: reset_config_files.yml
+  when: service_fdo_aio_status.rc is not defined or service_fdo_aio_status.rc != 0
 
 - name: Restart FDO AIO Service
   systemd:
