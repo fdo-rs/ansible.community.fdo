@@ -1,0 +1,10 @@
+---
+storage_driver:
+  Directory:
+    path:  {{ rendezvous_server_storage_driver_path }}
+session_store_driver:
+  Directory:
+    path: {{ rendezvous_server_session_store_driver_path }}
+trusted_manufacturer_keys_path: {{ rendezvous_server_trusted_manufacturer_keys_path }}
+max_wait_seconds: {{ rendezvous_server_max_wait_seconds }}
+bind: "{{ rendezvous_server_bind_ip }}:{{ rendezvous_server_listen_port_rendezvous_server }}"

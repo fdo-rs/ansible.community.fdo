@@ -1,0 +1,29 @@
+---
+service_info:
+  initial_user: 
+    username: {{ serviceinfo_api_server_service_info_initial_user_username }}
+    password: {{ serviceinfo_api_server_service_info_initial_user_password }}
+    sshkeys:
+    - {{ serviceinfo_api_server_service_info_initial_user_sshkeys }}
+  files:
+  - path: {{ serviceinfo_api_server_service_files_path }}
+    source_path: {{ serviceinfo_api_server_service_files_source_path }}
+  commands: 
+  - command: touch
+    args:
+    - {{ serviceinfo_api_server_test_path }}
+    return_stdout: true
+    return_stderr: true
+  diskencryption_clevis: 
+  - disk_label: {{ serviceinfo_api_server_diskencryption_clevis_disk_label }}
+    binding:
+      pin: tpm2
+      config: "{}"
+    reencrypt: true
+  additional_serviceinfo: ~
+bind: "{{ serviceinfo_api_server_bind_ip }}:{{ serviceinfo_api_server_listen_port_serviceinfo_api_server }}"
+device_specific_store_driver:
+  Directory:
+    path: {{ serviceinfo_api_server_device_specific_store_driver_path }}
+service_info_auth_token: {{ serviceinfo_api_server_service_info_auth_token }}
+admin_auth_token: {{ serviceinfo_api_server_admin_auth_token }}

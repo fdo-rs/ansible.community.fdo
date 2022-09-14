@@ -1,0 +1,31 @@
+---
+#
+# Backup the old config file and create a new ones from template.
+#
+- name: Copy Old Owner Onboarding Server Config
+  copy:
+    src: /etc/fdo/owner-onboarding-server.yml
+    dest: /etc/fdo/owner-onboarding-server.yml.old
+    remote_src: yes
+
+- name: Configure Owner Onboarding Server
+  template:
+    src: ../templates/owner-onboarding-server.yml.j2
+    dest: /etc/fdo/owner-onboarding-server.yml
+  ignore_errors: yes
+  register: owner_onboarding_server
+
+- name: Copy Old Serviceinfo API Server Config
+  copy:
+    src: /etc/fdo/serviceinfo-api-server.yml
+    dest: /etc/fdo/serviceinfo-api-server.yml.old
+    remote_src: yes
+  when: not owner_onboarding_server.failed
+
+- name: Configure Serviceinfo API Server
+  template:
+    src: ../templates/serviceinfo-api-server.yml.j2
+    dest: /etc/fdo/serviceinfo-api-server.yml
+  ignore_errors: yes
+  register: serviceinfo_api_server
+  when: not owner_onboarding_server.failed
