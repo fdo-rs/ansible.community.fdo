@@ -7,7 +7,7 @@ owner_onboarding_server_owner_private_key_path: /etc/fdo/keys/owner_key.der
 owner_onboarding_server_bind_ip: 0.0.0.0
 owner_onboarding_server_listen_port_owner_onboarding_server: 8081
 owner_onboarding_server_listen_port_serviceinfo_api_server: 8083
-owner_onboarding_server_service_info_api_authentication_token: Kpt5P/5flBkaiNSvDYS3cEdBQXJn2Zv9n1D50431/lo= #SERVICEINFO_API_TOKEN
+owner_onboarding_server_service_info_api_authentication_token: TestAuthToken # change to a valid API token
 owner_onboarding_server_owner_addresses_transport: http
 owner_onboarding_server_owner_addresses_ip_address: 127.0.0.1 # change to owner server ip
 owner_onboarding_server_report_to_rendezvous_endpoint_enabled: true
@@ -23,5 +23,5 @@ serviceinfo_api_server_listen_port_serviceinfo_api_server: "{{ owner_onboarding_
 serviceinfo_api_server_test_path: /root/test
 serviceinfo_api_server_diskencryption_clevis_disk_label: /dev/vda4
 serviceinfo_api_server_device_specific_store_driver_path: /etc/fdo/stores/serviceinfo_api_devices
-serviceinfo_api_server_service_info_auth_token: "{{ owner_onboarding_server_service_info_api_authentication_token }}" #SERVICEINFO_API_TOKEN
-serviceinfo_api_server_admin_auth_token: zJNoErq7aa0RusJ1w0tkTjdITdMCWYkndzVv7F0V42Q= #ADMIN_TOKEN
+serviceinfo_api_server_service_info_auth_token: "{{ owner_onboarding_server_service_info_api_authentication_token }}"
+serviceinfo_api_server_admin_auth_token: TestAdminToken # change to a valid API token

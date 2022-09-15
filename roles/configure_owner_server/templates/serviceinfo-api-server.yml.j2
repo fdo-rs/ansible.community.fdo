@@ -2,9 +2,13 @@
 service_info:
   initial_user: 
     username: {{ serviceinfo_api_server_service_info_initial_user_username }}
+    {% if serviceinfo_api_server_service_info_initial_user_password is not none %}   
     password: {{ serviceinfo_api_server_service_info_initial_user_password }}
+    {% endif %}
+    {% if serviceinfo_api_server_service_info_initial_user_sshkeys is not none %}   
     sshkeys:
     - {{ serviceinfo_api_server_service_info_initial_user_sshkeys }}
+    {% endif %}
   files:
   - path: {{ serviceinfo_api_server_service_files_path }}
     source_path: {{ serviceinfo_api_server_service_files_source_path }}

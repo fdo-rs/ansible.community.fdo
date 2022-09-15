@@ -1,13 +1,6 @@
 ---
-- name: Check RHEL Subscription
-  command: subscription-manager status
-  register: subscriptionStatus
-  ignore_errors: true
-
-- name: RHEL Subscription
-  fail:
-    msg: RHEL Subscription not available.
-  when: '"Overall Status: Current" not in subscriptionStatus.stdout'
+- import_role:
+    name: check_rhel_subscription
 
 - name: Install Packages
   ansible.builtin.dnf:
