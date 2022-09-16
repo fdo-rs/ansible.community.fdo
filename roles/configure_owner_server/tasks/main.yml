@@ -33,7 +33,7 @@
 #
 - name: Restart Serviceinfo API Server
   systemd:
-    name: fdo-fdo-serviceinfo-api-server
+    name: fdo-serviceinfo-api-server
     state: restarted
     enabled: yes
   when: not owner_onboarding_server.failed and not serviceinfo_api_server.failed
