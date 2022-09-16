@@ -5,5 +5,6 @@ tests/output
 
 # integration_config.yml contains connection info for the
 # developer instance, including credentials
-/tests/integration/integration_config.yml
-/tests/integration/inventory
+tests/integration/integration_config.yml
+tests/integration/inventory
+ansible_collections

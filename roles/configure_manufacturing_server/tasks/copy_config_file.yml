@@ -1,0 +1,16 @@
+---
+#
+# Backup the old config file and create a new ones from template.
+#
+- name: Copy Old Manufacturing Server Config
+  copy:
+    src: /etc/fdo/manufacturing-server.yml
+    dest: /etc/fdo/manufacturing-server.yml.old
+    remote_src: yes
+
+- name: Configure Manufacturing Server
+  template:
+    src: ../templates/manufacturing-server.yml.j2
+    dest: /etc/fdo/manufacturing-server.yml
+  ignore_errors: yes
+  register: manufacturing_server

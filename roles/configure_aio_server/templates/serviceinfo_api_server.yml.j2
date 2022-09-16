@@ -1,0 +1,13 @@
+---
+service_info:
+  initial_user: {{ serviceinfo_api_server_service_info_initial_user }}
+  files: {{ serviceinfo_api_server_service_info_files }}
+  commands: {{ serviceinfo_api_server_service_info_commands }}
+  diskencryption_clevis: {{ serviceinfo_api_server_service_info_diskencryption_clevis }}
+  additional_serviceinfo: {{ serviceinfo_api_server_service_info_additional_serviceinfo }}
+bind: "{{ aio_configuration_listen_ip_address }}:{{ aio_configuration_listen_port_serviceinfo_api_server }}"
+service_info_auth_token: {{ aio_configuration_serviceinfo_api_auth_token }}
+admin_auth_token: {{ aio_configuration_serviceinfo_api_admin_token }}
+device_specific_store_driver:
+  Directory:
+    path: {{ serviceinfo_api_server_device_specific_store_driver_path }}

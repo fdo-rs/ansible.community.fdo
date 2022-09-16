@@ -1,0 +1,27 @@
+---
+# owner-onboarding-server.yml
+owner_onboarding_server_ownership_voucher_store_driver_path: /etc/fdo/stores/owner_vouchers
+owner_onboarding_server_session_store_driver_path: /etc/fdo/stores/owner_onboarding_sessions
+owner_onboarding_server_trusted_device_keys_path: /etc/fdo/keys/device_ca_cert.pem
+owner_onboarding_server_owner_private_key_path: /etc/fdo/keys/owner_key.der
+owner_onboarding_server_bind_ip: 0.0.0.0
+owner_onboarding_server_listen_port_owner_onboarding_server: 8081
+owner_onboarding_server_listen_port_serviceinfo_api_server: 8083
+owner_onboarding_server_service_info_api_authentication_token: TestAuthToken # change to a valid API token
+owner_onboarding_server_owner_addresses_transport: http
+owner_onboarding_server_owner_addresses_ip_address: 127.0.0.1 # change to owner server ip
+owner_onboarding_server_report_to_rendezvous_endpoint_enabled: true
+
+# serviceinfo-api-server.yml
+serviceinfo_api_server_service_info_initial_user_username: admin
+serviceinfo_api_server_service_info_initial_user_password: admin
+serviceinfo_api_server_service_info_initial_user_sshkeys: ""
+serviceinfo_api_server_service_files_path: /root/resolv.conf
+serviceinfo_api_server_service_files_source_path: /etc/resolv.conf
+serviceinfo_api_server_bind_ip: "{{ owner_onboarding_server_bind_ip }}"
+serviceinfo_api_server_listen_port_serviceinfo_api_server: "{{ owner_onboarding_server_listen_port_serviceinfo_api_server}}"
+serviceinfo_api_server_test_path: /root/test
+serviceinfo_api_server_diskencryption_clevis_disk_label: /dev/vda4
+serviceinfo_api_server_device_specific_store_driver_path: /etc/fdo/stores/serviceinfo_api_devices
+serviceinfo_api_server_service_info_auth_token: "{{ owner_onboarding_server_service_info_api_authentication_token }}"
+serviceinfo_api_server_admin_auth_token: TestAdminToken # change to a valid API token

@@ -1,0 +1,93 @@
+---
+#
+# Backup the old config file and create a new ones from template.
+#
+- name: Copy config file
+  import_tasks: copy_config_file.yml
+
+#
+# Restart Owner Onboarding Server and check its status after restart.
+#
+- name: Restart Owner Onboarding Server
+  systemd:
+    name: fdo-owner-onboarding-server
+    state: restarted
+    enabled: yes
+  when: not owner_onboarding_server.failed and not serviceinfo_api_server.failed
+
+- name: Check Owner Onboarding Server Status
+  command: systemctl status fdo-owner-onboarding-server
+  ignore_errors: yes
+  register: fdo_rendezvous_server_status
+  when: not owner_onboarding_server.failed and not serviceinfo_api_server.failed
+
+- name: Report Owner Onboarding Server Status
+  fail:
+    msg: Owner Onboarding Server failed to restart after configuration change.
+  ignore_errors: yes
+  when: not owner_onboarding_server.failed and not serviceinfo_api_server.failed and
+          fdo_rendezvous_server_status.rc != 0
+
+#
+# Restart Serviceinfo API Server and check its status after restart.
+#
+- name: Restart Serviceinfo API Server
+  systemd:
+    name: fdo-serviceinfo-api-server
+    state: restarted
+    enabled: yes
+  when: not owner_onboarding_server.failed and not serviceinfo_api_server.failed
+          and fdo_rendezvous_server_status.rc == 0
+
+- name: Check Serviceinfo API Server Status
+  command: systemctl status fdo-owner-onboarding-server
+  ignore_errors: yes
+  register: fdo_serviceinfo_api_server_status
+  when: not owner_onboarding_server.failed and not serviceinfo_api_server.failed
+          and fdo_rendezvous_server_status.rc == 0
+
+- name: Report Serviceinfo API Server Status
+  fail:
+    msg: Serviceinfo API Server failed to restart after configuration change.
+  ignore_errors: yes
+  when: not owner_onboarding_server.failed and not serviceinfo_api_server.failed
+          and fdo_rendezvous_server_status.rc == 0 and fdo_serviceinfo_api_server_status.rc != 0
+
+#
+# Reset Owner Onboarding & Serviceinfo API Server Configs to the old ones & restart the services.
+#
+- name: Reset config file
+  import_tasks: reset_config_file.yml
+  when: fdo_rendezvous_server_status.rc is not defined or fdo_rendezvous_server_status.rc != 0 or
+          fdo_serviceinfo_api_server_status.rc is not defined or fdo_serviceinfo_api_server_status.rc != 0
+  
+- name: Restart Owner Onboarding Server
+  systemd:
+    name: fdo-owner-onboarding-server
+    state: restarted
+    enabled: yes
+  when: not owner_onboarding_server.failed and not serviceinfo_api_server.failed and
+          fdo_rendezvous_server_status.rc != 0
+  
+- name: Restart Serviceinfo API Server
+  systemd:
+    name: fdo-serviceinfo-api-server
+    state: restarted
+    enabled: yes
+  when: not owner_onboarding_server.failed and not serviceinfo_api_server.failed and
+          fdo_serviceinfo_api_server_status.rc != 0
+
+#
+# Open required port - in case config change was successful.
+#
+- name: Open Required Ports
+  ansible.posix.firewalld:
+    port: "{{ item }}"
+    permanent: yes
+    state: enabled
+    immediate: true
+  loop:
+    - "{{ owner_onboarding_server_listen_port_owner_onboarding_server }}/tcp"
+    - "{{ owner_onboarding_server_listen_port_serviceinfo_api_server }}/tcp"
+  when: not owner_onboarding_server.failed and not serviceinfo_api_server.failed and
+          (fdo_rendezvous_server_status.rc != 0 or fdo_serviceinfo_api_server_status.rc != 0)

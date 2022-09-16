@@ -1,0 +1,10 @@
+---
+- name: Check RHEL Subscription
+  command: subscription-manager status
+  register: subscriptionStatus
+  ignore_errors: true
+
+- name: RHEL Subscription
+  fail:
+    msg: RHEL Subscription not available.
+  when: '"Overall Status: Current" not in subscriptionStatus.stdout'

@@ -1,0 +1,21 @@
+---
+ownership_voucher_store_driver:
+  Directory:
+    path: {{ owner_onboarding_server_ownership_voucher_store_driver_path }}
+session_store_driver:
+  Directory:
+    path: {{ owner_onboarding_server_session_store_driver_path }}
+trusted_device_keys_path: {{ owner_onboarding_server_trusted_device_keys_path }}
+owner_private_key_path: {{ owner_onboarding_server_owner_private_key_path }}
+owner_public_key_path: /etc/fdo/keys/owner_cert.pem
+bind: "{{ owner_onboarding_server_bind_ip }}:{{ owner_onboarding_server_listen_port_owner_onboarding_server }}"
+service_info_api_url: "http://localhost:{{ owner_onboarding_server_listen_port_serviceinfo_api_server }}/device_info"
+service_info_api_authentication:
+  BearerToken:
+    token: {{ owner_onboarding_server_service_info_api_authentication_token }}
+owner_addresses:
+  - transport: {{ owner_onboarding_server_owner_addresses_transport }}
+    addresses:
+      - ip_address: {{ owner_onboarding_server_owner_addresses_ip_address }}
+    port: {{ owner_onboarding_server_listen_port_owner_onboarding_server }}
+report_to_rendezvous_endpoint_enabled: {{ owner_onboarding_server_report_to_rendezvous_endpoint_enabled | bool | lower }}

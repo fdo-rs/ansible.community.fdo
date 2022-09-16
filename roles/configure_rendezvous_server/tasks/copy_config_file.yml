@@ -1,0 +1,16 @@
+---
+#
+# Backup the old config file and create a new ones from template.
+#
+- name: Copy Old Rendezvous Server Config
+  copy:
+    src: /etc/fdo/rendezvous-server.yml
+    dest: /etc/fdo/rendezvous-server.yml.old
+    remote_src: yes
+
+- name: Configure Rendezvous Server
+  template:
+    src: ../templates/rendezvous-server.yml.j2
+    dest: /etc/fdo/rendezvous-server.yml
+  ignore_errors: yes
+  register: rendezvous_server

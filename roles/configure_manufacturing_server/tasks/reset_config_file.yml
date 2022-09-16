@@ -1,0 +1,7 @@
+---
+#
+# Reset FDO Manufacturing Server Config to the old one.
+#
+- name: Reset Manufacturing Server Config
+  command: mv /etc/fdo/manufacturing-server.yml.old /etc/fdo/manufacturing-server.yml
+  ignore_errors: yes

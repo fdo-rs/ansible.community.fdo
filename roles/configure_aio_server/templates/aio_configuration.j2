@@ -1,0 +1,18 @@
+---
+cert_organization: {{ aio_configuration_cert_organization }}
+cert_country: {{ aio_configuration_cert_country }}
+listen_ip_address: {{ aio_configuration_listen_ip_address }}
+listen_port_manufacturing_server: {{ aio_configuration_listen_port_manufacturing_server }}
+listen_port_owner_onboarding_server: {{ aio_configuration_listen_port_owner_onboarding_server }}
+listen_port_rendezvous_server: {{ aio_configuration_listen_port_rendezvous_server }}
+listen_port_serviceinfo_api_server: {{ aio_configuration_listen_port_serviceinfo_api_server }}
+separate_manufacturing_and_owner_voucher_store: {{ aio_configuration_separate_manufacturing_and_owner_voucher_store | bool | lower }}
+manufacturing_enable_plain_di: {{ aio_configuration_manufacturing_enable_plain_di | bool | lower }}
+manufacturing_disable_key_storage_filesystem: {{ aio_configuration_manufacturing_disable_key_storage_filesystem | bool | lower }}
+manufacturing_disable_key_storage_tpm: {{ aio_configuration_manufacturing_disable_key_storage_tpm | bool | lower }}
+manufacturing_use_secp256r1: {{ aio_configuration_manufacturing_use_secp256r1 | bool | lower }}
+contact_hostname: {{ aio_configuration_contact_hostname }}
+contact_addresses:
+  - IpAddr: {{ aio_configuration_contact_addresses_IpAddr}}
+serviceinfo_api_auth_token: {{ aio_configuration_serviceinfo_api_auth_token }}
+serviceinfo_api_admin_token: {{ aio_configuration_serviceinfo_api_admin_token }}

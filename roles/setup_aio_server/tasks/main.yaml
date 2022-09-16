@@ -1,0 +1,27 @@
+---
+- import_role:
+    name: check_rhel_subscription
+
+- name: Install Packages
+  dnf:
+    state: latest
+    name:
+      - fdo-admin-cli
+
+- name: Start and Enable FDO AIO Service
+  systemd:
+    name: fdo-aio
+    state: started
+    enabled: yes
+
+- name: Open Required Ports
+  ansible.posix.firewalld:
+    port: "{{ item }}"
+    permanent: yes
+    state: enabled
+    immediate: true
+  loop:
+    - 8080/tcp
+    - 8081/tcp
+    - 8082/tcp
+    - 8083/tcp
