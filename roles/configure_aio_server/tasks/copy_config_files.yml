@@ -4,77 +4,66 @@
 #
 - name: Copy Old AIO Config
   copy:
-    src: /etc/fdo/aio/aio_configuration
-    dest: /etc/fdo/aio/aio_configuration.old
+    src: "{{ fdo_aio_src }}/aio_configuration"
+    dest: "{{ fdo_aio_src }}/aio_configuration.old"
     remote_src: yes
 
 - name: Configure AIO
   template:
     src: ../templates/aio_configuration.j2
-    dest: /etc/fdo/aio/aio_configuration
+    dest: "{{ fdo_aio_src }}/aio_configuration"
   ignore_errors: yes
   register: aio_configuration
 
 - name: Copy Old Manufacturing Server Config
   copy:
-    src: /etc/fdo/aio/configs/manufacturing_server.yml
-    dest: /etc/fdo/aio/configs/manufacturing_server.yml.old
+    src: "{{ fdo_aio_src }}/configs/manufacturing_server.yml"
+    dest: "{{ fdo_aio_src }}/configs/manufacturing_server.yml.old"
     remote_src: yes
-  when: not aio_configuration.failed
 
 - name: Configure Manufacturing Server
   template:
     src: ../templates/manufacturing_server.yml.j2
-    dest: /etc/fdo/aio/configs/manufacturing_server.yml
+    dest: "{{ fdo_aio_src }}/configs/manufacturing_server.yml"
   ignore_errors: yes
   register: manufacturing_server
-  when: not aio_configuration.failed
 
 - name: Copy Old Rendezvous Server Config
   copy:
-    src: /etc/fdo/aio/configs/rendezvous_server.yml
-    dest: /etc/fdo/aio/configs/rendezvous_server.yml.old
+    src: "{{ fdo_aio_src }}/configs/rendezvous_server.yml"
+    dest: "{{ fdo_aio_src }}/configs/rendezvous_server.yml.old"
     remote_src: yes
   when: not aio_configuration.failed and not manufacturing_server.failed
 
 - name: Configure Rendezvous Server
   template:
     src: ../templates/rendezvous_server.yml.j2
-    dest: /etc/fdo/aio/configs/rendezvous_server.yml
+    dest: "{{ fdo_aio_src }}/configs/rendezvous_server.yml"
   ignore_errors: yes
   register: rendezvous_server
-  when: not aio_configuration.failed and not manufacturing_server.failed
 
 - name: Copy Old Owner Onboarding Server Config
   copy:
-    src: /etc/fdo/aio/configs/owner_onboarding_server.yml
-    dest: /etc/fdo/aio/configs/owner_onboarding_server.yml.old
+    src: "{{ fdo_aio_src }}/configs/owner_onboarding_server.yml"
+    dest: "{{ fdo_aio_src }}/configs/owner_onboarding_server.yml.old"
     remote_src: yes
-  when: not aio_configuration.failed and not manufacturing_server.failed and
-          not rendezvous_server.failed
 
 - name: Configure Owner Onboarding Server
   template:
     src: ../templates/owner_onboarding_server.yml.j2
-    dest: /etc/fdo/aio/configs/owner_onboarding_server.yml
+    dest: "{{ fdo_aio_src }}/configs/owner_onboarding_server.yml"
   ignore_errors: yes
   register: owner_onboarding_server
-  when: not aio_configuration.failed and not manufacturing_server.failed and
-          not rendezvous_server.failed
 
 - name: Copy Old ServiceInfo API Server Config
   copy:
-    src: /etc/fdo/aio/configs/serviceinfo_api_server.yml
-    dest: /etc/fdo/aio/configs/serviceinfo_api_server.yml.old
+    src: "{{ fdo_aio_src }}/configs/serviceinfo_api_server.yml"
+    dest: "{{ fdo_aio_src }}/configs/serviceinfo_api_server.yml.old"
     remote_src: yes
-  when: not aio_configuration.failed and not manufacturing_server.failed and
-          not rendezvous_server.failed and not owner_onboarding_server.failed
 
 - name: Configure ServiceInfo API Server
   template:
     src: ../templates/serviceinfo_api_server.yml.j2
-    dest: /etc/fdo/aio/configs/serviceinfo_api_server.yml
+    dest: "{{ fdo_aio_src }}/configs/serviceinfo_api_server.yml"
   ignore_errors: yes
   register: owner_onboarding_server
-  when: not aio_configuration.failed and not manufacturing_server.failed and
-          not rendezvous_server.failed and not owner_onboarding_server.failed

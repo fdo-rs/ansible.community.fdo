@@ -1,4 +1,8 @@
 ---
+# configuration settings
+fdo_aio_src: /etc/fdo/aio
+enable_roll_back: true
+
 # aio_configuration
 aio_configuration_cert_organization: FDO AIO
 aio_configuration_cert_country: US
