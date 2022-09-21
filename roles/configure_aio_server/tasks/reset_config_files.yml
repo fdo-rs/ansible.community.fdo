@@ -4,20 +4,15 @@
 #
 - name: Reset AIO Config
   command: "mv {{ fdo_aio_src }}/aio_configuration.old {{ fdo_aio_src }}/aio_configuration"
-  when: aio_configuration.failed
 
 - name: Reset Manufacturing Server Config
   command: "mv {{ fdo_aio_src }}/configs/manufacturing_server.yml.old {{ fdo_aio_src }}/configs/manufacturing_server.yml"
-  when: manufacturing_server.failed
 
 - name: Reset Rendezvous Server Config
   command: "mv {{ fdo_aio_src }}/configs/rendezvous_server.yml.old {{ fdo_aio_src }}/configs/rendezvous_server.yml"
-  when: rendezvous_server.failed
 
 - name: Reset Onboarding Server Config
   command: "mv {{ fdo_aio_src }}/configs/owner_onboarding_server.yml.old {{ fdo_aio_src }}/configs/owner_onboarding_server.yml"
-  when: owner_onboarding_server.failed
 
 - name: Reset ServiceInfo API Server Config
   command: "mv {{ fdo_aio_src }}/configs/serviceinfo_api_server.yml.old {{ fdo_aio_src }}/configs/serviceinfo_api_server.yml"
-  when: owner_onboarding_server.failed

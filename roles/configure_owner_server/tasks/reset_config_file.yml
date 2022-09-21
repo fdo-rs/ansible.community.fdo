@@ -3,12 +3,10 @@
 # Reset Owner Onboarding Server Config to the old one.
 #
 - name: Reset Owner Onboarding Server Config
-  command: mv /etc/fdo/owner-onboarding-server.yml.old /etc/fdo/owner-onboarding-server.yml
-  ignore_errors: yes
+  command: "mv {{ fdo_src }}/owner-onboarding-server.yml.old {{ fdo_src }}/owner-onboarding-server.yml"
 
 #
 # Reset Serviceinfo API Server Config to the old one.
 #
 - name: Reset Serviceinfo API Server Config
-  command: mv /etc/fdo/serviceinfo-api-server.yml.old /etc/fdo/serviceinfo-api-server.yml
-  ignore_errors: yes
+  command: "mv {{ fdo_src }}/serviceinfo-api-server.yml.old {{ fdo_src }}/serviceinfo-api-server.yml"

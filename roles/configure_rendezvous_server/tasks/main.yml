@@ -1,58 +1,45 @@
 ---
-#
-# Backup the old config file and create a new ones from template.
-#
-- name: Copy config file
-  import_tasks: copy_config_file.yml
+- name: Update config file and restart FDO Rendezvous Server
+  block:
+    - name: Create backup of the old config file and create new one from the template
+      import_tasks: copy_config_file.yml
 
-#
-# Restart FDO Rendezvous Server and check its status after restart.
-#
-- name: Restart FDO Rendezvous Server
-  systemd:
-    name: fdo-rendezvous-server
-    state: restarted
-    enabled: yes
-  when: not rendezvous_server.failed
+    - name: Restart FDO Rendezvous Server
+      systemd:
+        name: fdo-rendezvous-server
+        state: restarted
+        enabled: yes
 
-- name: Check FDO Rendezvous Server Status
-  command: systemctl status fdo-rendezvous-server
-  ignore_errors: yes
-  register: fdo_rendezvous_server_status
-  when: not rendezvous_server.failed
+    - name: Check FDO Rendezvous Server Status
+      command: systemctl status fdo-rendezvous-server
+      register: fdo_rendezvous_server_status
 
-- name: Report FDO Rendezvous Server Status
-  fail:
-    msg: FDO Rendezvous Server failed to restart after configuration change.
-  ignore_errors: yes
-  when: not rendezvous_server.failed and
-          fdo_rendezvous_server_status.rc != 0
+    - name: Report FDO Rendezvous Server Status
+      fail:
+        msg: FDO Rendezvous Server failed to restart after configuration change.
+      when: fdo_rendezvous_server_status.rc != 0
 
-#
-# Reset FDO Rendezvous Server Config to the old one & restart the service - in case FDO Rendezvous Server failed to restart.
-#
-- name: Reset config file
-  import_tasks: reset_config_file.yml
-  when: fdo_rendezvous_server_status.rc is not defined or fdo_rendezvous_server_status.rc != 0
-  
-- name: Restart FDO Rendezvous Server
-  systemd:
-    name: fdo-rendezvous-server
-    state: restarted
-    enabled: yes
-  when: not rendezvous_server.failed and
-          fdo_rendezvous_server_status.rc != 0
+    - name: Open Required Ports
+      ansible.posix.firewalld:
+        port: "{{ item }}"
+        permanent: yes
+        state: enabled
+        immediate: true
+      loop:
+        - "{{ rendezvous_server_listen_port_rendezvous_server }}/tcp"
 
-#
-# Open required port - in case config change was successful.
-#
-- name: Open Required Ports
-  ansible.posix.firewalld:
-    port: "{{ item }}"
-    permanent: yes
-    state: enabled
-    immediate: true
-  loop:
-    - "{{ rendezvous_server_listen_port_rendezvous_server }}/tcp"
-  when: not rendezvous_server.failed and
-          fdo_rendezvous_server_status.rc != 0
+  rescue:
+    - name: Reset config file
+      import_tasks: reset_config_file.yml
+      when: enable_roll_back | bool == true
+
+    - name: Restart FDO Rendezvous Server
+      systemd:
+        name: fdo-rendezvous-server
+        state: restarted
+        enabled: yes
+      when: enable_roll_back | bool == true
+
+    - name: FDO Rendezvous Server configuration failed
+      fail:
+        msg: FDO Rendezvous Server configuration failed.

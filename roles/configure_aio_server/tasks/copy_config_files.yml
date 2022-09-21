@@ -1,6 +1,6 @@
 ---
 #
-# Create backups of old config files and create new ones from templates.
+# Create backups of old config files and create new ones from the templates.
 #
 - name: Copy Old AIO Config
   copy:
@@ -8,39 +8,17 @@
     dest: "{{ fdo_aio_src }}/aio_configuration.old"
     remote_src: yes
 
-- name: Configure AIO
-  template:
-    src: ../templates/aio_configuration.j2
-    dest: "{{ fdo_aio_src }}/aio_configuration"
-  ignore_errors: yes
-  register: aio_configuration
-
 - name: Copy Old Manufacturing Server Config
   copy:
     src: "{{ fdo_aio_src }}/configs/manufacturing_server.yml"
     dest: "{{ fdo_aio_src }}/configs/manufacturing_server.yml.old"
     remote_src: yes
 
-- name: Configure Manufacturing Server
-  template:
-    src: ../templates/manufacturing_server.yml.j2
-    dest: "{{ fdo_aio_src }}/configs/manufacturing_server.yml"
-  ignore_errors: yes
-  register: manufacturing_server
-
 - name: Copy Old Rendezvous Server Config
   copy:
     src: "{{ fdo_aio_src }}/configs/rendezvous_server.yml"
     dest: "{{ fdo_aio_src }}/configs/rendezvous_server.yml.old"
     remote_src: yes
-  when: not aio_configuration.failed and not manufacturing_server.failed
-
-- name: Configure Rendezvous Server
-  template:
-    src: ../templates/rendezvous_server.yml.j2
-    dest: "{{ fdo_aio_src }}/configs/rendezvous_server.yml"
-  ignore_errors: yes
-  register: rendezvous_server
 
 - name: Copy Old Owner Onboarding Server Config
   copy:
@@ -48,22 +26,38 @@
     dest: "{{ fdo_aio_src }}/configs/owner_onboarding_server.yml.old"
     remote_src: yes
 
-- name: Configure Owner Onboarding Server
-  template:
-    src: ../templates/owner_onboarding_server.yml.j2
-    dest: "{{ fdo_aio_src }}/configs/owner_onboarding_server.yml"
-  ignore_errors: yes
-  register: owner_onboarding_server
-
 - name: Copy Old ServiceInfo API Server Config
   copy:
     src: "{{ fdo_aio_src }}/configs/serviceinfo_api_server.yml"
     dest: "{{ fdo_aio_src }}/configs/serviceinfo_api_server.yml.old"
     remote_src: yes
 
+- name: Configure AIO
+  template:
+    src: ../templates/aio_configuration.j2
+    dest: "{{ fdo_aio_src }}/aio_configuration"
+  register: aio_configuration
+
+- name: Configure Manufacturing Server
+  template:
+    src: ../templates/manufacturing_server.yml.j2
+    dest: "{{ fdo_aio_src }}/configs/manufacturing_server.yml"
+  register: manufacturing_server
+
+- name: Configure Rendezvous Server
+  template:
+    src: ../templates/rendezvous_server.yml.j2
+    dest: "{{ fdo_aio_src }}/configs/rendezvous_server.yml"
+  register: rendezvous_server
+
+- name: Configure Owner Onboarding Server
+  template:
+    src: ../templates/owner_onboarding_server.yml.j2
+    dest: "{{ fdo_aio_src }}/configs/owner_onboarding_server.yml"
+  register: owner_onboarding_server
+
 - name: Configure ServiceInfo API Server
   template:
     src: ../templates/serviceinfo_api_server.yml.j2
     dest: "{{ fdo_aio_src }}/configs/serviceinfo_api_server.yml"
-  ignore_errors: yes
   register: owner_onboarding_server

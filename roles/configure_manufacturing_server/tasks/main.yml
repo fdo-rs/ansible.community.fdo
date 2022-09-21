@@ -1,58 +1,45 @@
 ---
-#
-# Backup the old config file and create a new ones from template.
-#
-- name: Copy config file
-  import_tasks: copy_config_file.yml
+- name: Update config file and restart FDO Manufacturing Server
+  block:
+    - name: Create backup of the old config file and create a new one from the template
+      import_tasks: copy_config_file.yml
 
-#
-# Restart FDO Manufacturing Server and check its status after restart.
-#
-- name: Restart FDO Manufacturing Server
-  systemd:
-    name: fdo-manufacturing-server
-    state: restarted
-    enabled: yes
-  when: not manufacturing_server.failed
+    - name: Restart FDO Manufacturing Server
+      systemd:
+        name: fdo-manufacturing-server
+        state: restarted
+        enabled: yes
 
-- name: Check FDO Manufacturing Server Status
-  command: systemctl status fdo-manufacturing-server
-  ignore_errors: yes
-  register: fdo_manufacturing_server_status
-  when: not manufacturing_server.failed
+    - name: Check FDO Manufacturing Server Status
+      command: systemctl status fdo-manufacturing-server
+      register: fdo_manufacturing_server_status
 
-- name: Report FDO Manufacturing Server Status
-  fail:
-    msg: FDO Manufacturing Server failed to restart after configuration change.
-  ignore_errors: yes
-  when: not manufacturing_server.failed and
-          fdo_manufacturing_server_status.rc != 0
+    - name: Report FDO Manufacturing Server Status
+      fail:
+        msg: FDO Manufacturing Server failed to restart after configuration change.
+      when: fdo_manufacturing_server_status.rc != 0
 
-#
-# Reset FDO Manufacturing Server Config to the old one & restart the service - in case FDO Manufacturing Server failed to restart.
-#
-- name: Reset config file
-  import_tasks: reset_config_file.yml
-  when: fdo_manufacturing_server_status.rc is not defined or fdo_manufacturing_server_status.rc != 0
-  
-- name: Restart FDO Manufacturing Server
-  systemd:
-    name: fdo-manufacturing-server
-    state: restarted
-    enabled: yes
-  when: not manufacturing_server.failed and
-          fdo_manufacturing_server_status.rc != 0
+    - name: Open Required Ports
+      ansible.posix.firewalld:
+        port: "{{ item }}"
+        permanent: yes
+        state: enabled
+        immediate: true
+      loop:
+        - "{{ manufacturing_server_listen_port_manufacturing_server }}/tcp"
 
-#
-# Open required port - in case config change was successful.
-#
-- name: Open Required Ports
-  ansible.posix.firewalld:
-    port: "{{ item }}"
-    permanent: yes
-    state: enabled
-    immediate: true
-  loop:
-    - "{{ manufacturing_server_listen_port_manufacturing_server }}/tcp"
-  when: not manufacturing_server.failed and
-          fdo_manufacturing_server_status.rc != 0
+  rescue:
+    - name: Reset config file
+      import_tasks: reset_config_file.yml
+      when: enable_roll_back | bool == true
+      
+    - name: Restart FDO Manufacturing Server
+      systemd:
+        name: fdo-manufacturing-server
+        state: restarted
+        enabled: yes
+      when: enable_roll_back | bool == true
+
+    - name: FDO Manufacturing Server configuration failed
+      fail:
+        msg: FDO Manufacturing Server configuration failed.
