@@ -1,6 +1,6 @@
 ---
 #
-# Backup the old config file and create a new ones from template.
+# Create backup of existing configuration file and create a new one from template.
 #
 - name: Copy Old Rendezvous Server Config
   copy:

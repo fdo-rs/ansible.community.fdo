@@ -1,6 +1,6 @@
 ---
 #
-# Backup the old config files and create new ones from the templates.
+# Create backups of existing configuration files and create new ones from templates.
 #
 - name: Copy Old Owner Onboarding Server Config
   copy:

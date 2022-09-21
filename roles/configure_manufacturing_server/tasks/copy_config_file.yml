@@ -1,6 +1,6 @@
 ---
 #
-# Backup the old config file and create a new one from the template.
+# Create backup of existing configuration file and create a new one from template.
 #
 - name: Copy Old Manufacturing Server Config
   copy:
