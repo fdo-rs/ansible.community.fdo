@@ -1,0 +1,5 @@
+argument_specs:
+  main:
+    short_description: Setup AIO server
+    description:
+      - Setup AIO Server

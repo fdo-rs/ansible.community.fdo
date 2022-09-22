@@ -1,0 +1,86 @@
+argument_specs:
+  main:
+    short_description: Check RHEL subscription
+    description:
+      - Check if used RHEL subscritpion is valid.
+    options:
+      aio_configuration_cert_organization:
+        description:
+          - ...
+        type: str
+        default: FDO AIO
+      aio_configuration_cert_country:
+        description:
+          - ...
+        type: str
+        default: US
+      aio_configuration_listen_ip_address:
+        description:
+          - ...
+        type: str
+        default: 0.0.0.0
+      aio_configuration_listen_port_manufacturing_server:
+        description:
+          - ...
+        type: int
+        default: 8080
+      aio_configuration_listen_port_owner_onboarding_server:
+        description:
+          - ...
+        type: int
+        default: 8081
+      aio_configuration_listen_port_rendezvous_server:
+        description:
+          - ...
+        type: int
+        default: 8082
+      aio_configuration_listen_port_serviceinfo_api_server:
+        description:
+          - ...
+        type: int
+        default: 8083
+      aio_configuration_separate_manufacturing_and_owner_voucher_store:
+        description:
+          - ...
+        type: bool
+        default: false
+      aio_configuration_manufacturing_enable_plain_di:
+        description:
+          - ...
+        type: bool
+        default: false
+      aio_configuration_manufacturing_disable_key_storage_filesystem:
+        description:
+          - ...
+        type: bool
+        default: false
+      aio_configuration_manufacturing_disable_key_storage_tpm:
+        description:
+          - ...
+        type: bool
+        default: false
+      aio_configuration_manufacturing_use_secp256r1:
+        description:
+          - ...
+        type: bool
+        default: false
+      aio_configuration_contact_hostname:
+        description:
+          - ...
+        type: str
+        default: ~
+      aio_configuration_contact_addresses_IpAddr:
+        description:
+          - ...
+        type: str
+        default: ...
+      aio_configuration_serviceinfo_api_auth_token:
+        description:
+          - ...
+        type: str
+        required: true
+      aio_configuration_serviceinfo_api_admin_token:
+        description:
+          - ...
+        type: str
+        required: true
