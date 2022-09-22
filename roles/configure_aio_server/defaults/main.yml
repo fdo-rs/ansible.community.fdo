@@ -17,9 +17,9 @@ aio_configuration_manufacturing_disable_key_storage_filesystem: false
 aio_configuration_manufacturing_disable_key_storage_tpm: false
 aio_configuration_manufacturing_use_secp256r1: false
 aio_configuration_contact_hostname: ~
-aio_configuration_contact_addresses_IpAddr: "{{ ansible_eth0.ipv4.address }}"
-aio_configuration_serviceinfo_api_auth_token: TestAuthToken # change to a valid API token
-aio_configuration_serviceinfo_api_admin_token: TestAdminToken # change to a valid API token
+aio_configuration_contact_addresses_IpAddr: ...
+#aio_configuration_serviceinfo_api_auth_token: TestAuthToken # change to a valid API token
+#aio_configuration_serviceinfo_api_admin_token: TestAdminToken # change to a valid API token
 
 # manufacturing_server.yml
 manufacturing_server_session_store_driver_path: "{{ fdo_aio_src }}/stores/manufacturing_sessions"
