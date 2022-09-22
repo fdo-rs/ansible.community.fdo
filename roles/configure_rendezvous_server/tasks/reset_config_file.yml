@@ -3,5 +3,4 @@
 # Reset FDO Rendezvous Server Config to the old one.
 #
 - name: Reset Rendezvous Server Config
-  command: mv /etc/fdo/rendezvous-server.yml.old /etc/fdo/rendezvous-server.yml
-  ignore_errors: yes
+  command: "mv {{ fdo_src }}/rendezvous-server.yml.old {{ fdo_src }}/rendezvous-server.yml"

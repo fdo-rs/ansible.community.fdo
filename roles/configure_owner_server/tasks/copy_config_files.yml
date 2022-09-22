@@ -1,0 +1,25 @@
+---
+#
+# Create backups of existing configuration files and create new ones from templates.
+#
+- name: Copy Old Owner Onboarding Server Config
+  copy:
+    src: "{{ fdo_src }}/owner-onboarding-server.yml"
+    dest: "{{ fdo_src }}/owner-onboarding-server.yml.old"
+    remote_src: yes
+
+- name: Copy Old Serviceinfo API Server Config
+  copy:
+    src: "{{ fdo_src }}/serviceinfo-api-server.yml"
+    dest: "{{ fdo_src }}/serviceinfo-api-server.yml.old"
+    remote_src: yes
+
+- name: Configure Owner Onboarding Server
+  template:
+    src: ../templates/owner-onboarding-server.yml.j2
+    dest: "{{ fdo_src }}/owner-onboarding-server.yml"
+
+- name: Configure Serviceinfo API Server
+  template:
+    src: ../templates/serviceinfo-api-server.yml.j2
+    dest: "{{ fdo_src }}/serviceinfo-api-server.yml"
