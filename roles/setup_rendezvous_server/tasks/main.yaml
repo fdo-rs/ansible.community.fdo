@@ -10,15 +10,15 @@
 
 - name: Creates FDO Keys Directory
   file:
-    path: /etc/fdo/keys
+    path: "{{ fdo_src }}/keys"
     state: directory
     mode: 0775
 
 # TODO: configure delegated machine 
 - name: Copy Manufacturer Certificate from Manufacturing Server
   synchronize:
-    src: /etc/fdo/keys/manufacturer_cert.pem
-    dest: /etc/fdo/keys/manufacturer_cert.pem
+    src: "{{ fdo_src }}/keys/manufacturer_cert.pem"
+    dest: "{{ fdo_src }}/keys/manufacturer_cert.pem"
   delegate_to: '{{target|default("manufacturing_server")}}'
 
 - name: Create Rendezvous Service Keys Stores
@@ -28,14 +28,14 @@
     mode: 0775
     recurse: yes
   loop:
-    - /etc/fdo/stores/rendezvous_registered
-    - /etc/fdo/stores/rendezvous_sessions
+    - "{{ fdo_src }}/stores/rendezvous_registered"
+    - "{{ fdo_src }}/stores/rendezvous_sessions"
 
 # TODO: add option to edit the default config
 - name: Copy Rendezvous Server Config
   copy:
     src: /usr/share/doc/fdo/rendezvous-server.yml
-    dest: /etc/fdo/rendezvous-server.yml
+    dest: "{{ fdo_src }}/rendezvous-server.yml"
     remote_src: yes
 
 - name: Start and Enable FDO Rendezvous Server Service

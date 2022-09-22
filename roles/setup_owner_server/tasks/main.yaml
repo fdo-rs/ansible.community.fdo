@@ -11,29 +11,29 @@
 
 - name: Creates FDO Keys Directory
   file:
-    path: /etc/fdo/keys
+    path: "{{ fdo_src }}/keys"
     state: directory
     mode: 0775
 
 # TODO: configure delegated machine 
 - name: Copy Device Certificates from Manufacturing Server
   synchronize:
-    src: /etc/fdo/keys/device_ca_cert.pem
-    dest: /etc/fdo/keys/device_ca_cert.pem
+    src: "{{ fdo_src }}/keys/device_ca_cert.pem"
+    dest: "{{ fdo_src }}/keys/device_ca_cert.pem"
   delegate_to: '{{target|default("manufacturing_server")}}'
 
 # TODO: configure delegated machine 
 - name: Copy Owner Key from Manufacturing Server
   synchronize:
-    src: /etc/fdo/keys/owner_key.der
-    dest: /etc/fdo/keys/owner_key.der
+    src: "{{ fdo_src }}/keys/owner_key.der"
+    dest: "{{ fdo_src }}/keys/owner_key.der"
   delegate_to: '{{target|default("manufacturing_server")}}'
 
 # TODO: configure delegated machine 
 - name: Copy Owner Certificate from Manufacturing Server
   synchronize:
-    src: /etc/fdo/keys/owner_cert.pem
-    dest: /etc/fdo/keys/owner_cert.pem
+    src: "{{ fdo_src }}/keys/owner_cert.pem"
+    dest: "{{ fdo_src }}/keys/owner_cert.pem"
   delegate_to: '{{target|default("manufacturing_server")}}'
 
 - name: Create Owner Service Keys Stores
@@ -43,21 +43,21 @@
     mode: 0775
     recurse: yes
   loop:
-    - /etc/fdo/stores/owner_vouchers
-    - /etc/fdo/stores/owner_onboarding_sessions
+    - "{{ fdo_src }}/stores/owner_vouchers"
+    - "{{ fdo_src }}/stores/owner_onboarding_sessions"
 
 # TODO: add option to edit the default config
 - name: Copy Owner Onboarding Server Config
   copy:
     src: /usr/share/doc/fdo/owner-onboarding-server.yml
-    dest: /etc/fdo/owner-onboarding-server.yml
+    dest: "{{ fdo_src }}/owner-onboarding-server.yml"
     remote_src: yes
 
 # TODO: add option to edit the default config
 - name: Copy ServiceInfo API Server Config
   copy:
     src: /usr/share/doc/fdo/serviceinfo-api-server.yml
-    dest: /etc/fdo/serviceinfo-api-server.yml
+    dest: "{{ fdo_src }}/serviceinfo-api-server.yml"
     remote_src: yes
 
 - name: Start and Enable FDO Onboarding Server Service
