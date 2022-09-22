@@ -17,7 +17,7 @@
 # TODO: configure delegated machine 
 - name: Copy Manufacturer Certificate from Manufacturing Server
   synchronize:
-    src: "{{ fdo_src }}/keys/manufacturer_cert.pem"
+    src: "{{ manufacturing_server_fdo_src }}/keys/manufacturer_cert.pem"
     dest: "{{ fdo_src }}/keys/manufacturer_cert.pem"
   delegate_to: '{{target|default("manufacturing_server")}}'
 

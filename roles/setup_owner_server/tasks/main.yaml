@@ -18,21 +18,21 @@
 # TODO: configure delegated machine 
 - name: Copy Device Certificates from Manufacturing Server
   synchronize:
-    src: "{{ fdo_src }}/keys/device_ca_cert.pem"
+    src: "{{ manufacturing_server_fdo_src }}/keys/device_ca_cert.pem"
     dest: "{{ fdo_src }}/keys/device_ca_cert.pem"
   delegate_to: '{{target|default("manufacturing_server")}}'
 
 # TODO: configure delegated machine 
 - name: Copy Owner Key from Manufacturing Server
   synchronize:
-    src: "{{ fdo_src }}/keys/owner_key.der"
+    src: "{{ manufacturing_server_fdo_src }}/keys/owner_key.der"
     dest: "{{ fdo_src }}/keys/owner_key.der"
   delegate_to: '{{target|default("manufacturing_server")}}'
 
 # TODO: configure delegated machine 
 - name: Copy Owner Certificate from Manufacturing Server
   synchronize:
-    src: "{{ fdo_src }}/keys/owner_cert.pem"
+    src: "{{ manufacturing_server_fdo_src }}/keys/owner_cert.pem"
     dest: "{{ fdo_src }}/keys/owner_cert.pem"
   delegate_to: '{{target|default("manufacturing_server")}}'
 
