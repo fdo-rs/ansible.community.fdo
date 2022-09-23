@@ -1,6 +1,6 @@
 argument_specs:
   main:
-    short_description: 
+    short_description: Reconfigures rendezvous server files.
     description: 
       - Creates a backup of the existing configuration file, creates a new one from template and then restarts the rendezvous server. If the service restarted correctly it then opens the required ports.
       In the case of it failing it resets the config file by moving the contents of the backup file back to the original configuration file. It then restarts the rendezvous server and reports that the configuration had failed.

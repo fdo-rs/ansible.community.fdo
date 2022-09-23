@@ -1,6 +1,6 @@
 argument_specs:
   main:
-    short_description: 
+    short_description: Reconfigures owner server files.
     description: 
       - Creates backups of existing configuration files, creates new ones from templates and then restarts the owner onboarding server and the serviceinfo api server. If the service restarted correctly it then opens the required ports.
       In the case of it failing it resets the config files by moving the contents of backup files back to the original configuration files. It then restarts the owner onboarding server and the serviceinfo api server and reports that the configuration had failed.
