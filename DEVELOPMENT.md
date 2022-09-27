@@ -10,7 +10,7 @@ pip install ansible-core  # 2.13.3
 
 mkdir -p ansible_collections/community/
 cd ansible_collections/community/
-git clone ssh://git@gitlab.xlab.si:13022/fdo-ansible-collection/fdo-ansible-collection.git fdo
+git clone git@github.com:xlab-si/community.fdo.git fdo
 cd fdo
 
 # Install community.general collection, since we like to have stdout_callback=community.general.yaml in ansible.cfg
