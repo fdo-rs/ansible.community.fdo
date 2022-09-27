@@ -1,0 +1,14 @@
+# Per https://www.ansible.com/blog/ansible-linting-with-github-actions
+name: Run ansible-lint
+on: [push, pull_request]
+jobs:
+  build:
+    # runs-on: ubuntu-latest
+    runs-on: [self-hosted, linux]
+    steps:
+    - uses: actions/checkout@v2
+    - name: Lint Ansible Playbook
+      # replace "master" with any valid ref
+      uses: ansible/ansible-lint-action@v6
+      with:
+        targets: "./"

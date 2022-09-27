@@ -34,6 +34,12 @@ sudo ./svc.sh status
 
 Install also:
 - docker-engine - https://docs.docker.com/engine/install/centos/
+- centos user will run docker:
+```
+sudo usermod -a -G docker centos
+sudo ./svc.sh stop
+sudo ./svc.sh start
+```
 - python3.x -
 ```
 sudo yum install python39
