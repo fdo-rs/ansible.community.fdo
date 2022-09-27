@@ -31,3 +31,11 @@ sudo ./svc.sh install
 sudo ./svc.sh start
 sudo ./svc.sh status
 ```
+
+Install also:
+- docker-engine - https://docs.docker.com/engine/install/centos/
+- python3.x -
+```
+sudo yum install python39
+sudo    alternatives --set python /usr/bin/python3
+```
