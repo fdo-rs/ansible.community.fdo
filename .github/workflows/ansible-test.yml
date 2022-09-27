@@ -1,0 +1,38 @@
+# Per https://github.com/marketplace/actions/ansible-test
+name: Perform testing with ansible-test
+on: [push]
+jobs:
+  ansible-test:
+    runs-on: [self-hosted, linux]
+    container:
+      # image: python:3.10-bullseye
+      image: quay.io/justinc1_github/temp-py3.10-ub2204:latest
+    steps:
+#    - name: Perform integration testing with ansible-test
+#      uses: ansible-community/ansible-test-gh-action@release/v1
+#      with:
+#        ansible-core-version: stable-2.11
+#        pre-test-cmd: echo This runs before the ansible-test invocation
+#        target-python-version: 3.9
+#        controller-python-version: auto
+#        testing-type: integration
+#        test-deps: ansible.netcommon
+
+    - name: Perform sanity testing with ansible-test
+      uses: ansible-community/ansible-test-gh-action@release/v1
+      with:
+        ansible-core-version: stable-2.13
+        testing-type: sanity
+#        target-python-version: 3.10
+#        controller-python-version: 3.10
+
+#    - name: Perform unit testing with ansible-test
+#      uses: ansible-community/ansible-test-gh-action@release/v1
+#      with:
+#        ansible-core-version: stable-2.11
+#        pre-test-cmd: echo This runs before the ansible-test invocation
+#        target-python-version: 3.9
+#        testing-type: units
+#        test-deps: >-
+#          ansible.netcommon
+#          ansible.utils
