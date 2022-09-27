@@ -62,3 +62,13 @@ ansible-playbook -i localhost, sample-playbook.yml -v
 - add tests/integration/integration_config.yml.template if needed
 - add docs/
 - fix 'osbuild.composer' collection is not auto-installed. It is not on galaxy.
+
+# CI infrastructure
+
+The CI integration tests require a preconfigured infrastructure -
+VMs that already run FDO services.
+We have a dedicated github actions runner that has access to those VMs.
+
+In [DEV-github-runner.md](DEV-github-runner.md) are described steps used to setup the CI runner.
+
+In (TODO) are described steps to setup VMs with FDO services.
