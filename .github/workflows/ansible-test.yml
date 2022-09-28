@@ -4,9 +4,9 @@ on: [push]
 jobs:
   ansible-test:
     runs-on: [self-hosted, linux]
-    container:
+    #container:
       # image: python:3.10-bullseye
-      image: quay.io/justinc1_github/temp-py3.10-ub2204:latest
+      #image: quay.io/justinc1_github/temp-py3.10-ub2204:latest
     steps:
 #    - name: Perform integration testing with ansible-test
 #      uses: ansible-community/ansible-test-gh-action@release/v1
