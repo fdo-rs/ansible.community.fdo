@@ -4,6 +4,24 @@ on: [push]
 env:
   WORKDIR: /work-dir/ansible_collections/community/fdo
 jobs:
+  units:
+    runs-on: [self-hosted, linux]
+    container: python:3.10-bullseye
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - run: pip3 install -r sanity.requirements -r test.requirements
+      - run: pip install ansible-core==2.13.4
+      - run: apt update
+      - run: apt install -y git make
+        # ansible-test needs special directory structure.
+      - run: mkdir -p $WORKDIR
+      - run: cp -a ./ $WORKDIR
+        #
+      - run: cd $WORKDIR && ansible-test units --python 3.10
+      - run: cd $WORKDIR && ansible-test coverage html --requirements
+      - run: cd $WORKDIR && ansible-test coverage report --omit 'tests/*' --show-missing
+
   sanity:
     runs-on: [self-hosted, linux]
     container: python:3.10-bullseye
