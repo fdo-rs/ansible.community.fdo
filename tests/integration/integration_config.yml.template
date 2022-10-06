@@ -1,3 +1,4 @@
 # Replace the values of variables with connection and access
 # needed for integration tests
 my_var: my-sample-value
+my_password: my-sample-password
