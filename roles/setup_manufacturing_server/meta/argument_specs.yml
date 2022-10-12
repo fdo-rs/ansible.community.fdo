@@ -6,3 +6,10 @@ argument_specs:
         Creates an FDO keys directory, checks if it is empty and generates keys and certificates inside it using fdo-admin-tool.
         Then creates manufacturer service key storages, copies the manufacturing server config example, starts and enables the
         FDO manufacturing server service and opens the required ports.
+    
+    options:
+      fdo_src:
+        description:
+          - Fdo directory path.
+        type: str
+        default: /etc/fdo
