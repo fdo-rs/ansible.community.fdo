@@ -17,4 +17,3 @@ argument_specs:
           - Fdo directory path on the manufacturing server.
           type: str
           default: /etc/fdo    
-          
