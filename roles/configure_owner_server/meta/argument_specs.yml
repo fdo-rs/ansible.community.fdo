@@ -1,0 +1,133 @@
+argument_specs:
+  main:
+    short_description: Reconfigures owner server files.
+    description: 
+      - Creates backups of existing configuration files, creates new ones from templates and then restarts the owner onboarding server and the serviceinfo api server. If the service restarted correctly it then opens the required ports.
+        In the case of it failing it resets the config files by moving the contents of backup files back to the original configuration files. It then restarts the owner onboarding server and the serviceinfo api server and reports that the configuration had failed.
+
+    options:
+      fdo_src:
+        description:
+          - Fdo directory path.
+        type: str
+        default: /etc/fdo
+      enable_roll_back:
+        description:
+          - Enables rollback of configuration files after an unsuccessful reconfiguration.
+        type: bool
+        default: true
+      owner_onboarding_server_ownership_voucher_store_driver_path:
+        description:
+          - Owner vouchers directory path.
+        type: str
+        default: "{{ fdo_src }}/stores/owner_vouchers"
+      owner_onboarding_server_session_store_driver_path:
+        description:
+          - Owner onboarding sessions directory path.
+        type: str
+        default: "{{ fdo_src }}/stores/owner_onboarding_sessions"
+      owner_onboarding_server_trusted_device_keys_path:
+        description:
+          - device_ca_cert.pem file path.
+        type: str
+        default: "{{ fdo_src }}/keys/device_ca_cert.pem"
+      owner_onboarding_server_owner_private_key_path:
+        description:
+          - owner_key.der file path.
+        type: str
+        default: "{{ fdo_src }}/keys/owner_key.der"
+      owner_onboarding_server_bind_ip:
+        description:
+          - The IP address that the owner onboarding server will bind to.
+        type: str
+        default: 0.0.0.0
+      owner_onboarding_server_listen_port_owner_onboarding_server:
+        description:
+          - The port that the owner onboarding server will listen to.
+        type: int
+        default: 8081
+      owner_onboarding_server_listen_port_serviceinfo_api_server:
+        description:
+          - The port that the serviceinfo api server will listen to.
+        type: int
+        default: 8083
+      owner_onboarding_server_service_info_api_authentication_token:
+        description:
+          - Serviceinfo api authentication token. Change to a valid API token
+        type: str
+        default: TestAuthToken 
+      owner_onboarding_server_owner_addresses_transport:
+        description:
+          - ...
+        type: str
+        default: http
+      owner_onboarding_server_owner_addresses_ip_address:
+        description:
+          - Owner server IP address. Change to owner server IP. 
+        type: str
+        default: 127.0.0.1 
+      owner_onboarding_server_report_to_rendezvous_endpoint_enabled:
+        description:
+          - ... 
+        type: bool
+        default: true
+      serviceinfo_api_server_service_info_initial_user_username:
+        description:
+          - Username of the initial user of the serviceinfo api.
+        type: str
+        default: admin
+      serviceinfo_api_server_service_info_initial_user_password:
+        description:
+          - Password of the initial user of the serviceinfo api.
+        type: str
+        default: admin
+      serviceinfo_api_server_service_info_initial_user_sshkeys:
+        description:
+          - SSH Keys of the initial user of the serviceinfo api.
+        type: str
+        default: ""
+      serviceinfo_api_server_service_files_path:
+        description:
+          - Serviceinfo api server service files path.
+        type: str
+        default: /root/resolv.conf
+      serviceinfo_api_server_service_files_source_path:
+        description:
+          - Serviceinfo api server service files source path.
+        type: str
+        default: /etc/resolv.conf
+      serviceinfo_api_server_bind_ip:
+        description:
+          - The IP address that the owner onboarding server will bind to.
+        type: str
+        default: "{{ owner_onboarding_server_bind_ip }}"
+      serviceinfo_api_server_listen_port_serviceinfo_api_server:
+        description:
+          - The port that the serviceinfo api server will listen to.
+        type: str
+        default: "{{ owner_onboarding_server_listen_port_serviceinfo_api_server}}"
+      serviceinfo_api_server_test_path:
+        description:
+          - Test directory path.
+        type: str
+        default: /root/test
+      serviceinfo_api_server_diskencryption_clevis_disk_label:
+        description:
+          - ...
+        type: str
+        default: /dev/vda4
+      serviceinfo_api_server_device_specific_store_driver_path:
+        description:
+          - Serviceinfo api devices directory path. 
+        type: str
+        default: "{{ fdo_src }}/stores/serviceinfo_api_devices"
+      serviceinfo_api_server_service_info_auth_token:
+        description:
+          - Serviceinfo api authorization token.
+        type: str
+        default: "{{ owner_onboarding_server_service_info_api_authentication_token }}"
+      serviceinfo_api_server_admin_auth_token:
+        description:
+          - Serviceinfo api admin authorization token. Change to a valid API token.
+        type: str
+        default: TestAdminToken 

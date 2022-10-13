@@ -1,86 +1,248 @@
 argument_specs:
   main:
-    short_description: Check RHEL subscription
+    short_description: Reconfigures AIO server files
     description:
-      - Check if used RHEL subscritpion is valid.
+      - Creates backups of existing configuration files, creates new ones from templates and then restarts the FDO AIO service. If the service restarted correctly it then opens the required ports.
+        In the case of it failing it resets the config files by moving the contents of backup files back to the original configuration files. It then restarts the FDO AIO service and reports that the configuration had failed.
+      
     options:
+      fdo_aio_src:
+        description:
+          - Aio directory path.
+        type: str
+        default: /etc/fdo/aio
+      enable_roll_back:
+        description:
+          - Enables rollback of configuration files after an unsuccessful reconfiguration.
+        type: bool
+        default: true
       aio_configuration_cert_organization:
         description:
-          - ...
+          - Certificate's organization.
         type: str
         default: FDO AIO
       aio_configuration_cert_country:
         description:
-          - ...
+          - Certificate's country.
         type: str
         default: US
       aio_configuration_listen_ip_address:
         description:
-          - ...
+          - The IP address that the AIO server will listen to. 
         type: str
         default: 0.0.0.0
       aio_configuration_listen_port_manufacturing_server:
         description:
-          - ...
+          - The port that the manufacturing server will listen to.
         type: int
         default: 8080
       aio_configuration_listen_port_owner_onboarding_server:
         description:
-          - ...
+          - The port that the owner onboarding server will listen to.
         type: int
         default: 8081
       aio_configuration_listen_port_rendezvous_server:
         description:
-          - ...
+          - The port that the rendezvous server will listen to.
         type: int
         default: 8082
       aio_configuration_listen_port_serviceinfo_api_server:
         description:
-          - ...
+          - The port that the serviceinfo api server will listen to.
         type: int
         default: 8083
       aio_configuration_separate_manufacturing_and_owner_voucher_store:
         description:
-          - ...
+          - Dictates if manufacturing and owner voucher should be stored seperately or not.
         type: bool
         default: false
       aio_configuration_manufacturing_enable_plain_di:
         description:
-          - ...
+          - ... 
         type: bool
         default: false
       aio_configuration_manufacturing_disable_key_storage_filesystem:
         description:
-          - ...
+          - ... 
         type: bool
         default: false
       aio_configuration_manufacturing_disable_key_storage_tpm:
         description:
-          - ...
+          - ... 
         type: bool
         default: false
       aio_configuration_manufacturing_use_secp256r1:
         description:
-          - ...
+          - ... 
         type: bool
         default: false
       aio_configuration_contact_hostname:
         description:
-          - ...
+          - Name of the host machine.
         type: str
         default: ~
       aio_configuration_contact_addresses_IpAddr:
         description:
-          - ...
+          - IP Address of the host machine. Must be either set manually or used with `gather_facts true` in your playbook. Also note that some newer versions of Linux don't support `eth0` interface. 
         type: str
         default: ...
       aio_configuration_serviceinfo_api_auth_token:
         description:
-          - ...
+          - Serviceinfo api authorization token. Change to a valid API token. 
         type: str
         required: true
       aio_configuration_serviceinfo_api_admin_token:
         description:
-          - ...
+          - Serviceinfo api admin token. Change to a valid API token. 
         type: str
         required: true
+      manufacturing_server_session_store_driver_path:
+        description:
+          - Manufacturing sessions directory path.
+        type: str
+        default: "{{ fdo_aio_src }}/stores/manufacturing_sessions"
+      manufacturing_server_ownership_voucher_store_driver_path:
+        description:
+          - Owner vouchers directory path.
+        type: str
+        default: "{{ fdo_aio_src }}/stores/owner_vouchers"
+      manufacturing_server_public_key_store_driver_path:
+        description:
+          - Manufacturer keys directory path.
+        type: str
+        default: "{{ fdo_aio_src }}/stores/manufacturer_keys"
+      manufacturing_server_protocols_plain_di:
+        description:
+          - ... 
+        type: bool
+        default: false
+      manufacturing_server_protocols_key_path:
+        description:
+          - diun_key.der file path.
+        type: str
+        default: "{{ fdo_aio_src }}/keys/diun_key.der"
+      manufacturing_server_protocols_cert_path:
+        description:
+          - diun_cert.pem file path.
+        type: str
+        default: "{{ fdo_aio_src }}/keys/diun_cert.pem"
+      manufacturing_server_rendezvous_info_protocol:
+        description:
+          - ... 
+        type: str
+        default: http
+      manufacturing_server_manufacturer_cert_path:
+        description:
+          - manufacturer_cert.pem file path.
+        type: str
+        default: "{{ fdo_aio_src }}/keys/manufacturer_cert.pem"
+      manufacturing_server_device_cert_ca_private_key:
+        description:
+          - device_ca_key.der file path.
+        type: str
+        default: "{{ fdo_aio_src }}/keys/device_ca_key.der"
+      manufacturing_server_device_cert_ca_chain:
+        description:
+          - device_ca_cert.pem file path.
+        type: str
+        default: "{{ fdo_aio_src }}/keys/device_ca_cert.pem"
+      manufacturing_server_owner_cert_path:
+        description:
+          - owner_cert.pem file path.
+        type: str
+        default: "{{ fdo_aio_src }}/keys/owner_cert.pem"
+      manufacturing_server_manufacturer_private_key:
+        description:
+          - manufacturer_key.der file path.
+        type: str
+        default: "{{ fdo_aio_src }}/keys/manufacturer_key.der"
+      rendezvous_server_storage_driver_path:
+        description:
+          - rendezvous_registered directory path.
+        type: str
+        default: "{{ fdo_aio_src }}/stores/rendezvous_registered"
+      rendezvous_server_session_store_driver_path:
+        description:
+          - rendezvous_sessions directory path.
+        type: str
+        default: "{{ fdo_aio_src }}/stores/rendezvous_sessions"
+      rendezvous_server_trusted_manufacturer_keys_path:
+        description:
+          - Trusted manufacturer keys file path.
+        type: str
+        default: "{{ manufacturing_server_manufacturer_cert_path }}"
+      rendezvous_server_max_wait_seconds:
+        description:
+          - Rendezvous server max wait time in seconds.
+        type: str
+        default: ~
+      owner_onboarding_server_ownership_voucher_store_driver_path:
+        description:
+          - Owner onboarding server and ownership voucher storage path.
+        type: str
+        default: "{{ manufacturing_server_ownership_voucher_store_driver_path }}"
+      owner_onboarding_server_session_store_driver_path:
+        description:
+          - Owner onboarding sessions directory path.
+        type: str
+        default: "{{ fdo_aio_src }}/stores/owner_onboarding_sessions"
+      owner_onboarding_server_trusted_device_keys_path:
+        description:
+          - Owner onboarding server trusted device keys file path.
+        type: str
+        default: "{{ manufacturing_server_device_cert_ca_chain }}"
+      owner_onboarding_server_owner_private_key_path:
+        description:
+          - owner_key.der file path.
+        type: str
+        default: "{{ fdo_aio_src }}/keys/owner_key.der"
+      owner_onboarding_server_owner_public_key_path:
+        description:
+          - Owner public key file path.
+        type: str
+        default: "{{ manufacturing_server_owner_cert_path }}"
+      owner_onboarding_server_service_info_api_authentication_token:
+        description:
+          - Serviceinfo api authentication token.
+        type: str
+        default: "{{ aio_configuration_serviceinfo_api_auth_token }}"
+      owner_onboarding_server_owner_addresses_transport:
+        description:
+          - ... 
+        type: str
+        default: http
+      owner_onboarding_server_report_to_rendezvous_endpoint_enabled:
+        description:
+          - ... 
+        type: bool
+        default: true
+      serviceinfo_api_server_service_info_initial_user:
+        description:
+          - Name of the initial user of the serviceinfo api. 
+        type: str
+        default: ~
+      serviceinfo_api_server_service_info_files:
+        description:
+          - ... 
+        type: str
+        default: ~
+      serviceinfo_api_server_service_info_commands:
+        description:
+          - ... 
+        type: str
+        default: ~
+      serviceinfo_api_server_service_info_diskencryption_clevis:
+        description:
+          - ... 
+        type: str
+        default: ~
+      serviceinfo_api_server_service_info_additional_serviceinfo:
+        description:
+          - ... 
+        type: str
+        default: ~
+      serviceinfo_api_server_device_specific_store_driver_path:
+        description:
+          - Serviceinfo api devices directory path.
+        type: str
+        default: "{{ fdo_aio_src }}/stores/serviceinfo_api_devices"
