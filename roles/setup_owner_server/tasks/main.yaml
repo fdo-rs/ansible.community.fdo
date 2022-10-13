@@ -20,24 +20,21 @@
   synchronize:
     src: "{{ manufacturing_server_fdo_src }}/keys/device_ca_cert.pem"
     dest: "{{ fdo_src }}/keys/device_ca_cert.pem"
-    private_key: /home/lukawernig/FDO/Xlab/ansible_collections/community/fdo/.vagrant/machines/manufacturing-server/virtualbox/private_key
-  delegate_to: '{{target|default("192.168.56.100")}}'
+  delegate_to: '{{target|default("manufacturing_server")}}'
 
 # TODO: configure delegated machine 
 - name: Copy Owner Key from Manufacturing Server
   synchronize:
     src: "{{ manufacturing_server_fdo_src }}/keys/owner_key.der"
     dest: "{{ fdo_src }}/keys/owner_key.der"
-    private_key: /home/lukawernig/FDO/Xlab/ansible_collections/community/fdo/.vagrant/machines/manufacturing-server/virtualbox/private_key
-  delegate_to: '{{target|default("192.168.56.100")}}'
+  delegate_to: '{{target|default("manufacturing_server")}}'
 
 # TODO: configure delegated machine 
 - name: Copy Owner Certificate from Manufacturing Server
   synchronize:
     src: "{{ manufacturing_server_fdo_src }}/keys/owner_cert.pem"
     dest: "{{ fdo_src }}/keys/owner_cert.pem"
-    private_key: /home/lukawernig/FDO/Xlab/ansible_collections/community/fdo/.vagrant/machines/manufacturing-server/virtualbox/private_key  
-  delegate_to: '{{target|default("192.168.56.100")}}'
+  delegate_to: '{{target|default("manufacturing_server")}}'
 
 - name: Create Owner Service Keys Stores
   file:
