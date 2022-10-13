@@ -246,4 +246,3 @@ argument_specs:
           - Serviceinfo api devices directory path.
         type: str
         default: "{{ fdo_aio_src }}/stores/serviceinfo_api_devices"
-
