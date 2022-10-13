@@ -10,7 +10,7 @@ pip install ansible-core  # 2.13.3
 
 mkdir -p ansible_collections/community/
 cd ansible_collections/community/
-git clone ssh://git@gitlab.xlab.si:13022/fdo-ansible-collection/fdo-ansible-collection.git fdo
+git clone git@github.com:xlab-si/community.fdo.git fdo
 cd fdo
 
 # Install community.general collection, since we like to have stdout_callback=community.general.yaml in ansible.cfg
@@ -62,3 +62,13 @@ ansible-playbook -i localhost, sample-playbook.yml -v
 - add tests/integration/integration_config.yml.template if needed
 - add docs/
 - fix 'osbuild.composer' collection is not auto-installed. It is not on galaxy.
+
+# CI infrastructure
+
+The CI integration tests require a preconfigured infrastructure -
+VMs that already run FDO services.
+We have a dedicated github actions runner that has access to those VMs.
+
+In [DEV-github-runner.md](DEV-github-runner.md) are described steps used to setup the CI runner.
+
+In (TODO) are described steps to setup VMs with FDO services.

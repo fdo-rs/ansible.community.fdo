@@ -1,6 +1,7 @@
 ---
 - environment:
     MY_VAR: "{{ my_var }}"
+    MY_PASSWORD: "{{ my_password }}"
 
   block:
     - name: Show MY_VAR value - not what I would expect
@@ -9,5 +10,5 @@
 
     - name: Show MY_VAR value in real subprocess
       ansible.builtin.command:
-        cmd: /bin/echo "in real subprocess MY_VAR=$MY_VAR"
+        cmd: /bin/echo "in real subprocess MY_VAR=$MY_VAR MY_PASSWORD=$MY_PASSWORD"
       changed_when: False
