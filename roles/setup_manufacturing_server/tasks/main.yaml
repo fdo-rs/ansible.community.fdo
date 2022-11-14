@@ -8,6 +8,9 @@
     name:
       - fdo-admin-cli
       - fdo-manufacturing-server
+      - firewalld
+      - sshpass
+      - rsync
 
 - name: Creates FDO Keys Directory
   file:
@@ -41,7 +44,6 @@
     - "{{ fdo_src }}/stores/manufacturing_sessions"
     - "{{ fdo_src }}/stores/owner_vouchers"
 
-# TODO: add option to edit the default config
 - name: Copy Manufacturing Server Config
   copy:
     src: /usr/share/doc/fdo/manufacturing-server.yml
@@ -53,6 +55,11 @@
     name: fdo-manufacturing-server
     state: started
     enabled: yes
+
+- name: Start firewalld service 
+  service:
+    name: firewalld
+    state: started
 
 - name: Open Required Ports
   ansible.posix.firewalld:
