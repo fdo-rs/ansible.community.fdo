@@ -8,6 +8,9 @@
     name:
       - fdo-admin-cli
       - fdo-owner-onboarding-server
+      - firewalld
+      - sshpass
+      - rsync
 
 - name: Creates FDO Keys Directory
   file:
@@ -15,26 +18,23 @@
     state: directory
     mode: 0775
 
-# TODO: configure delegated machine 
 - name: Copy Device Certificates from Manufacturing Server
   synchronize:
     src: "{{ manufacturing_server_fdo_src }}/keys/device_ca_cert.pem"
     dest: "{{ fdo_src }}/keys/device_ca_cert.pem"
-  delegate_to: '{{target|default("manufacturing_server")}}'
+  delegate_to: "{{ groups['manufacturing_server'][0] }}"
 
-# TODO: configure delegated machine 
 - name: Copy Owner Key from Manufacturing Server
   synchronize:
     src: "{{ manufacturing_server_fdo_src }}/keys/owner_key.der"
     dest: "{{ fdo_src }}/keys/owner_key.der"
-  delegate_to: '{{target|default("manufacturing_server")}}'
+  delegate_to: "{{ groups['manufacturing_server'][0] }}"
 
-# TODO: configure delegated machine 
 - name: Copy Owner Certificate from Manufacturing Server
   synchronize:
     src: "{{ manufacturing_server_fdo_src }}/keys/owner_cert.pem"
     dest: "{{ fdo_src }}/keys/owner_cert.pem"
-  delegate_to: '{{target|default("manufacturing_server")}}'
+  delegate_to: "{{ groups['manufacturing_server'][0] }}"
 
 - name: Create Owner Service Keys Stores
   file:
@@ -46,14 +46,12 @@
     - "{{ fdo_src }}/stores/owner_vouchers"
     - "{{ fdo_src }}/stores/owner_onboarding_sessions"
 
-# TODO: add option to edit the default config
 - name: Copy Owner Onboarding Server Config
   copy:
     src: /usr/share/doc/fdo/owner-onboarding-server.yml
     dest: "{{ fdo_src }}/owner-onboarding-server.yml"
     remote_src: yes
 
-# TODO: add option to edit the default config
 - name: Copy ServiceInfo API Server Config
   copy:
     src: /usr/share/doc/fdo/serviceinfo-api-server.yml
@@ -71,6 +69,11 @@
     name: fdo-serviceinfo-api-server
     state: started
     enabled: yes
+
+- name: Start firewalld service 
+  service:
+    name: firewalld
+    state: started
 
 - name: Open Required Ports
   ansible.posix.firewalld:
