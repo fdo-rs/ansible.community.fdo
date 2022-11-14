@@ -1,0 +1,20 @@
+argument_specs:
+  main:
+    short_description: Setup the owner server
+    description: 
+      - Checks RHEL subscription, installs fdo-admin-cli and fdo-owner-onboarding-server packages with dnf.
+        Creates FDO keys directory, copies device certificates, the owner key and the owner certificate from manufacturing server.
+        It then creates owner service keys stores, copies owner onboarding server config example and serviceinfo api server config example,
+        starts and enables the FDO onboarding server service, the FDO serviceinfo API server service and opens required ports. 
+    
+    options:
+      fdo_src:
+        description:
+          - Fdo directory path.
+        type: str
+        default: /etc/fdo
+      manufacturing_server_fdo_src:
+        description:
+          - Fdo directory path on the manufacturing server.
+          type: str
+          default: /etc/fdo

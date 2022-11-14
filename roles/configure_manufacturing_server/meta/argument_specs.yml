@@ -1,0 +1,102 @@
+argument_specs:
+  main:
+    short_description: Reconfigures manufacturing server files.
+    description: 
+      - Creates a backup of the existing configuration file, creates a new one from template and then restarts the manufacturing server. If the service restarted correctly it then opens the required ports.
+        In the case of it failing it resets the config file by moving the contents of the backup file back to the original configuration file. It then restarts the manufacturing server and reports that the configuration had failed.
+    options:
+      fdo_src:
+        description:
+          - Fdo directory path.
+        type: str
+        default: /etc/fdo
+      enable_roll_back:
+        description:
+          - Enables rollback of configuration files after an unsuccessful reconfiguration.
+        type: bool
+        default: true
+      manufacturing_server_session_store_driver_path:
+        description:
+          - Manufacturing sessions directory path
+        type: str
+        default: "{{ fdo_src }}/stores/manufacturing_sessions"
+      manufacturing_server_ownership_voucher_store_driver_path:
+        description:
+          - Owner vouchers directory path.
+        type: str
+        default: "{{ fdo_src }}/stores/owner_vouchers"
+      manufacturing_server_public_key_store_driver_path:
+        description:
+          - Manufacturer keys directory path-
+        type: str
+        default: "{{ fdo_src }}/stores/manufacturer_keys"
+      manufacturing_server_bind_ip:
+        description:
+          - The IP address that the manufacturing server will bind to.
+        type: str
+        default: 0.0.0.0
+      manufacturing_server_listen_port_manufacturing_server:
+        description:
+          - The port that the manufacturing server will listen to.
+        type: int
+        default: 8080
+      manufacturing_server_protocols_plain_di:
+        description:
+          - ...
+        type: bool
+        default: false
+      manufacturing_server_protocols_diun_key_path:
+        description:
+          - diun_key.der file path.
+        type: str
+        default: "{{ fdo_src }}/keys/diun_key.der"
+      manufacturing_server_protocols_diun_cert_path:
+        description:
+          - diun_cert.pem file path.
+        type: str
+        default: "{{ fdo_src }}/keys/diun_cert.pem"
+      manufacturing_server_rendezvous_info_deviceport:
+        description:
+          - ...
+        type: int
+        default: 8082
+      manufacturing_server_rendezvous_info_ip_address:
+        description:
+          - ...
+        type: str
+        default: 127.0.0.1 # change to rendezvous server ip
+      manufacturing_server_rendezvous_info_owner_port:
+        description:
+          - ...
+        type: str
+        default: "{{ manufacturing_server_rendezvous_info_deviceport }}"
+      manufacturing_server_rendezvous_info_protocol:
+        description:
+          - ...
+        type: str
+        default: http
+      manufacturing_server_manufacturing_manufacturer_cert_path:
+        description:
+          - manufacturer_cert.pem file path.
+        type: str
+        default: "{{ fdo_src }}/keys/manufacturer_cert.pem"
+      manufacturing_server_manufacturing_device_cert_ca_private_key:
+        description:
+          - device_ca_key.der file path.
+        type: str
+        default: "{{ fdo_src }}/keys/device_ca_key.der"
+      manufacturing_server_manufacturing_device_cert_ca_chain:
+        description:
+          - device_ca_cert.pem file path.
+        type: str
+        default: "{{ fdo_src }}/keys/device_ca_cert.pem"
+      manufacturing_server_manufacturing_owner_cert_path:
+        description:
+          - owner_cert.pem file path.
+        type: str
+        default: "{{ fdo_src }}/keys/owner_cert.pem"
+      manufacturing_server_manufacturing_manufacturer_private_key:
+        description:
+          - manufacturer_key.der file path.
+        type: str
+        default: "{{ fdo_src }}/keys/manufacturer_key.der"

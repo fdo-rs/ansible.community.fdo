@@ -20,6 +20,7 @@ build_ignore:
 - .gitignore
 - .flake8
 - DEVELOPMENT.md
+- DEV-github-runner.md
 - Makefile
 - sanity.requirements
 - test.requirements
