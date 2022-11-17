@@ -22,19 +22,19 @@
   synchronize:
     src: "{{ manufacturing_server_fdo_src }}/keys/device_ca_cert.pem"
     dest: "{{ fdo_src }}/keys/device_ca_cert.pem"
-  delegate_to: "{{ groups['manufacturing_server'][0] }}"
+  delegate_to: "{{ manufacturing_server_url }}"
 
 - name: Copy Owner Key from Manufacturing Server
   synchronize:
     src: "{{ manufacturing_server_fdo_src }}/keys/owner_key.der"
     dest: "{{ fdo_src }}/keys/owner_key.der"
-  delegate_to: "{{ groups['manufacturing_server'][0] }}"
+  delegate_to: "{{ manufacturing_server_url }}"
 
 - name: Copy Owner Certificate from Manufacturing Server
   synchronize:
     src: "{{ manufacturing_server_fdo_src }}/keys/owner_cert.pem"
     dest: "{{ fdo_src }}/keys/owner_cert.pem"
-  delegate_to: "{{ groups['manufacturing_server'][0] }}"
+  delegate_to: "{{ manufacturing_server_url }}"
 
 - name: Create Owner Service Keys Stores
   file:
