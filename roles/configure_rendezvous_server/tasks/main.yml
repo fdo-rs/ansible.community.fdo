@@ -4,6 +4,10 @@
     - name: Create backup of the old config file and create new one from the template
       import_tasks: copy_config_file.yml
 
+    - name: Update Manufacturing Server certificate
+      import_tasks: update_cert.yml
+      when: update_cert | bool == true
+
     - name: Restart FDO Rendezvous Server
       systemd:
         name: fdo-rendezvous-server

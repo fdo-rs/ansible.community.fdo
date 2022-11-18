@@ -1,0 +1,9 @@
+---
+#
+# Updates Manufacturing Server certificate.
+#
+- name: Copy Manufacturer Certificate from Manufacturing Server
+  synchronize:
+    src: "{{ manufacturing_server_fdo_src }}/keys/manufacturer_cert.pem"
+    dest: "{{ fdo_src }}/keys/manufacturer_cert.pem"
+  delegate_to: "{{ manufacturing_server_url }}"
