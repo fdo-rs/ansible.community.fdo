@@ -16,5 +16,10 @@ argument_specs:
       manufacturing_server_fdo_src:
         description:
           - Fdo directory path on the manufacturing server.
-          type: str
-          default: /etc/fdo
+        type: str
+        default: /etc/fdo
+      manufacturing_server_url:
+        description:
+          - Manufacturing Server URL.
+        type: str
+        default: "{{ groups['manufacturing_server'][0] }}"

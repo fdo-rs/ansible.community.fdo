@@ -14,8 +14,8 @@ argument_specs:
           - Device Owner Voucer directory path on Owner server.
         type: str
         default: /etc/fdo/stores/owner_vouchers
-      ownership_voucher_uuid:
+      manufacturing_server_url:
         description:
-          - Device Owner Voucher UUID.
+          - Manufacturing Server URL.
         type: str
-        required: true
+        default: "{{ groups['manufacturing_server'][0] }}"

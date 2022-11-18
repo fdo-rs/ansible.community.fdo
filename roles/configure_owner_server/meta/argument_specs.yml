@@ -11,11 +11,26 @@ argument_specs:
           - Fdo directory path.
         type: str
         default: /etc/fdo
+      manufacturing_server_fdo_src:
+        description:
+          - Fdo directory path on the manufacturing server.
+        type: str
+        default: /etc/fdo
       enable_roll_back:
         description:
           - Enables rollback of configuration files after an unsuccessful reconfiguration.
         type: bool
         default: true
+      update_keys_certs:
+        description:
+          - Enable Manufacturing Server keys & certificates update.
+        type: bool
+        default: true
+      manufacturing_server_url:
+        description:
+          - Manufacturing Server URL.
+        type: str
+        default: "{{ groups['manufacturing_server'][0] }}"
       owner_onboarding_server_ownership_voucher_store_driver_path:
         description:
           - Owner vouchers directory path.

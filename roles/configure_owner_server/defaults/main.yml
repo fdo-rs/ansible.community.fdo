@@ -1,7 +1,10 @@
 ---
 # configuration settings
 fdo_src: /etc/fdo
+manufacturing_server_fdo_src: /etc/fdo
 enable_roll_back: true
+update_keys_certs: true
+manufacturing_server_url: "{{ groups['manufacturing_server'][0] }}"
 
 # owner-onboarding-server.yml
 owner_onboarding_server_ownership_voucher_store_driver_path: "{{ fdo_src }}/stores/owner_vouchers"

@@ -4,6 +4,10 @@
     - name: Create backups of old config files and create new ones from templates
       import_tasks: copy_config_files.yml
 
+    - name: Update Manufacturing Server keys & certificates
+      import_tasks: update_keys_certs.yml
+      when: update_keys_certs | bool == true
+
     - name: Restart Owner Onboarding Server
       systemd:
         name: fdo-owner-onboarding-server
