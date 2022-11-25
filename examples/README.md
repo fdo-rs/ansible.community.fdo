@@ -1,11 +1,11 @@
 # About
 
-The `examples` directory contains usage examples for individual roles.
+This document contains usage examples for individual roles from `community.fdo` Ansible Collection.
 A copy-paste Ansible playbook snippets are listed below.
 
 # Preparation
 
-You need to install ansible and the `community.fdo` collection.
+You need to install Ansible and the `community.fdo` collection.
 
 # Examples
 
@@ -123,8 +123,7 @@ You need to install ansible and the `community.fdo` collection.
   gather_facts: true
   tasks:
     # Role copies Device Ownership Vouchers from Manufacturing Server to Owner Server.
+    # This role should be delegated only to Owner Server.
     - import_role:
         name: copy_ownership_vouchers
 ```
-
-> Note: this role should be delegated to Owner Server.
