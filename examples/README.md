@@ -5,7 +5,7 @@ A copy-paste Ansible playbook snippets are listed below.
 
 # Preparation
 
-You need to install Ansible and the `community.fdo` collection.
+You need to install Ansible and its `community.fdo` & `ansible.posix` collections.
 
 # Examples
 
@@ -126,4 +126,29 @@ You need to install Ansible and the `community.fdo` collection.
     # This role should be delegated only to Owner Server.
     - import_role:
         name: copy_ownership_vouchers
+```
+
+## Copy Manufacturing Server Ownership Vouchers via localhost
+
+```yaml
+---
+- name: Fetch Ownership Voucers from Manufacturer server to localhost
+  hosts: manufacturing_server
+  become: true
+  gather_facts: true
+  tasks:
+    # Role copies Device Ownership Vouchers from Manufacturing Server to localhost.
+    # This role should be delegated only to Manufacturing Server.
+    - import_role:
+        name: fetch_ownership_vouchers_to_localhost
+
+- name: Copy Ownership Voucers from localhost to Owner server
+  hosts: owner_server
+  become: true
+  gather_facts: true
+  tasks:
+    # Role copies Device Ownership Vouchers from localhost to Owner Server.
+    # This role should be delegated only to Owner Server.
+    - import_role:
+        name: copy_ownership_vouchers_from_localhost
 ```
