@@ -1,0 +1,5 @@
+---
+- name: Copy Ownership Voucher from Manufacturing Server
+  synchronize:
+    src: "{{ localhost_ownership_vouchers_dir }}/"
+    dest: "{{ owner_server_ownership_vouchers_dir }}"

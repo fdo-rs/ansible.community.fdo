@@ -1,0 +1,3 @@
+---
+manufacturing_server_ownership_vouchers_dir: /etc/fdo/stores/owner_vouchers
+localhost_ownership_vouchers_dir: /var/tmp/fdo
