@@ -1,5 +1,6 @@
 argument_specs:
   main:
+    version_added: 0.0.1
     short_description: Fetch FDO Device Owner Voucers
     description:
       - Fetch FDO Device Owner Voucers from Manufacturer server to localhost.

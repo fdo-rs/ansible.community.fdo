@@ -1,5 +1,6 @@
 argument_specs:
   main:
+    version_added: 0.0.1
     short_description: Copy FDO Device Owner Voucers
     description:
       - Copy FDO Device Owner Voucers from localhost to Owner server.
