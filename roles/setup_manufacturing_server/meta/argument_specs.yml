@@ -1,12 +1,12 @@
 argument_specs:
   main:
+    version_added: 0.0.1
     short_description: Setup the manufacturing server
     description: 
       - Checks RHEL subscription and installs fdo-admin-cli and fdo-manufacturing-server packages with dnf.
         Creates an FDO keys directory, checks if it is empty and generates keys and certificates inside it using fdo-admin-tool.
         Then creates manufacturer service key storages, copies the manufacturing server config example, starts and enables the
         FDO manufacturing server service and opens the required ports.
-    
     options:
       fdo_src:
         description:
