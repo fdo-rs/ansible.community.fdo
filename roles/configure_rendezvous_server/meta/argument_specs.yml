@@ -1,0 +1,48 @@
+argument_specs:
+  main:
+    short_description: Reconfigures rendezvous server files.
+    description: 
+      - Creates a backup of the existing configuration file, creates a new one from template and then restarts the rendezvous server. If the service restarted correctly it then opens the required ports.
+        In the case of it failing it resets the config file by moving the contents of the backup file back to the original configuration file. It then restarts the rendezvous server and reports that the configuration had failed.
+
+    options:
+      fdo_src:
+        description:
+          - Fdo directory path.
+        type: str
+        default: /etc/fdo
+      enable_roll_back:
+        description:
+          - Enables rollback of configuration files after an unsuccessful reconfiguration.
+        type: bool
+        default: true
+      rendezvous_server_storage_driver_path:
+        description:
+          - Rendezvous server storage directory path.
+        type: str
+        default: "{{ fdo_src }}/stores/rendezvous_registered"
+      rendezvous_server_session_store_driver_path:
+        description:
+          - Rendezvous server sessions directory path.
+        type: str
+        default: "{{ fdo_src }}/stores/rendezvous_sessions"
+      rendezvous_server_trusted_manufacturer_keys_path:
+        description:
+          - manufacturer_cert.pem file path.
+        type: str
+        default: "{{ fdo_src }}/keys/manufacturer_cert.pem"
+      rendezvous_server_max_wait_seconds:
+        description:
+          - Rendezvous server max wait time in seconds.
+        type: str
+        default: ~
+      rendezvous_server_bind_ip:
+        description:
+          - The IP address that the rendezvous server will bind to.
+        type: str
+        default: 0.0.0.0
+      rendezvous_server_listen_port_rendezvous_server:
+        description:
+          - The port that the rendezvous server will listen to.
+        type: int
+        default: 8082
