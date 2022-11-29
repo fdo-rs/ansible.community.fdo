@@ -5,7 +5,7 @@ collection := $(notdir $(realpath $(CURDIR)      ))
 namespace  := $(notdir $(realpath $(CURDIR)/..   ))
 toplevel   := $(notdir $(realpath $(CURDIR)/../..))
 
-err_msg := Place collection at <WHATEVER>/ansible_collections/scale_computing/hypercore
+err_msg := Place collection at <WHATEVER>/ansible_collections/community/fdo
 ifeq (true,$(CI))
   $(info Running in CI setting, skipping directory checks.)
 else ifneq (fdo,$(collection))
@@ -66,3 +66,9 @@ units:  ## Run unit tests
 .PHONY: integration
 integration:  ## Run integration tests
 	ansible-test integration --docker --diff
+
+.PHONY: docs
+docs:  ## Build collection documentation
+	pip install -r docs.requirements
+	$(MAKE) -C docs -f Makefile.custom docs
+

@@ -1,5 +1,6 @@
 argument_specs:
   main:
+    version_added: 0.0.1
     short_description: Setup AIO server
     description:
       - Checks RHEL subscription, installs fdo-admin-cli package with dnf, starts and enables the FDO AIO service
