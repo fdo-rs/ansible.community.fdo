@@ -85,7 +85,7 @@ argument_specs:
         description:
           - IP Address of the host machine. Must be either set manually or used with `gather_facts true` in your playbook. Also note that some newer versions of Linux don't support `eth0` interface. 
         type: str
-        default: ...
+        default: "{{ ansible_eth0.ipv4.address }}"
       aio_configuration_serviceinfo_api_auth_token:
         description:
           - Serviceinfo api authorization token. Change to a valid API token. 
