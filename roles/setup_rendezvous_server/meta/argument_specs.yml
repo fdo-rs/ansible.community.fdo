@@ -22,3 +22,8 @@ argument_specs:
           - Manufacturing Server URL.
         type: str
         default: "{{ groups['manufacturing_server'][0] }}"
+      copy_manufacturer_certs:
+        description:
+          - Enable fetching manufacturing server certificates & keys.
+        type: bool
+        default: true

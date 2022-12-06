@@ -1,0 +1,7 @@
+---
+- name: Copy Manufacturer Certificate from localhost
+  synchronize:
+    src: "{{ localhost_manufacturing_server_certs_dir }}/manufacturer_cert.pem"
+    dest: "{{ rendezvous_server_fdo_src }}/keys/manufacturer_cert.pem"
+    checksum: true
+    rsync_timeout: 60

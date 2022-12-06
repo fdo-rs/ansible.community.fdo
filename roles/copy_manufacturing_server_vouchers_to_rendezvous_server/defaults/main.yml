@@ -1,0 +1,3 @@
+---
+rendezvous_server_fdo_src: /etc/fdo
+localhost_manufacturing_server_certs_dir: /var/tmp/fdo

@@ -1,0 +1,21 @@
+---
+- name: Copy Manufacturing Server Device Certificates from localhost
+  synchronize:
+    src: "{{ localhost_manufacturing_server_certs_dir }}/device_ca_cert.pem"
+    dest: "{{ owner_server_fdo_src }}/keys/device_ca_cert.pem"
+    checksum: true
+    rsync_timeout: 60
+
+- name: Copy Manufacturing Server Owner Key from localhost
+  synchronize:
+    src: "{{ localhost_manufacturing_server_certs_dir }}/owner_key.der"
+    dest: "{{ owner_server_fdo_src }}/keys/owner_key.der"
+    checksum: true
+    rsync_timeout: 60
+
+- name: Copy Manufacturing Server Owner Certificate from localhost
+  synchronize:
+    src: "{{ localhost_manufacturing_server_certs_dir }}/owner_cert.pem"
+    dest: "{{ owner_server_fdo_src }}/keys/owner_cert.pem"
+    checksum: true
+    rsync_timeout: 60
