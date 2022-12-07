@@ -22,3 +22,11 @@
     mode: pull
     checksum: true
     rsync_timeout: 60
+
+- name: Copy Manufacturer Certificate from Manufacturing Server
+  synchronize:
+    src: "{{ manufacturing_server_fdo_src }}/keys/manufacturer_cert.pem"
+    dest: "{{ localhost_manufacturing_server_certs_dir }}"
+    mode: pull
+    checksum: true
+    rsync_timeout: 60

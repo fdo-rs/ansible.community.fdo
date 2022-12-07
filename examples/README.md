@@ -119,7 +119,7 @@ In case of the specific use-case where Manufacturing Server is located in differ
   become: true
   gather_facts: true
   vars:
-  #  - update_keys_certs: false
+  #  - update_cert: false
   tasks:
     # Role updates FDO Rendezvous Server config files and restarts the services.
     # If not configured otherwise it also updates installed Manufacturing Server keys and certificates .
