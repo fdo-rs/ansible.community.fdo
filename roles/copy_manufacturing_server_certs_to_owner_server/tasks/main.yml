@@ -19,3 +19,15 @@
     dest: "{{ owner_server_fdo_src }}/keys/owner_cert.pem"
     checksum: true
     rsync_timeout: 60
+
+- name: Restart Owner Onboarding Server
+  systemd:
+    name: fdo-owner-onboarding-server
+    state: restarted
+    enabled: yes
+
+- name: Restart Serviceinfo API Server
+  systemd:
+    name: fdo-serviceinfo-api-server
+    state: restarted
+    enabled: yes

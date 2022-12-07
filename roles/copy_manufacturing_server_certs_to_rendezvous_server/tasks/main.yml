@@ -5,3 +5,9 @@
     dest: "{{ rendezvous_server_fdo_src }}/keys/manufacturer_cert.pem"
     checksum: true
     rsync_timeout: 60
+
+- name: Restart FDO Rendezvous Server
+      systemd:
+        name: fdo-rendezvous-server
+        state: restarted
+        enabled: yes
