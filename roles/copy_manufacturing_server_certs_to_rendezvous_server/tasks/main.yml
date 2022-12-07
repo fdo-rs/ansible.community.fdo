@@ -7,7 +7,7 @@
     rsync_timeout: 60
 
 - name: Restart FDO Rendezvous Server
-      systemd:
-        name: fdo-rendezvous-server
-        state: restarted
-        enabled: yes
+  systemd:
+    name: fdo-rendezvous-server
+    state: restarted
+    enabled: yes
