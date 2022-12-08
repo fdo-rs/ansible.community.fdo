@@ -6,4 +6,6 @@
   synchronize:
     src: "{{ manufacturing_server_fdo_src }}/keys/manufacturer_cert.pem"
     dest: "{{ fdo_src }}/keys/manufacturer_cert.pem"
+    checksum: true
+    rsync_timeout: 60
   delegate_to: "{{ manufacturing_server_url }}"

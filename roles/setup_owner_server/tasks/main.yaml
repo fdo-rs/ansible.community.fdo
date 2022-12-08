@@ -22,19 +22,28 @@
   synchronize:
     src: "{{ manufacturing_server_fdo_src }}/keys/device_ca_cert.pem"
     dest: "{{ fdo_src }}/keys/device_ca_cert.pem"
+    checksum: true
+    rsync_timeout: 60
   delegate_to: "{{ manufacturing_server_url }}"
+  when: copy_manufacturer_certs | bool == true
 
 - name: Copy Owner Key from Manufacturing Server
   synchronize:
     src: "{{ manufacturing_server_fdo_src }}/keys/owner_key.der"
     dest: "{{ fdo_src }}/keys/owner_key.der"
+    checksum: true
+    rsync_timeout: 60
   delegate_to: "{{ manufacturing_server_url }}"
+  when: copy_manufacturer_certs | bool == true
 
 - name: Copy Owner Certificate from Manufacturing Server
   synchronize:
     src: "{{ manufacturing_server_fdo_src }}/keys/owner_cert.pem"
     dest: "{{ fdo_src }}/keys/owner_cert.pem"
+    checksum: true
+    rsync_timeout: 60
   delegate_to: "{{ manufacturing_server_url }}"
+  when: copy_manufacturer_certs | bool == true
 
 - name: Create Owner Service Keys Stores
   file:

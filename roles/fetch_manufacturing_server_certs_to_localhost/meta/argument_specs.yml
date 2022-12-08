@@ -1,0 +1,17 @@
+argument_specs:
+  main:
+    version_added: 0.0.1
+    short_description: Fetch FDO Manufacturing Server Keys and Certificates
+    description:
+      - Fetch FDO Server Keys and Certificates from Manufacturer server to localhost.
+    options:
+      manufacturing_server_fdo_src:
+        description:
+          - FDO directory path on the Manufacturing Server.
+        type: str
+        default: /etc/fdo
+      localhost_manufacturing_server_certs_dir:
+        description:
+          - Manufacturing Server Keys and Certificates directory path on localhost.
+        type: str
+        default: /var/tmp/fdo
