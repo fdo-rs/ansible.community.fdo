@@ -1,7 +1,8 @@
 ---
-#
-# Updates Manufacturing Server Device/Owner keys/certificates.
-#
+# Copyright: (c) 2022, XLAB Steampunk <steampunk@xlab.si>
+# GNU General Public License v3.0+ (see LICENSE or https://www.gnu.org/licenses/gpl-3.0.txt)
+
+### Updates Manufacturing Server Device/Owner keys/certificates. ###
 - name: Copy Device Certificates from Manufacturing Server
   synchronize:
     src: "{{ manufacturing_server_fdo_src }}/keys/device_ca_cert.pem"

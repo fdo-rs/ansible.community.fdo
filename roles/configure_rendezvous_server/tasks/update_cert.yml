@@ -1,7 +1,8 @@
 ---
-#
-# Updates Manufacturing Server certificate.
-#
+# Copyright: (c) 2022, XLAB Steampunk <steampunk@xlab.si>
+# GNU General Public License v3.0+ (see LICENSE or https://www.gnu.org/licenses/gpl-3.0.txt)
+
+### Updates Manufacturing Server certificate. ###
 - name: Copy Manufacturer Certificate from Manufacturing Server
   synchronize:
     src: "{{ manufacturing_server_fdo_src }}/keys/manufacturer_cert.pem"

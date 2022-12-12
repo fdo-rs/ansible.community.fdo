@@ -1,3 +1,6 @@
 ---
+# Copyright: (c) 2022, XLAB Steampunk <steampunk@xlab.si>
+# GNU General Public License v3.0+ (see LICENSE or https://www.gnu.org/licenses/gpl-3.0.txt)
+
 owner_server_ownership_vouchers_dir: /etc/fdo/stores/owner_vouchers
 localhost_ownership_vouchers_dir: /var/tmp/fdo

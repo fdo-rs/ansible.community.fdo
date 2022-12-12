@@ -1,9 +1,12 @@
 ---
-# configuration settings
+# Copyright: (c) 2022, XLAB Steampunk <steampunk@xlab.si>
+# GNU General Public License v3.0+ (see LICENSE or https://www.gnu.org/licenses/gpl-3.0.txt)
+
+### configuration settings ###
 fdo_aio_src: /etc/fdo/aio
 enable_roll_back: true
 
-# aio_configuration
+### aio_configuration ###
 aio_configuration_cert_organization: FDO AIO
 aio_configuration_cert_country: US
 aio_configuration_listen_ip_address: 0.0.0.0
@@ -21,7 +24,7 @@ aio_configuration_contact_addresses_IpAddr: "{{ ansible_eth0.ipv4.address }}" # 
 #aio_configuration_serviceinfo_api_auth_token: TestAuthToken # change to a valid API token
 #aio_configuration_serviceinfo_api_admin_token: TestAdminToken # change to a valid API token
 
-# manufacturing_server.yml
+### manufacturing_server.yml ###
 manufacturing_server_session_store_driver_path: "{{ fdo_aio_src }}/stores/manufacturing_sessions"
 manufacturing_server_ownership_voucher_store_driver_path: "{{ fdo_aio_src }}/stores/owner_vouchers"
 manufacturing_server_public_key_store_driver_path: "{{ fdo_aio_src }}/stores/manufacturer_keys"
@@ -35,13 +38,13 @@ manufacturing_server_device_cert_ca_chain: "{{ fdo_aio_src }}/keys/device_ca_cer
 manufacturing_server_owner_cert_path: "{{ fdo_aio_src }}/keys/owner_cert.pem"
 manufacturing_server_manufacturer_private_key: "{{ fdo_aio_src }}/keys/manufacturer_key.der"
 
-# rendezvous_server.yml
+### rendezvous_server.yml ###
 rendezvous_server_storage_driver_path: "{{ fdo_aio_src }}/stores/rendezvous_registered"
 rendezvous_server_session_store_driver_path: "{{ fdo_aio_src }}/stores/rendezvous_sessions"
 rendezvous_server_trusted_manufacturer_keys_path: "{{ manufacturing_server_manufacturer_cert_path }}"
 rendezvous_server_max_wait_seconds: ~
 
-# owner_onboarding_server.yml
+### owner_onboarding_server.yml ###
 owner_onboarding_server_ownership_voucher_store_driver_path: "{{ manufacturing_server_ownership_voucher_store_driver_path }}"
 owner_onboarding_server_session_store_driver_path: "{{ fdo_aio_src }}/stores/owner_onboarding_sessions"
 owner_onboarding_server_trusted_device_keys_path: "{{ manufacturing_server_device_cert_ca_chain }}"
@@ -51,7 +54,7 @@ owner_onboarding_server_service_info_api_authentication_token: "{{ aio_configura
 owner_onboarding_server_owner_addresses_transport: http
 owner_onboarding_server_report_to_rendezvous_endpoint_enabled: true
 
-# serviceinfo_api_server.yml
+### serviceinfo_api_server.yml ###
 serviceinfo_api_server_service_info_initial_user: ~
 serviceinfo_api_server_service_info_files: ~
 serviceinfo_api_server_service_info_commands: ~

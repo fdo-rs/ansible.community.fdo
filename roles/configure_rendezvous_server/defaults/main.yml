@@ -1,12 +1,15 @@
 ---
-# configuration settings
+# Copyright: (c) 2022, XLAB Steampunk <steampunk@xlab.si>
+# GNU General Public License v3.0+ (see LICENSE or https://www.gnu.org/licenses/gpl-3.0.txt)
+
+### configuration settings ###
 fdo_src: /etc/fdo
 manufacturing_server_fdo_src: /etc/fdo
 enable_roll_back: true
 update_cert: true
 manufacturing_server_url: "{{ groups['manufacturing_server'][0] }}"
 
-# rendezvous-server.yml
+### rendezvous-server.yml ###
 rendezvous_server_storage_driver_path: "{{ fdo_src }}/stores/rendezvous_registered"
 rendezvous_server_session_store_driver_path: "{{ fdo_src }}/stores/rendezvous_sessions"
 rendezvous_server_trusted_manufacturer_keys_path: "{{ fdo_src }}/keys/manufacturer_cert.pem"

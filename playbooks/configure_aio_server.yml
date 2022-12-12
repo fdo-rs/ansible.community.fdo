@@ -1,0 +1,14 @@
+---
+# Copyright: (c) 2022, XLAB Steampunk <steampunk@xlab.si>
+# GNU General Public License v3.0+ (see LICENSE or https://www.gnu.org/licenses/gpl-3.0.txt)
+
+- name: Configure FDO AIO Server
+  hosts: aio_server
+  become: true
+  gather_facts: true
+  vars:
+    - aio_configuration_serviceinfo_api_auth_token: "demo-token-77622c4b-c057-4295-950a-87bd951a3dda"
+    - aio_configuration_serviceinfo_api_admin_token: "demo-token-48a7bea0-6989-4304-8957-eae0a754647b"
+  tasks:
+    - ansible.builtin.include_role:
+        name: community.fdo.configure_aio_server

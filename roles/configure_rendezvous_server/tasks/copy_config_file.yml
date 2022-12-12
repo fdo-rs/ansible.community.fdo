@@ -1,7 +1,8 @@
 ---
-#
-# Create backup of existing configuration file and create a new one from template.
-#
+# Copyright: (c) 2022, XLAB Steampunk <steampunk@xlab.si>
+# GNU General Public License v3.0+ (see LICENSE or https://www.gnu.org/licenses/gpl-3.0.txt)
+
+### Create backup of existing configuration file and create a new one from template. ###
 - name: Copy Old Rendezvous Server Config
   copy:
     src: "{{ fdo_src }}/rendezvous-server.yml"

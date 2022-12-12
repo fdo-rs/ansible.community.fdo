@@ -1,9 +1,12 @@
 ---
-# configuration settings
+# Copyright: (c) 2022, XLAB Steampunk <steampunk@xlab.si>
+# GNU General Public License v3.0+ (see LICENSE or https://www.gnu.org/licenses/gpl-3.0.txt)
+
+### configuration settings ###
 fdo_src: /etc/fdo
 enable_roll_back: true
 
-# manufacturing-server.yml
+### manufacturing-server.yml ###
 manufacturing_server_session_store_driver_path: "{{ fdo_src }}/stores/manufacturing_sessions"
 manufacturing_server_ownership_voucher_store_driver_path: "{{ fdo_src }}/stores/owner_vouchers"
 manufacturing_server_public_key_store_driver_path: "{{ fdo_src }}/stores/manufacturer_keys"
