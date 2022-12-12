@@ -4,7 +4,7 @@
 
 argument_specs:
   main:
-    version_added: 0.0.1
+    version_added: 1.0.0
     short_description: Reconfigures AIO server files
     description:
       - Creates backups of existing configuration files, creates new ones from templates and then restarts the FDO AIO service. If the service restarted correctly it then opens the required ports.

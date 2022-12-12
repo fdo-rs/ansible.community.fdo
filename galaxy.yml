@@ -1,6 +1,6 @@
 namespace: community
 name: fdo
-version: 0.0.1
+version: 1.0.0
 readme: README.md
 authors:
 - your name <example@domain.com>

@@ -4,7 +4,7 @@
 
 argument_specs:
   main:
-    version_added: 0.0.1
+    version_added: 1.0.0
     short_description: Fetch FDO Manufacturing Server Keys and Certificates
     description:
       - Fetch FDO Server Keys and Certificates from Manufacturer server to localhost.

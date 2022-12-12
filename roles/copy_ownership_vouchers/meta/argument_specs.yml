@@ -4,7 +4,7 @@
 
 argument_specs:
   main:
-    version_added: 0.0.1
+    version_added: 1.0.0
     short_description: Copy FDO Device Owner Voucer
     description:
       - Copy FDO Device Owner Voucer from Manufacturer server to Owner server.

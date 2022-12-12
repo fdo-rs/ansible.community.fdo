@@ -4,7 +4,7 @@
 
 argument_specs:
   main:
-    version_added: 0.0.1
+    version_added: 1.0.0
     short_description: Setup the owner server
     description: 
       - Checks RHEL subscription and installs fdo-rendezvous-server package with dnf.

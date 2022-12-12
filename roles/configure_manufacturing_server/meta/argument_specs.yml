@@ -4,7 +4,7 @@
 
 argument_specs:
   main:
-    version_added: 0.0.1
+    version_added: 1.0.0
     short_description: Reconfigures manufacturing server files.
     description: 
       - Creates a backup of the existing configuration file, creates a new one from template and then restarts the manufacturing server. If the service restarted correctly it then opens the required ports.
