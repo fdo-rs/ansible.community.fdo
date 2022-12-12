@@ -23,7 +23,6 @@ python_version := $(shell \
 unit_test_targets := $(shell find tests/unit -name '*.py')
 integration_test_targets := $(shell ls tests/integration/targets)
 
-
 .PHONY: help
 help:
 	@echo Available targets:
@@ -71,4 +70,3 @@ integration:  ## Run integration tests
 docs:  ## Build collection documentation
 	pip install -r docs.requirements
 	$(MAKE) -C docs -f Makefile.custom docs
-

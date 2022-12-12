@@ -5,7 +5,7 @@ A copy-paste Ansible playbook snippets are listed below.
 
 # Preparation
 
-You need to install Ansible and its `community.fdo` & `ansible.posix` collections.
+You need to install Ansible and `community.fdo` & `ansible.posix` collections.
 
 # Examples
 
