@@ -17,7 +17,7 @@ aio_configuration_manufacturing_disable_key_storage_filesystem: false
 aio_configuration_manufacturing_disable_key_storage_tpm: false
 aio_configuration_manufacturing_use_secp256r1: false
 aio_configuration_contact_hostname: ~
-aio_configuration_contact_addresses_IpAddr: "{{ ansible_eth0.ipv4.address }}" # Must be either set manually or used with `gather_facts: true` in your playbook. Also note that some newer versions of Linux don't support `eth0` interface.
+aio_configuration_contact_addresses_IpAddr: "{{ ansible_default_ipv4.address }}" # Must be either set manually (if you system has more than one interface) or used with `gather_facts: true` in your playbook.
 #aio_configuration_serviceinfo_api_auth_token: TestAuthToken # change to a valid API token
 #aio_configuration_serviceinfo_api_admin_token: TestAdminToken # change to a valid API token
 
