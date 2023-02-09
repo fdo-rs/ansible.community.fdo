@@ -1,24 +1,24 @@
 ---
 service_info:
-  initial_user: 
+  initial_user:
     username: {{ serviceinfo_api_server_service_info_initial_user_username }}
-    {% if serviceinfo_api_server_service_info_initial_user_password is not none %}   
+{% if serviceinfo_api_server_service_info_initial_user_password is not none %}
     password: {{ serviceinfo_api_server_service_info_initial_user_password }}
-    {% endif %}
-    {% if serviceinfo_api_server_service_info_initial_user_sshkeys is not none %}   
+{% endif %}
+{% if serviceinfo_api_server_service_info_initial_user_sshkeys is not none %}
     sshkeys:
     - {{ serviceinfo_api_server_service_info_initial_user_sshkeys }}
-    {% endif %}
+{% endif %}
   files:
   - path: {{ serviceinfo_api_server_service_files_path }}
     source_path: {{ serviceinfo_api_server_service_files_source_path }}
-  commands: 
+  commands:
   - command: touch
     args:
     - {{ serviceinfo_api_server_test_path }}
     return_stdout: true
     return_stderr: true
-  diskencryption_clevis: 
+  diskencryption_clevis:
   - disk_label: {{ serviceinfo_api_server_diskencryption_clevis_disk_label }}
     binding:
       pin: tpm2
