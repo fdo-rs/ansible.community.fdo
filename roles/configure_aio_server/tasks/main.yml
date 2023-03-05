@@ -5,27 +5,28 @@
 - name: Update config files and restart FDO AIO service
   block:
     - name: Create backups of old config files and create new ones from templates
-      import_tasks: copy_config_files.yml
+      ansible.builtin.import_tasks: copy_config_files.yml
 
     - name: Restart FDO AIO Service
-      systemd:
+      ansible.builtin.systemd:
         name: fdo-aio
         state: restarted
-        enabled: yes
+        enabled: true
 
     - name: Check FDO AIO Service Status
-      command: systemctl status fdo-aio
+      ansible.builtin.command: systemctl status fdo-aio
       register: service_fdo_aio_status
+      changed_when: service_fdo_aio_status.rc != 0
 
     - name: Report Status of FDO AIO Service
-      fail:
+      ansible.builtin.fail:
         msg: FDO AIO Service failed to restart after configuration change.
       when: service_fdo_aio_status.rc != 0
 
     - name: Open Required Ports
       ansible.posix.firewalld:
         port: "{{ item }}"
-        permanent: yes
+        permanent: true
         state: enabled
         immediate: true
       loop:
@@ -36,16 +37,16 @@
 
   rescue:
     - name: Reset config files
-      import_tasks: reset_config_files.yml
-      when: enable_roll_back | bool == true
+      ansible.builtin.import_tasks: reset_config_files.yml
+      when: enable_roll_back | bool
 
     - name: Restart FDO AIO Service
-      systemd:
+      ansible.builtin.systemd:
         name: fdo-aio
         state: restarted
-        enabled: yes
-      when: enable_roll_back | bool == true
+        enabled: true
+      when: enable_roll_back | bool
 
     - name: FDO AIO Service configuration failed
-      fail:
+      ansible.builtin.fail:
         msg: FDO AIO Service configuration failed.

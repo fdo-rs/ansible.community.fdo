@@ -4,16 +4,26 @@
 
 ### Reset FDO AIO Configs to the old ones. ###
 - name: Reset AIO Config
-  command: "mv {{ fdo_aio_src }}/aio_configuration.old {{ fdo_aio_src }}/aio_configuration"
+  ansible.builtin.command: "mv {{ fdo_aio_src }}/aio_configuration.old {{ fdo_aio_src }}/aio_configuration"
+  register: aoi_config_move_output
+  changed_when: aoi_config_move_output.rc == 0
 
 - name: Reset Manufacturing Server Config
-  command: "mv {{ fdo_aio_src }}/configs/manufacturing_server.yml.old {{ fdo_aio_src }}/configs/manufacturing_server.yml"
+  ansible.builtin.command: "mv {{ fdo_aio_src }}/configs/manufacturing_server.yml.old {{ fdo_aio_src }}/configs/manufacturing_server.yml"
+  register: manufacturing_config_move_output
+  changed_when: manufacturing_config_move_output.rc == 0
 
 - name: Reset Rendezvous Server Config
-  command: "mv {{ fdo_aio_src }}/configs/rendezvous_server.yml.old {{ fdo_aio_src }}/configs/rendezvous_server.yml"
+  ansible.builtin.command: "mv {{ fdo_aio_src }}/configs/rendezvous_server.yml.old {{ fdo_aio_src }}/configs/rendezvous_server.yml"
+  register: rendezvous_config_move_output
+  changed_when: rendezvous_config_move_output.rc == 0
 
 - name: Reset Onboarding Server Config
-  command: "mv {{ fdo_aio_src }}/configs/owner_onboarding_server.yml.old {{ fdo_aio_src }}/configs/owner_onboarding_server.yml"
+  ansible.builtin.command: "mv {{ fdo_aio_src }}/configs/owner_onboarding_server.yml.old {{ fdo_aio_src }}/configs/owner_onboarding_server.yml"
+  register: onboarding_config_move_output
+  changed_when: onboarding_config_move_output.rc == 0
 
 - name: Reset ServiceInfo API Server Config
-  command: "mv {{ fdo_aio_src }}/configs/serviceinfo_api_server.yml.old {{ fdo_aio_src }}/configs/serviceinfo_api_server.yml"
+  ansible.builtin.command: "mv {{ fdo_aio_src }}/configs/serviceinfo_api_server.yml.old {{ fdo_aio_src }}/configs/serviceinfo_api_server.yml"
+  register: service_info_config_move_output
+  changed_when: service_info_config_move_output.rc == 0
