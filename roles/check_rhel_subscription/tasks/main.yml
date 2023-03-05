@@ -3,11 +3,12 @@
 # GNU General Public License v3.0+ (see LICENSE or https://www.gnu.org/licenses/gpl-3.0.txt)
 
 - name: Check RHEL Subscription
-  command: subscription-manager status
-  register: subscriptionStatus
+  ansible.builtin.command: subscription-manager status
+  register: subscription_status
   ignore_errors: true
+  changed_when: subscription_status.rc != 0
 
 - name: RHEL Subscription
-  fail:
+  ansible.builtin.fail:
     msg: RHEL Subscription not available.
-  when: '"Overall Status: Current" not in subscriptionStatus.stdout'
+  when: '"Overall Status: Current" not in subscription_status.stdout'
