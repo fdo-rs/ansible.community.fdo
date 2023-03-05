@@ -3,7 +3,7 @@
 # GNU General Public License v3.0+ (see LICENSE or https://www.gnu.org/licenses/gpl-3.0.txt)
 
 - name: Copy Device Certificates from Manufacturing Server
-  synchronize:
+  ansible.posix.synchronize:
     src: "{{ manufacturing_server_fdo_src }}/keys/device_ca_cert.pem"
     dest: "{{ localhost_manufacturing_server_certs_dir }}"
     mode: pull
@@ -11,7 +11,7 @@
     rsync_timeout: 60
 
 - name: Copy Owner Key from Manufacturing Server
-  synchronize:
+  ansible.posix.synchronize:
     src: "{{ manufacturing_server_fdo_src }}/keys/owner_key.der"
     dest: "{{ localhost_manufacturing_server_certs_dir }}"
     mode: pull
@@ -19,7 +19,7 @@
     rsync_timeout: 60
 
 - name: Copy Owner Certificate from Manufacturing Server
-  synchronize:
+  ansible.posix.synchronize:
     src: "{{ manufacturing_server_fdo_src }}/keys/owner_cert.pem"
     dest: "{{ localhost_manufacturing_server_certs_dir }}"
     mode: pull
@@ -27,7 +27,7 @@
     rsync_timeout: 60
 
 - name: Copy Manufacturer Certificate from Manufacturing Server
-  synchronize:
+  ansible.posix.synchronize:
     src: "{{ manufacturing_server_fdo_src }}/keys/manufacturer_cert.pem"
     dest: "{{ localhost_manufacturing_server_certs_dir }}"
     mode: pull

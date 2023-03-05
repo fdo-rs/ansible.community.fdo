@@ -2,65 +2,65 @@
 # Copyright: (c) 2022, XLAB Steampunk <steampunk@xlab.si>
 # GNU General Public License v3.0+ (see LICENSE or https://www.gnu.org/licenses/gpl-3.0.txt)
 
-- import_role:
+- ansible.builtin.import_role:
     name: check_rhel_subscription
 
 - name: Install Packages
-  dnf:
+  ansible.builtin.dnf:
     state: latest
     name:
-      - fdo-admin-cli
-      - fdo-manufacturing-server
-      - firewalld
-      - sshpass
-      - rsync
+    - fdo-admin-cli
+    - fdo-manufacturing-server
+    - firewalld
+    - sshpass
+    - rsync
 
 - name: Creates FDO Keys Directory
-  file:
+  ansible.builtin.file:
     path: "{{ fdo_src }}/keys"
     state: directory
     mode: 0775
 
 - name: Check if Certs and Keys folder is empty before proceeding
-  find:
+  ansible.builtin.find:
     paths: "{{ fdo_src }}/keys"
   register: filesFound
 
 - name: Generate new FDO Certs and Keys
-  shell: |
+  ansible.builtin.shell: |
     for i in manufacturer owner device-ca diun ; do
-    
+
     fdo-admin-tool generate-key-and-cert \
     --destination-dir "{{ fdo_src }}/keys" $i
-    
+
     done
   when: filesFound.matched == 0
 
 - name: Create Manufacturer Service Keys Stores
-  file:
+  ansible.builtin.file:
     path: "{{ item }}"
     state: directory
     mode: 0775
     recurse: yes
   loop:
-    - "{{ fdo_src }}/stores/manufacturer_keys"
-    - "{{ fdo_src }}/stores/manufacturing_sessions"
-    - "{{ fdo_src }}/stores/owner_vouchers"
+  - "{{ fdo_src }}/stores/manufacturer_keys"
+  - "{{ fdo_src }}/stores/manufacturing_sessions"
+  - "{{ fdo_src }}/stores/owner_vouchers"
 
 - name: Copy Manufacturing Server Config
-  copy:
+  ansible.builtin.copy:
     src: /usr/share/doc/fdo/manufacturing-server.yml
     dest: "{{ fdo_src }}/manufacturing-server.yml"
     remote_src: yes
 
 - name: Start and Enable FDO Manufacturing Server Service
-  systemd:
+  ansible.builtin.systemd:
     name: fdo-manufacturing-server
     state: started
     enabled: yes
 
-- name: Start firewalld service 
-  service:
+- name: Start firewalld service
+  ansible.builtin.service:
     name: firewalld
     state: started
 

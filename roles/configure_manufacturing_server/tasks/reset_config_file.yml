@@ -3,4 +3,6 @@
 # Reset FDO Manufacturing Server Config to the old one.
 #
 - name: Reset Manufacturing Server Config
-  command: "mv {{ fdo_src }}/manufacturing-server.yml.old {{ fdo_src }}/manufacturing-server.yml"
+  ansible.builtin.command: "mv {{ fdo_src }}/manufacturing-server.yml.old {{ fdo_src }}/manufacturing-server.yml"
+  register: manufacturing_config_move_output
+  changed_when: manufacturing_config_move_output.rc == 0

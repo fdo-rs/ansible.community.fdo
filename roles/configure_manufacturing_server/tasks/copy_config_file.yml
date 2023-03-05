@@ -4,12 +4,12 @@
 
 ### Create backup of existing configuration file and create a new one from template. ###
 - name: Copy Old Manufacturing Server Config
-  copy:
+  ansible.builtin.copy:
     src: "{{ fdo_src }}/manufacturing-server.yml"
     dest: "{{ fdo_src }}/manufacturing-server.yml.old"
     remote_src: yes
 
 - name: Configure Manufacturing Server
-  template:
+  ansible.builtin.template:
     src: ../templates/manufacturing-server.yml.j2
     dest: "{{ fdo_src }}/manufacturing-server.yml"

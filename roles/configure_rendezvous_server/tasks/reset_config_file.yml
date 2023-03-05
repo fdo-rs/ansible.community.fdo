@@ -4,4 +4,4 @@
 
 ### Reset FDO Rendezvous Server Config to the old one. ###
 - name: Reset Rendezvous Server Config
-  command: "mv {{ fdo_src }}/rendezvous-server.yml.old {{ fdo_src }}/rendezvous-server.yml"
+  ansible.builtin.command: "mv {{ fdo_src }}/rendezvous-server.yml.old {{ fdo_src }}/rendezvous-server.yml"

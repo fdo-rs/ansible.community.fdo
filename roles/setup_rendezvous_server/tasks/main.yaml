@@ -1,27 +1,26 @@
 ---
 # Copyright: (c) 2022, XLAB Steampunk <steampunk@xlab.si>
 # GNU General Public License v3.0+ (see LICENSE or https://www.gnu.org/licenses/gpl-3.0.txt)
-
-- import_role:
+- ansible.builtin.import_role:
     name: check_rhel_subscription
 
 - name: Install Packages
   ansible.builtin.dnf:
     state: latest
     name:
-      - fdo-rendezvous-server
-      - firewalld
-      - sshpass
-      - rsync
+    - fdo-rendezvous-server
+    - firewalld
+    - sshpass
+    - rsync
 
 - name: Creates FDO Keys Directory
-  file:
+  ansible.builtin.file:
     path: "{{ fdo_src }}/keys"
     state: directory
     mode: 0775
 
 - name: Copy Manufacturer Certificate from Manufacturing Server
-  synchronize:
+  ansible.posix.synchronize:
     src: "{{ manufacturing_server_fdo_src }}/keys/manufacturer_cert.pem"
     dest: "{{ fdo_src }}/keys/manufacturer_cert.pem"
     checksum: true
@@ -30,29 +29,29 @@
   when: copy_manufacturer_certs | bool == true
 
 - name: Create Rendezvous Service Keys Stores
-  file:
+  ansible.builtin.file:
     path: "{{ item }}"
     state: directory
     mode: 0775
     recurse: yes
   loop:
-    - "{{ fdo_src }}/stores/rendezvous_registered"
-    - "{{ fdo_src }}/stores/rendezvous_sessions"
+  - "{{ fdo_src }}/stores/rendezvous_registered"
+  - "{{ fdo_src }}/stores/rendezvous_sessions"
 
 - name: Copy Rendezvous Server Config
-  copy:
+  ansible.builtin.copy:
     src: /usr/share/doc/fdo/rendezvous-server.yml
     dest: "{{ fdo_src }}/rendezvous-server.yml"
     remote_src: yes
 
 - name: Start and Enable FDO Rendezvous Server Service
-  systemd:
+  ansible.builtin.systemd:
     name: fdo-rendezvous-server
     state: started
     enabled: yes
 
-- name: Start firewalld service 
-  service:
+- name: Start firewalld service
+  ansible.builtin.service:
     name: firewalld
     state: started
 

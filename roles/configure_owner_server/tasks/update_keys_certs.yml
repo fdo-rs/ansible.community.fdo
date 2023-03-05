@@ -4,7 +4,7 @@
 
 ### Updates Manufacturing Server Device/Owner keys/certificates. ###
 - name: Copy Device Certificates from Manufacturing Server
-  synchronize:
+  ansible.posix.synchronize:
     src: "{{ manufacturing_server_fdo_src }}/keys/device_ca_cert.pem"
     dest: "{{ fdo_src }}/keys/device_ca_cert.pem"
     checksum: true
@@ -12,7 +12,7 @@
   delegate_to: "{{ manufacturing_server_url }}"
 
 - name: Copy Owner Key from Manufacturing Server
-  synchronize:
+  ansible.posix.synchronize:
     src: "{{ manufacturing_server_fdo_src }}/keys/owner_key.der"
     dest: "{{ fdo_src }}/keys/owner_key.der"
     checksum: true
@@ -20,7 +20,7 @@
   delegate_to: "{{ manufacturing_server_url }}"
 
 - name: Copy Owner Certificate from Manufacturing Server
-  synchronize:
+  ansible.posix.synchronize:
     src: "{{ manufacturing_server_fdo_src }}/keys/owner_cert.pem"
     dest: "{{ fdo_src }}/keys/owner_cert.pem"
     checksum: true
