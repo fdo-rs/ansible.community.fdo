@@ -1,4 +1,3 @@
----
 # Copyright: (c) 2022, XLAB Steampunk <steampunk@xlab.si>
 # GNU General Public License v3.0+ (see LICENSE or https://www.gnu.org/licenses/gpl-3.0.txt)
 
@@ -20,9 +19,10 @@ aio_configuration_manufacturing_disable_key_storage_filesystem: false
 aio_configuration_manufacturing_disable_key_storage_tpm: false
 aio_configuration_manufacturing_use_secp256r1: false
 aio_configuration_contact_hostname: ~
-aio_configuration_contact_addresses_IpAddr: "{{ ansible_default_ipv4.address }}" # Must be either set manually (if you system has more than one interface) or used with `gather_facts: true` in your playbook.
-#aio_configuration_serviceinfo_api_auth_token: TestAuthToken # change to a valid API token
-#aio_configuration_serviceinfo_api_admin_token: TestAdminToken # change to a valid API token
+# Must be either set manually (if you system has more than one interface) or used with `gather_facts: true` in your playbook.
+aio_configuration_contact_addresses_ipaddr: "{{ ansible_default_ipv4.address }}"
+# aio_configuration_serviceinfo_api_auth_token: TestAuthToken # change to a valid API token
+# aio_configuration_serviceinfo_api_admin_token: TestAdminToken # change to a valid API token
 
 ### manufacturing_server.yml ###
 manufacturing_server_session_store_driver_path: "{{ fdo_aio_src }}/stores/manufacturing_sessions"
