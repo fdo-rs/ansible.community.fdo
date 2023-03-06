@@ -14,7 +14,7 @@
         enabled: true
 
     - name: Check FDO Manufacturing Server Status
-      ansible.builtin.systemctl:
+      ansible.builtin.systemd:
         name: fdo-manufacturing-server
       register: fdo_manufacturing_server_status
 
