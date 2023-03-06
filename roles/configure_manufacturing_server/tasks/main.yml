@@ -11,7 +11,7 @@
       ansible.builtin.systemd:
         name: fdo-manufacturing-server
         state: restarted
-        enabled: yes
+        enabled: true
 
     - name: Check FDO Manufacturing Server Status
       ansible.builtin.command: systemctl status fdo-manufacturing-server
@@ -25,7 +25,7 @@
     - name: Open Required Ports
       ansible.posix.firewalld:
         port: "{{ item }}"
-        permanent: yes
+        permanent: true
         state: enabled
         immediate: true
       loop:
@@ -40,7 +40,7 @@
       ansible.builtin.systemd:
         name: fdo-manufacturing-server
         state: restarted
-        enabled: yes
+        enabled: true
       when: enable_roll_back | bool
 
     - name: FDO Manufacturing Server configuration failed

@@ -41,7 +41,7 @@
     path: "{{ item }}"
     state: directory
     mode: 0775
-    recurse: yes
+    recurse: true
   loop:
   - "{{ fdo_src }}/stores/manufacturer_keys"
   - "{{ fdo_src }}/stores/manufacturing_sessions"
@@ -51,13 +51,13 @@
   ansible.builtin.copy:
     src: /usr/share/doc/fdo/manufacturing-server.yml
     dest: "{{ fdo_src }}/manufacturing-server.yml"
-    remote_src: yes
+    remote_src: true
 
 - name: Start and Enable FDO Manufacturing Server Service
   ansible.builtin.systemd:
     name: fdo-manufacturing-server
     state: started
-    enabled: yes
+    enabled: true
 
 - name: Start firewalld service
   ansible.builtin.service:
@@ -67,6 +67,6 @@
 - name: Open Required Ports
   ansible.posix.firewalld:
     port: 8080/tcp
-    permanent: yes
+    permanent: true
     state: enabled
     immediate: true

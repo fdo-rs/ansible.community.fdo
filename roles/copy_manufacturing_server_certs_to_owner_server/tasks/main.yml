@@ -27,10 +27,10 @@
   ansible.builtin.systemd:
     name: fdo-owner-onboarding-server
     state: restarted
-    enabled: yes
+    enabled: true
 
 - name: Restart Serviceinfo API Server
   ansible.builtin.systemd:
     name: fdo-serviceinfo-api-server
     state: restarted
-    enabled: yes
+    enabled: true

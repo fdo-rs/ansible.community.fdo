@@ -7,7 +7,7 @@
   ansible.builtin.copy:
     src: "{{ fdo_src }}/manufacturing-server.yml"
     dest: "{{ fdo_src }}/manufacturing-server.yml.old"
-    remote_src: yes
+    remote_src: true
 
 - name: Configure Manufacturing Server
   ansible.builtin.template:

@@ -13,4 +13,4 @@
   ansible.builtin.systemd:
     name: fdo-rendezvous-server
     state: restarted
-    enabled: yes
+    enabled: true

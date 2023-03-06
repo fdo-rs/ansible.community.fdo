@@ -15,7 +15,7 @@
       ansible.builtin.systemd:
         name: fdo-rendezvous-server
         state: restarted
-        enabled: yes
+        enabled: true
 
     - name: Check FDO Rendezvous Server Status
       ansible.builtin.command: systemctl status fdo-rendezvous-server
@@ -29,7 +29,7 @@
     - name: Open Required Ports
       ansible.posix.firewalld:
         port: "{{ item }}"
-        permanent: yes
+        permanent: true
         state: enabled
         immediate: true
       loop:
@@ -44,7 +44,7 @@
       ansible.builtin.systemd:
         name: fdo-rendezvous-server
         state: restarted
-        enabled: yes
+        enabled: true
       when: enable_roll_back | bool == true
 
     - name: FDO Rendezvous Server configuration failed

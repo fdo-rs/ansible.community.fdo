@@ -33,7 +33,7 @@
     path: "{{ item }}"
     state: directory
     mode: 0775
-    recurse: yes
+    recurse: true
   loop:
   - "{{ fdo_src }}/stores/rendezvous_registered"
   - "{{ fdo_src }}/stores/rendezvous_sessions"
@@ -42,13 +42,13 @@
   ansible.builtin.copy:
     src: /usr/share/doc/fdo/rendezvous-server.yml
     dest: "{{ fdo_src }}/rendezvous-server.yml"
-    remote_src: yes
+    remote_src: true
 
 - name: Start and Enable FDO Rendezvous Server Service
   ansible.builtin.systemd:
     name: fdo-rendezvous-server
     state: started
-    enabled: yes
+    enabled: true
 
 - name: Start firewalld service
   ansible.builtin.service:
@@ -58,6 +58,6 @@
 - name: Open Required Ports
   ansible.posix.firewalld:
     port: 8082/tcp
-    permanent: yes
+    permanent: true
     state: enabled
     immediate: true

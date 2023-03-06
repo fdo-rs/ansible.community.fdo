@@ -15,7 +15,7 @@
       ansible.builtin.systemd:
         name: fdo-owner-onboarding-server
         state: restarted
-        enabled: yes
+        enabled: true
 
     - name: Check Owner Onboarding Server Status
       ansible.builtin.command: systemctl status fdo-owner-onboarding-server
@@ -30,7 +30,7 @@
       ansible.builtin.systemd:
         name: fdo-serviceinfo-api-server
         state: restarted
-        enabled: yes
+        enabled: true
 
     - name: Check Serviceinfo API Server Status
       ansible.builtin.command: systemctl status fdo-owner-onboarding-server
@@ -44,7 +44,7 @@
     - name: Open Required Ports
       ansible.posix.firewalld:
         port: "{{ item }}"
-        permanent: yes
+        permanent: true
         state: enabled
         immediate: true
       loop:
@@ -60,14 +60,14 @@
       ansible.builtin.systemd:
         name: fdo-owner-onboarding-server
         state: restarted
-        enabled: yes
+        enabled: true
       when: enable_roll_back | bool == true
 
     - name: Restart Serviceinfo API Server
       ansible.builtin.systemd:
         name: fdo-serviceinfo-api-server
         state: restarted
-        enabled: yes
+        enabled: true
       when: enable_roll_back | bool == true
 
     - name: FDO Owner Onboarding & Serviceinfo API Servers configuration failed
