@@ -29,7 +29,7 @@ serviceinfo_api_server_service_info_initial_user_sshkeys: ""
 serviceinfo_api_server_service_files_path: /root/resolv.conf
 serviceinfo_api_server_service_files_source_path: /etc/resolv.conf
 serviceinfo_api_server_bind_ip: "{{ owner_onboarding_server_bind_ip }}"
-serviceinfo_api_server_listen_port_serviceinfo_api_server: "{{ owner_onboarding_server_listen_port_serviceinfo_api_server}}"
+serviceinfo_api_server_listen_port_serviceinfo_api_server: "{{ owner_onboarding_server_listen_port_serviceinfo_api_server }}"
 serviceinfo_api_server_test_path: /root/test
 serviceinfo_api_server_diskencryption_clevis_disk_label: /dev/vda4
 serviceinfo_api_server_device_specific_store_driver_path: "{{ fdo_src }}/stores/serviceinfo_api_devices"

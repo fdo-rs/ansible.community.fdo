@@ -2,7 +2,8 @@
 # Copyright: (c) 2022, XLAB Steampunk <steampunk@xlab.si>
 # GNU General Public License v3.0+ (see LICENSE or https://www.gnu.org/licenses/gpl-3.0.txt)
 
-- ansible.builtin.import_role:
+- name: Check Subscription
+  ansible.builtin.import_role:
     name: check_rhel_subscription
 
 - name: Install Packages
@@ -24,7 +25,7 @@
 - name: Check if Certs and Keys folder is empty before proceeding
   ansible.builtin.find:
     paths: "{{ fdo_src }}/keys"
-  register: filesFound
+  register: files_found
 
 - name: Generate new FDO Certs and Keys
   ansible.builtin.shell: |
@@ -34,7 +35,7 @@
     --destination-dir "{{ fdo_src }}/keys" $i
 
     done
-  when: filesFound.matched == 0
+  when: files_found.matched == 0
 
 - name: Create Manufacturer Service Keys Stores
   ansible.builtin.file:
