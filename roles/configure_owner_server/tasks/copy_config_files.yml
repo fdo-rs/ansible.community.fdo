@@ -19,12 +19,12 @@
 
 - name: Configure Owner Onboarding Server
   ansible.builtin.template:
-    src: ../templates/owner-onboarding-server.yml.j2
+    src: "{{ role_path }}/templates/owner-onboarding-server.yml.j2"
     dest: "{{ fdo_src }}/owner-onboarding-server.yml"
     mode: "0644"
 
 - name: Configure Serviceinfo API Server
   ansible.builtin.template:
-    src: ../templates/serviceinfo-api-server.yml.j2
+    src: "{{ role_path }}/templates/serviceinfo-api-server.yml.j2"
     dest: "{{ fdo_src }}/serviceinfo-api-server.yml"
     mode: "0644"

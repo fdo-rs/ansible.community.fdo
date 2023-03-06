@@ -12,6 +12,6 @@
 
 - name: Configure Rendezvous Server
   ansible.builtin.template:
-    src: ../templates/rendezvous-server.yml.j2
+    src: "{{ role_path }}/templates/rendezvous-server.yml.j2"
     dest: "{{ fdo_src }}/rendezvous-server.yml"
     mode: "0644"
