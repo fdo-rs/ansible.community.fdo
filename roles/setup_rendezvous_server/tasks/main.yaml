@@ -8,7 +8,7 @@
 
 - name: Install Packages
   ansible.builtin.dnf:
-    state: latest
+    state: present
     name:
     - fdo-rendezvous-server
     - firewalld
