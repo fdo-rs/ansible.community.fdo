@@ -36,6 +36,7 @@
 
     done
   when: files_found.matched == 0
+  changed_when: true # assume always (re-)generates when called
 
 - name: Create Manufacturer Service Keys Stores
   ansible.builtin.file:

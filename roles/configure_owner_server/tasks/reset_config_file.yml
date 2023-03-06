@@ -5,7 +5,11 @@
 ### Reset Owner Onboarding Server Config to the old one. ###
 - name: Reset Owner Onboarding Server Config
   ansible.builtin.command: "mv {{ fdo_src }}/owner-onboarding-server.yml.old {{ fdo_src }}/owner-onboarding-server.yml"
+  register: onboarding_config_move_output
+  changed_when: onboarding_config_move_output.rc == 0
 
 ### Reset Serviceinfo API Server Config to the old one. ###
 - name: Reset Serviceinfo API Server Config
   ansible.builtin.command: "mv {{ fdo_src }}/serviceinfo-api-server.yml.old {{ fdo_src }}/serviceinfo-api-server.yml"
+  register: service_info_config_move_output
+  changed_when: service_info_config_move_output.rc == 0
