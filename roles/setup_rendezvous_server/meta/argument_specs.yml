@@ -6,7 +6,7 @@ argument_specs:
   main:
     version_added: 1.0.0
     short_description: Setup the owner server
-    description: 
+    description:
       - Checks RHEL subscription and installs fdo-rendezvous-server package with dnf.
         Creates FDO keys directory, copies manufacturer certificate from manufacturing server and creates rendezvous service keys stores.
         It then copies the rendezvous server config example. starts and enables the FDO rendezvous server service and opens required ports.

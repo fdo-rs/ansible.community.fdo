@@ -9,7 +9,7 @@
 
     - name: Update Manufacturing Server certificate
       ansible.builtin.import_tasks: update_cert.yml
-      when: update_cert | bool == true
+      when: update_cert | bool
 
     - name: Restart FDO Rendezvous Server
       ansible.builtin.systemd:
@@ -38,14 +38,14 @@
   rescue:
     - name: Reset config file
       ansible.builtin.import_tasks: reset_config_file.yml
-      when: enable_roll_back | bool == true
+      when: enable_roll_back | bool
 
     - name: Restart FDO Rendezvous Server
       ansible.builtin.systemd:
         name: fdo-rendezvous-server
         state: restarted
         enabled: true
-      when: enable_roll_back | bool == true
+      when: enable_roll_back | bool
 
     - name: FDO Rendezvous Server configuration failed
       ansible.builtin.fail:

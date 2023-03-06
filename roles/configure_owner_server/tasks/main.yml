@@ -9,7 +9,7 @@
 
     - name: Update Manufacturing Server keys & certificates
       ansible.builtin.import_tasks: update_keys_certs.yml
-      when: update_keys_certs | bool == true
+      when: update_keys_certs | bool
 
     - name: Restart Owner Onboarding Server
       ansible.builtin.systemd:
@@ -54,21 +54,21 @@
   rescue:
     - name: Reset config file
       ansible.builtin.import_tasks: reset_config_file.yml
-      when: enable_roll_back | bool == true
+      when: enable_roll_back | bool
 
     - name: Restart Owner Onboarding Server
       ansible.builtin.systemd:
         name: fdo-owner-onboarding-server
         state: restarted
         enabled: true
-      when: enable_roll_back | bool == true
+      when: enable_roll_back | bool
 
     - name: Restart Serviceinfo API Server
       ansible.builtin.systemd:
         name: fdo-serviceinfo-api-server
         state: restarted
         enabled: true
-      when: enable_roll_back | bool == true
+      when: enable_roll_back | bool
 
     - name: FDO Owner Onboarding & Serviceinfo API Servers configuration failed
       ansible.builtin.fail:

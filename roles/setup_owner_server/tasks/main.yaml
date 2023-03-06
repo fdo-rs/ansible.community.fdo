@@ -28,7 +28,7 @@
     checksum: true
     rsync_timeout: 60
   delegate_to: "{{ manufacturing_server_url }}"
-  when: copy_manufacturer_certs | bool == true
+  when: copy_manufacturer_certs | bool
 
 - name: Copy Owner Key from Manufacturing Server
   ansible.posix.synchronize:
@@ -37,7 +37,7 @@
     checksum: true
     rsync_timeout: 60
   delegate_to: "{{ manufacturing_server_url }}"
-  when: copy_manufacturer_certs | bool == true
+  when: copy_manufacturer_certs | bool
 
 - name: Copy Owner Certificate from Manufacturing Server
   ansible.posix.synchronize:
@@ -46,7 +46,7 @@
     checksum: true
     rsync_timeout: 60
   delegate_to: "{{ manufacturing_server_url }}"
-  when: copy_manufacturer_certs | bool == true
+  when: copy_manufacturer_certs | bool
 
 - name: Create Owner Service Keys Stores
   ansible.builtin.file:
