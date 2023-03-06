@@ -7,9 +7,11 @@
   ansible.builtin.copy:
     src: "{{ fdo_src }}/rendezvous-server.yml"
     dest: "{{ fdo_src }}/rendezvous-server.yml.old"
+    mode: "0644"
     remote_src: true
 
 - name: Configure Rendezvous Server
   ansible.builtin.template:
     src: ../templates/rendezvous-server.yml.j2
     dest: "{{ fdo_src }}/rendezvous-server.yml"
+    mode: "0644"

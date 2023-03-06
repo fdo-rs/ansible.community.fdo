@@ -7,20 +7,24 @@
   ansible.builtin.copy:
     src: "{{ fdo_src }}/owner-onboarding-server.yml"
     dest: "{{ fdo_src }}/owner-onboarding-server.yml.old"
+    mode: "0644"
     remote_src: true
 
 - name: Copy Old Serviceinfo API Server Config
   ansible.builtin.copy:
     src: "{{ fdo_src }}/serviceinfo-api-server.yml"
     dest: "{{ fdo_src }}/serviceinfo-api-server.yml.old"
+    mode: "0644"
     remote_src: true
 
 - name: Configure Owner Onboarding Server
   ansible.builtin.template:
     src: ../templates/owner-onboarding-server.yml.j2
     dest: "{{ fdo_src }}/owner-onboarding-server.yml"
+    mode: "0644"
 
 - name: Configure Serviceinfo API Server
   ansible.builtin.template:
     src: ../templates/serviceinfo-api-server.yml.j2
     dest: "{{ fdo_src }}/serviceinfo-api-server.yml"
+    mode: "0644"
