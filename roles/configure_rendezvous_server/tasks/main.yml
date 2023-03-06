@@ -18,13 +18,14 @@
         enabled: true
 
     - name: Check FDO Rendezvous Server Status
-      ansible.builtin.command: systemctl status fdo-rendezvous-server
+      ansible.builtin.systemd:
+        name: fdo-rendezvous-server
       register: fdo_rendezvous_server_status
 
     - name: Report FDO Rendezvous Server Status
       ansible.builtin.fail:
         msg: FDO Rendezvous Server failed to restart after configuration change.
-      when: fdo_rendezvous_server_status.rc != 0
+      when: fdo_rendezvous_server_status.status.ActiveState != 'active'
 
     - name: Open Required Ports
       ansible.posix.firewalld:

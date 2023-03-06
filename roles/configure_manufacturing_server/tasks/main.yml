@@ -14,13 +14,14 @@
         enabled: true
 
     - name: Check FDO Manufacturing Server Status
-      ansible.builtin.command: systemctl status fdo-manufacturing-server
+      ansible.builtin.systemctl:
+        name: fdo-manufacturing-server
       register: fdo_manufacturing_server_status
 
     - name: Report FDO Manufacturing Server Status
       ansible.builtin.fail:
         msg: FDO Manufacturing Server failed to restart after configuration change.
-      when: fdo_manufacturing_server_status.rc != 0
+      when: fdo_manufacturing_server_status.status.ActiveState != 'active'
 
     - name: Open Required Ports
       ansible.posix.firewalld:

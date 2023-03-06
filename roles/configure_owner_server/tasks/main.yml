@@ -18,13 +18,14 @@
         enabled: true
 
     - name: Check Owner Onboarding Server Status
-      ansible.builtin.command: systemctl status fdo-owner-onboarding-server
-      register: fdo_rendezvous_server_status
+      ansible.builtin.systemd:
+        name: fdo-owner-onboarding-server
+      register: fdo_owner_onboarding_server_status
 
     - name: Report Owner Onboarding Server Status
       ansible.builtin.fail:
         msg: Owner Onboarding Server failed to restart after configuration change.
-      when: fdo_rendezvous_server_status.rc != 0
+      when: fdo_owner_onboarding_server_status.status.ActiveState != 'active'
 
     - name: Restart Serviceinfo API Server
       ansible.builtin.systemd:
@@ -33,13 +34,14 @@
         enabled: true
 
     - name: Check Serviceinfo API Server Status
-      ansible.builtin.command: systemctl status fdo-owner-onboarding-server
+      ansible.builtin.systemd:
+        name: fdo-serviceinfo-api-server
       register: fdo_serviceinfo_api_server_status
 
     - name: Report Serviceinfo API Server Status
       ansible.builtin.fail:
         msg: Serviceinfo API Server failed to restart after configuration change.
-      when: fdo_serviceinfo_api_server_status.rc != 0
+      when: fdo_serviceinfo_api_server_status.status.ActiveState != 'active'
 
     - name: Open Required Ports
       ansible.posix.firewalld:
