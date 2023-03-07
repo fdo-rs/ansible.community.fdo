@@ -10,10 +10,10 @@
   ansible.builtin.dnf:
     state: present
     name:
-    - fdo-rendezvous-server
-    - firewalld
-    - sshpass
-    - rsync
+      - fdo-rendezvous-server
+      - firewalld
+      - sshpass
+      - rsync
 
 - name: Creates FDO Keys Directory
   ansible.builtin.file:
@@ -37,8 +37,8 @@
     mode: "0775"
     recurse: true
   loop:
-  - "{{ fdo_src }}/stores/rendezvous_registered"
-  - "{{ fdo_src }}/stores/rendezvous_sessions"
+    - "{{ fdo_src }}/stores/rendezvous_registered"
+    - "{{ fdo_src }}/stores/rendezvous_sessions"
 
 - name: Copy Rendezvous Server Config
   ansible.builtin.copy:

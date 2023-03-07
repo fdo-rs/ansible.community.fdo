@@ -10,11 +10,11 @@
   ansible.builtin.dnf:
     state: present
     name:
-    - fdo-admin-cli
-    - fdo-manufacturing-server
-    - firewalld
-    - sshpass
-    - rsync
+      - fdo-admin-cli
+      - fdo-manufacturing-server
+      - firewalld
+      - sshpass
+      - rsync
 
 - name: Creates FDO Keys Directory
   ansible.builtin.file:
@@ -45,9 +45,9 @@
     mode: "0775"
     recurse: true
   loop:
-  - "{{ fdo_src }}/stores/manufacturer_keys"
-  - "{{ fdo_src }}/stores/manufacturing_sessions"
-  - "{{ fdo_src }}/stores/owner_vouchers"
+    - "{{ fdo_src }}/stores/manufacturer_keys"
+    - "{{ fdo_src }}/stores/manufacturing_sessions"
+    - "{{ fdo_src }}/stores/owner_vouchers"
 
 - name: Copy Manufacturing Server Config
   ansible.builtin.copy:
