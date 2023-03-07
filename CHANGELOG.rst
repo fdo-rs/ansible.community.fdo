@@ -4,6 +4,32 @@ Community.Fdo Release Notes
 
 .. contents:: Topics
 
+v2.0.0
+======
+
+Release Summary
+---------------
+
+This release fixes ansible-lint violations in the roles.
+
+Name of the `aio_configuration_contact_addresses_IpAddr` variable changes to `aio_configuration_contact_addresses_ipaddr`,
+which breaks backward compatibility.
+
+Other changes
+-------------
+
+- Added explicit empty options to argument specifications without options
+- Fixed too long lines
+- Specified FQCNs for builtin and posix module actions
+- Fixed variable names according to the naming conventions
+- Explicitly specified permissions for files when using file/copy/template/...
+- Replaced relative paths with absolute ones
+- Replaced `yes/no` with `true/false`
+- Removed comparing to literal `true/false` when the value is already a boolean
+- Replaced the `systemctl status` command with `ansible.builtin.systemd` module for checking the status of a systemd service
+- Added `changed_when` to commands for indicating when a command causes changes
+- Used `present` instead of `latest` for packages to avoid inadvertent upgrades
+
 v1.0.0
 ======
 
