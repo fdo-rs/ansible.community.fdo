@@ -1,7 +1,8 @@
 ---
-#
-# Reset FDO AIO Configs to the old ones.
-#
+# Copyright: (c) 2022, XLAB Steampunk <steampunk@xlab.si>
+# GNU General Public License v3.0+ (see LICENSE or https://www.gnu.org/licenses/gpl-3.0.txt)
+
+### Reset FDO AIO Configs to the old ones. ###
 - name: Reset AIO Config
   command: "mv {{ fdo_aio_src }}/aio_configuration.old {{ fdo_aio_src }}/aio_configuration"
 

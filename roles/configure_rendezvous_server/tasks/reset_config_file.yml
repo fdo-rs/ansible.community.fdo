@@ -1,6 +1,7 @@
 ---
-#
-# Reset FDO Rendezvous Server Config to the old one.
-#
+# Copyright: (c) 2022, XLAB Steampunk <steampunk@xlab.si>
+# GNU General Public License v3.0+ (see LICENSE or https://www.gnu.org/licenses/gpl-3.0.txt)
+
+### Reset FDO Rendezvous Server Config to the old one. ###
 - name: Reset Rendezvous Server Config
   command: "mv {{ fdo_src }}/rendezvous-server.yml.old {{ fdo_src }}/rendezvous-server.yml"

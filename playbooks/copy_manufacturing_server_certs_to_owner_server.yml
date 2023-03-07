@@ -1,0 +1,11 @@
+---
+# Copyright: (c) 2022, XLAB Steampunk <steampunk@xlab.si>
+# GNU General Public License v3.0+ (see LICENSE or https://www.gnu.org/licenses/gpl-3.0.txt)
+
+- name: Copy Manufacturing Server Certs from localhost to Owner Server
+  hosts: owner_server
+  become: true
+  gather_facts: true
+  tasks:
+    - ansible.builtin.include_role:
+        name: community.fdo.copy_manufacturing_server_certs_to_owner_server

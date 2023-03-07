@@ -1,7 +1,8 @@
 ---
-#
-# Create backups of existing configuration files and create new ones from templates.
-#
+# Copyright: (c) 2022, XLAB Steampunk <steampunk@xlab.si>
+# GNU General Public License v3.0+ (see LICENSE or https://www.gnu.org/licenses/gpl-3.0.txt)
+
+### Create backups of existing configuration files and create new ones from templates. ###
 - name: Copy Old AIO Config
   copy:
     src: "{{ fdo_aio_src }}/aio_configuration"

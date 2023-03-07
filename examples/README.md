@@ -5,7 +5,7 @@ A copy-paste Ansible playbook snippets are listed below.
 
 # Preparation
 
-You need to install Ansible and its `community.fdo` & `ansible.posix` collections.
+You need to install Ansible and `community.fdo` & `ansible.posix` collections.
 
 # Examples
 
@@ -152,7 +152,7 @@ In case of the specific use-case where Manufacturing Server is located in differ
     - import_role:
         name: copy_manufacturing_server_certs_to_owner_server
 
-- name: Copy Manufacturing Server Certs to Owner Server
+- name: Copy Manufacturing Server Certs to Rendezvous Server
   hosts: rendezvous_server
   become: true
   gather_facts: true

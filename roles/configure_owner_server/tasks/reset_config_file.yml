@@ -1,12 +1,11 @@
 ---
-#
-# Reset Owner Onboarding Server Config to the old one.
-#
+# Copyright: (c) 2022, XLAB Steampunk <steampunk@xlab.si>
+# GNU General Public License v3.0+ (see LICENSE or https://www.gnu.org/licenses/gpl-3.0.txt)
+
+### Reset Owner Onboarding Server Config to the old one. ###
 - name: Reset Owner Onboarding Server Config
   command: "mv {{ fdo_src }}/owner-onboarding-server.yml.old {{ fdo_src }}/owner-onboarding-server.yml"
 
-#
-# Reset Serviceinfo API Server Config to the old one.
-#
+### Reset Serviceinfo API Server Config to the old one. ###
 - name: Reset Serviceinfo API Server Config
   command: "mv {{ fdo_src }}/serviceinfo-api-server.yml.old {{ fdo_src }}/serviceinfo-api-server.yml"

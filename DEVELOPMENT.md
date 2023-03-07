@@ -56,13 +56,6 @@ Sample ansible.cfg is there to ensure collection does not need to be installed.
 ansible-playbook -i localhost, sample-playbook.yml -v
 ```
 
-# TODO
-- add mock sample to tests/unit/plugins/conftest.py
-- add integration test, unit test
-- add tests/integration/integration_config.yml.template if needed
-- add docs/
-- fix 'osbuild.composer' collection is not auto-installed. It is not on galaxy.
-
 # CI infrastructure
 
 The CI integration tests require a preconfigured infrastructure -

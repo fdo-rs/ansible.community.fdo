@@ -1,6 +1,10 @@
+---
+# Copyright: (c) 2022, XLAB Steampunk <steampunk@xlab.si>
+# GNU General Public License v3.0+ (see LICENSE or https://www.gnu.org/licenses/gpl-3.0.txt)
+
 argument_specs:
   main:
-    version_added: 0.0.1
+    version_added: 1.0.0
     short_description: Check RHEL subscription
     description:
       - Check if used RHEL subscritpion is valid.

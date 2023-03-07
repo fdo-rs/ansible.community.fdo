@@ -1,20 +1,24 @@
+---
 namespace: community
 name: fdo
-version: 0.0.1
+version: 1.0.0
 readme: README.md
 authors:
-- your name <example@domain.com>
-description: your collection description
-license: []
-tags: []
-dependencies: {}
-# dependencies:
-#    'geerlingguy.k8s': '0.9.0'  # just testing dependencies
-#   'osbuild.composer': 'v59'
-repository: http://example.com/repository
-documentation: http://docs.example.com
-homepage: http://example.com
-issues: http://example.com/issue/tracker
+  - XLAB Steampunk <steampunk@xlab.si>
+description: FDO components installation and configuration
+license:
+  - GPL-3.0-or-later
+license_file: LICENSE
+tags: 
+  - fdo
+  - fido
+  - device_onboarding
+dependencies: 
+  - ansible.posix: '*'
+repository: https://github.com/ansible-collections/community.fdo
+documentation: https://github.com/ansible-collections/community.fdo/blob/main/examples/README.md
+homepage: https://github.com/ansible-collections/community.fdo
+issues: https://github.com/ansible-collections/community.fdo/issues
 build_ignore:
 - .idea
 - .gitignore

@@ -1,12 +1,15 @@
 ---
-# configuration settings
+# Copyright: (c) 2022, XLAB Steampunk <steampunk@xlab.si>
+# GNU General Public License v3.0+ (see LICENSE or https://www.gnu.org/licenses/gpl-3.0.txt)
+
+### configuration settings ###
 fdo_src: /etc/fdo
 manufacturing_server_fdo_src: /etc/fdo
 enable_roll_back: true
 update_keys_certs: true
 manufacturing_server_url: "{{ groups['manufacturing_server'][0] }}"
 
-# owner-onboarding-server.yml
+### owner-onboarding-server.yml ###
 owner_onboarding_server_ownership_voucher_store_driver_path: "{{ fdo_src }}/stores/owner_vouchers"
 owner_onboarding_server_session_store_driver_path: "{{ fdo_src }}/stores/owner_onboarding_sessions"
 owner_onboarding_server_trusted_device_keys_path: "{{ fdo_src }}/keys/device_ca_cert.pem"
@@ -19,7 +22,7 @@ owner_onboarding_server_owner_addresses_transport: http
 owner_onboarding_server_owner_addresses_ip_address: 127.0.0.1 # change to owner server ip
 owner_onboarding_server_report_to_rendezvous_endpoint_enabled: true
 
-# serviceinfo-api-server.yml
+### serviceinfo-api-server.yml ###
 serviceinfo_api_server_service_info_initial_user_username: admin
 serviceinfo_api_server_service_info_initial_user_password: admin
 serviceinfo_api_server_service_info_initial_user_sshkeys: ""
