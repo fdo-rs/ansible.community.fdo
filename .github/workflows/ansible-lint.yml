@@ -3,12 +3,10 @@ name: Run ansible-lint
 on: [push, pull_request]
 jobs:
   build:
-    # runs-on: ubuntu-latest
-    runs-on: [self-hosted, linux]
+    runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
-    - name: Lint Ansible Playbook
-      # replace "master" with any valid ref
+    - uses: actions/checkout@v3
+    - name: Lint Ansible Roles
       uses: ansible/ansible-lint-action@v6
       with:
-        targets: "./"
+        path: "./roles"
