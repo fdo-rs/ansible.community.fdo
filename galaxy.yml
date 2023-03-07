@@ -9,12 +9,12 @@ description: FDO components installation and configuration
 license:
   - GPL-3.0-or-later
 license_file: LICENSE
-tags: 
+tags:
   - fdo
   - fido
   - device_onboarding
-dependencies: 
-  - ansible.posix: '*'
+dependencies:
+  ansible.posix: '*'
 repository: https://github.com/ansible-collections/community.fdo
 documentation: https://github.com/ansible-collections/community.fdo/blob/main/examples/README.md
 homepage: https://github.com/ansible-collections/community.fdo
