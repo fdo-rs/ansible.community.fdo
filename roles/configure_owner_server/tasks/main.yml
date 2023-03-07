@@ -5,46 +5,48 @@
 - name: Update config files and restart FDO Servers
   block:
     - name: Create backups of old config files and create new ones from templates
-      import_tasks: copy_config_files.yml
+      ansible.builtin.import_tasks: copy_config_files.yml
 
     - name: Update Manufacturing Server keys & certificates
-      import_tasks: update_keys_certs.yml
-      when: update_keys_certs | bool == true
+      ansible.builtin.import_tasks: update_keys_certs.yml
+      when: update_keys_certs | bool
 
     - name: Restart Owner Onboarding Server
-      systemd:
+      ansible.builtin.systemd:
         name: fdo-owner-onboarding-server
         state: restarted
-        enabled: yes
+        enabled: true
 
     - name: Check Owner Onboarding Server Status
-      command: systemctl status fdo-owner-onboarding-server
-      register: fdo_rendezvous_server_status
+      ansible.builtin.systemd:
+        name: fdo-owner-onboarding-server
+      register: fdo_owner_onboarding_server_status
 
     - name: Report Owner Onboarding Server Status
-      fail:
+      ansible.builtin.fail:
         msg: Owner Onboarding Server failed to restart after configuration change.
-      when: fdo_rendezvous_server_status.rc != 0
+      when: fdo_owner_onboarding_server_status.status.ActiveState != 'active'
 
     - name: Restart Serviceinfo API Server
-      systemd:
+      ansible.builtin.systemd:
         name: fdo-serviceinfo-api-server
         state: restarted
-        enabled: yes
+        enabled: true
 
     - name: Check Serviceinfo API Server Status
-      command: systemctl status fdo-owner-onboarding-server
+      ansible.builtin.systemd:
+        name: fdo-serviceinfo-api-server
       register: fdo_serviceinfo_api_server_status
 
     - name: Report Serviceinfo API Server Status
-      fail:
+      ansible.builtin.fail:
         msg: Serviceinfo API Server failed to restart after configuration change.
-      when: fdo_serviceinfo_api_server_status.rc != 0
+      when: fdo_serviceinfo_api_server_status.status.ActiveState != 'active'
 
     - name: Open Required Ports
       ansible.posix.firewalld:
         port: "{{ item }}"
-        permanent: yes
+        permanent: true
         state: enabled
         immediate: true
       loop:
@@ -53,23 +55,23 @@
 
   rescue:
     - name: Reset config file
-      import_tasks: reset_config_file.yml
-      when: enable_roll_back | bool == true
+      ansible.builtin.import_tasks: reset_config_file.yml
+      when: enable_roll_back | bool
 
     - name: Restart Owner Onboarding Server
-      systemd:
+      ansible.builtin.systemd:
         name: fdo-owner-onboarding-server
         state: restarted
-        enabled: yes
-      when: enable_roll_back | bool == true
+        enabled: true
+      when: enable_roll_back | bool
 
     - name: Restart Serviceinfo API Server
-      systemd:
+      ansible.builtin.systemd:
         name: fdo-serviceinfo-api-server
         state: restarted
-        enabled: yes
-      when: enable_roll_back | bool == true
+        enabled: true
+      when: enable_roll_back | bool
 
     - name: FDO Owner Onboarding & Serviceinfo API Servers configuration failed
-      fail:
+      ansible.builtin.fail:
         msg: FDO Owner Onboarding & Serviceinfo API Servers configuration failed.

@@ -3,34 +3,34 @@
 # GNU General Public License v3.0+ (see LICENSE or https://www.gnu.org/licenses/gpl-3.0.txt)
 
 - name: Copy Manufacturing Server Device Certificates from localhost
-  synchronize:
+  ansible.posix.synchronize:
     src: "{{ localhost_manufacturing_server_certs_dir }}/device_ca_cert.pem"
     dest: "{{ owner_server_fdo_src }}/keys/device_ca_cert.pem"
     checksum: true
     rsync_timeout: 60
 
 - name: Copy Manufacturing Server Owner Key from localhost
-  synchronize:
+  ansible.posix.synchronize:
     src: "{{ localhost_manufacturing_server_certs_dir }}/owner_key.der"
     dest: "{{ owner_server_fdo_src }}/keys/owner_key.der"
     checksum: true
     rsync_timeout: 60
 
 - name: Copy Manufacturing Server Owner Certificate from localhost
-  synchronize:
+  ansible.posix.synchronize:
     src: "{{ localhost_manufacturing_server_certs_dir }}/owner_cert.pem"
     dest: "{{ owner_server_fdo_src }}/keys/owner_cert.pem"
     checksum: true
     rsync_timeout: 60
 
 - name: Restart Owner Onboarding Server
-  systemd:
+  ansible.builtin.systemd:
     name: fdo-owner-onboarding-server
     state: restarted
-    enabled: yes
+    enabled: true
 
 - name: Restart Serviceinfo API Server
-  systemd:
+  ansible.builtin.systemd:
     name: fdo-serviceinfo-api-server
     state: restarted
-    enabled: yes
+    enabled: true

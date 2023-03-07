@@ -2,31 +2,32 @@
 # Copyright: (c) 2022, XLAB Steampunk <steampunk@xlab.si>
 # GNU General Public License v3.0+ (see LICENSE or https://www.gnu.org/licenses/gpl-3.0.txt)
 
-- import_role:
+- name: Check Subscription
+  ansible.builtin.import_role:
     name: check_rhel_subscription
 
 - name: Install Packages
-  dnf:
-    state: latest
+  ansible.builtin.dnf:
+    state: present
     name:
       - fdo-admin-cli
       - firewalld
 
 - name: Start and Enable FDO AIO Service
-  systemd:
+  ansible.builtin.systemd:
     name: fdo-aio
     state: started
-    enabled: yes
+    enabled: true
 
-- name: Start firewalld service 
-  service:
+- name: Start firewalld service
+  ansible.builtin.service:
     name: firewalld
     state: started
 
 - name: Open Required Ports
   ansible.posix.firewalld:
     port: "{{ item }}"
-    permanent: yes
+    permanent: true
     state: enabled
     immediate: true
   loop:

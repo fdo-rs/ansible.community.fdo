@@ -16,6 +16,6 @@ service_info_api_authentication:
 owner_addresses:
   - transport: {{ owner_onboarding_server_owner_addresses_transport }}
     addresses:
-      - ip_address: {{ aio_configuration_contact_addresses_IpAddr }}
+      - ip_address: {{ aio_configuration_contact_addresses_ipaddr }}
     port: {{ aio_configuration_listen_port_owner_onboarding_server }}
 report_to_rendezvous_endpoint_enabled: {{ owner_onboarding_server_report_to_rendezvous_endpoint_enabled | bool | lower }}

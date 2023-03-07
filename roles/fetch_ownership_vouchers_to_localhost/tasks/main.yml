@@ -3,7 +3,7 @@
 # GNU General Public License v3.0+ (see LICENSE or https://www.gnu.org/licenses/gpl-3.0.txt)
 
 - name: Copy Ownership Voucher from Manufacturing Server
-  synchronize:
+  ansible.posix.synchronize:
     src: "{{ manufacturing_server_ownership_vouchers_dir }}/"
     dest: "{{ localhost_ownership_vouchers_dir }}"
     mode: pull

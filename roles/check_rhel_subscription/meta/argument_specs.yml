@@ -8,3 +8,4 @@ argument_specs:
     short_description: Check RHEL subscription
     description:
       - Check if used RHEL subscritpion is valid.
+    options: {}

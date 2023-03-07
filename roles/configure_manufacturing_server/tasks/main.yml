@@ -5,27 +5,28 @@
 - name: Update config file and restart FDO Manufacturing Server
   block:
     - name: Create backup of the old config file and create a new one from the template
-      import_tasks: copy_config_file.yml
+      ansible.builtin.import_tasks: copy_config_file.yml
 
     - name: Restart FDO Manufacturing Server
-      systemd:
+      ansible.builtin.systemd:
         name: fdo-manufacturing-server
         state: restarted
-        enabled: yes
+        enabled: true
 
     - name: Check FDO Manufacturing Server Status
-      command: systemctl status fdo-manufacturing-server
+      ansible.builtin.systemd:
+        name: fdo-manufacturing-server
       register: fdo_manufacturing_server_status
 
     - name: Report FDO Manufacturing Server Status
-      fail:
+      ansible.builtin.fail:
         msg: FDO Manufacturing Server failed to restart after configuration change.
-      when: fdo_manufacturing_server_status.rc != 0
+      when: fdo_manufacturing_server_status.status.ActiveState != 'active'
 
     - name: Open Required Ports
       ansible.posix.firewalld:
         port: "{{ item }}"
-        permanent: yes
+        permanent: true
         state: enabled
         immediate: true
       loop:
@@ -33,16 +34,16 @@
 
   rescue:
     - name: Reset config file
-      import_tasks: reset_config_file.yml
-      when: enable_roll_back | bool == true
-      
+      ansible.builtin.import_tasks: reset_config_file.yml
+      when: enable_roll_back | bool
+
     - name: Restart FDO Manufacturing Server
-      systemd:
+      ansible.builtin.systemd:
         name: fdo-manufacturing-server
         state: restarted
-        enabled: yes
-      when: enable_roll_back | bool == true
+        enabled: true
+      when: enable_roll_back | bool
 
     - name: FDO Manufacturing Server configuration failed
-      fail:
+      ansible.builtin.fail:
         msg: FDO Manufacturing Server configuration failed.

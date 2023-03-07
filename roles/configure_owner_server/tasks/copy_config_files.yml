@@ -4,23 +4,27 @@
 
 ### Create backups of existing configuration files and create new ones from templates. ###
 - name: Copy Old Owner Onboarding Server Config
-  copy:
+  ansible.builtin.copy:
     src: "{{ fdo_src }}/owner-onboarding-server.yml"
     dest: "{{ fdo_src }}/owner-onboarding-server.yml.old"
-    remote_src: yes
+    mode: "0644"
+    remote_src: true
 
 - name: Copy Old Serviceinfo API Server Config
-  copy:
+  ansible.builtin.copy:
     src: "{{ fdo_src }}/serviceinfo-api-server.yml"
     dest: "{{ fdo_src }}/serviceinfo-api-server.yml.old"
-    remote_src: yes
+    mode: "0644"
+    remote_src: true
 
 - name: Configure Owner Onboarding Server
-  template:
-    src: ../templates/owner-onboarding-server.yml.j2
+  ansible.builtin.template:
+    src: "{{ role_path }}/templates/owner-onboarding-server.yml.j2"
     dest: "{{ fdo_src }}/owner-onboarding-server.yml"
+    mode: "0644"
 
 - name: Configure Serviceinfo API Server
-  template:
-    src: ../templates/serviceinfo-api-server.yml.j2
+  ansible.builtin.template:
+    src: "{{ role_path }}/templates/serviceinfo-api-server.yml.j2"
     dest: "{{ fdo_src }}/serviceinfo-api-server.yml"
+    mode: "0644"

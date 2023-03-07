@@ -1,4 +1,3 @@
----
 # Copyright: (c) 2022, XLAB Steampunk <steampunk@xlab.si>
 # GNU General Public License v3.0+ (see LICENSE or https://www.gnu.org/licenses/gpl-3.0.txt)
 
@@ -7,8 +6,10 @@ argument_specs:
     version_added: 1.0.0
     short_description: Reconfigures AIO server files
     description:
-      - Creates backups of existing configuration files, creates new ones from templates and then restarts the FDO AIO service. If the service restarted correctly it then opens the required ports.
-        In the case of it failing it resets the config files by moving the contents of backup files back to the original configuration files. It then restarts the FDO AIO service and reports that the configuration had failed.
+      - Creates backups of existing configuration files, creates new ones from templates and then restarts the FDO AIO service.
+        If the service restarted correctly it then opens the required ports. In the case of it failing it resets the config files
+        by moving the contents of backup files back to the original configuration files. It then restarts the FDO AIO service and
+        reports that the configuration had failed.
     options:
       fdo_aio_src:
         description:
@@ -32,7 +33,7 @@ argument_specs:
         default: US
       aio_configuration_listen_ip_address:
         description:
-          - The IP address that the AIO server will listen to. 
+          - The IP address that the AIO server will listen to.
         type: str
         default: 0.0.0.0
       aio_configuration_listen_port_manufacturing_server:
@@ -62,22 +63,22 @@ argument_specs:
         default: false
       aio_configuration_manufacturing_enable_plain_di:
         description:
-          - ... 
+          - ...
         type: bool
         default: false
       aio_configuration_manufacturing_disable_key_storage_filesystem:
         description:
-          - ... 
+          - ...
         type: bool
         default: false
       aio_configuration_manufacturing_disable_key_storage_tpm:
         description:
-          - ... 
+          - ...
         type: bool
         default: false
       aio_configuration_manufacturing_use_secp256r1:
         description:
-          - ... 
+          - ...
         type: bool
         default: false
       aio_configuration_contact_hostname:
@@ -85,19 +86,20 @@ argument_specs:
           - Name of the host machine.
         type: str
         default: ~
-      aio_configuration_contact_addresses_IpAddr:
+      aio_configuration_contact_addresses_ipaddr:
         description:
-          - IP Address of the host machine. Must be either set manually (if you system has more than one interface) or used with `gather_facts true` in your playbook.
+          - IP Address of the host machine. Must be either set manually (if you system has more than one interface)
+            or used with `gather_facts true` in your playbook.
         type: str
         default: "{{ ansible_default_ipv4.address }}"
       aio_configuration_serviceinfo_api_auth_token:
         description:
-          - Serviceinfo api authorization token. Change to a valid API token. 
+          - Serviceinfo api authorization token. Change to a valid API token.
         type: str
         required: true
       aio_configuration_serviceinfo_api_admin_token:
         description:
-          - Serviceinfo api admin token. Change to a valid API token. 
+          - Serviceinfo api admin token. Change to a valid API token.
         type: str
         required: true
       manufacturing_server_session_store_driver_path:
@@ -117,7 +119,7 @@ argument_specs:
         default: "{{ fdo_aio_src }}/stores/manufacturer_keys"
       manufacturing_server_protocols_plain_di:
         description:
-          - ... 
+          - ...
         type: bool
         default: false
       manufacturing_server_protocols_key_path:
@@ -132,7 +134,7 @@ argument_specs:
         default: "{{ fdo_aio_src }}/keys/diun_cert.pem"
       manufacturing_server_rendezvous_info_protocol:
         description:
-          - ... 
+          - ...
         type: str
         default: http
       manufacturing_server_manufacturer_cert_path:
@@ -212,37 +214,37 @@ argument_specs:
         default: "{{ aio_configuration_serviceinfo_api_auth_token }}"
       owner_onboarding_server_owner_addresses_transport:
         description:
-          - ... 
+          - ...
         type: str
         default: http
       owner_onboarding_server_report_to_rendezvous_endpoint_enabled:
         description:
-          - ... 
+          - ...
         type: bool
         default: true
       serviceinfo_api_server_service_info_initial_user:
         description:
-          - Name of the initial user of the serviceinfo api. 
+          - Name of the initial user of the serviceinfo api.
         type: str
         default: ~
       serviceinfo_api_server_service_info_files:
         description:
-          - ... 
+          - ...
         type: str
         default: ~
       serviceinfo_api_server_service_info_commands:
         description:
-          - ... 
+          - ...
         type: str
         default: ~
       serviceinfo_api_server_service_info_diskencryption_clevis:
         description:
-          - ... 
+          - ...
         type: str
         default: ~
       serviceinfo_api_server_service_info_additional_serviceinfo:
         description:
-          - ... 
+          - ...
         type: str
         default: ~
       serviceinfo_api_server_device_specific_store_driver_path:

@@ -6,9 +6,11 @@ argument_specs:
   main:
     version_added: 1.0.0
     short_description: Reconfigures owner server files.
-    description: 
-      - Creates backups of existing configuration files, creates new ones from templates and then restarts the owner onboarding server and the serviceinfo api server. If the service restarted correctly it then opens the required ports.
-        In the case of it failing it resets the config files by moving the contents of backup files back to the original configuration files. It then restarts the owner onboarding server and the serviceinfo api server and reports that the configuration had failed.
+    description:
+      - Creates backups of existing configuration files, creates new ones from templates and then restarts the owner onboarding server and
+        the serviceinfo api server. If the service restarted correctly it then opens the required ports. In the case of it failing it resets
+        the config files by moving the contents of backup files back to the original configuration files. It then restarts the owner
+        onboarding server and the serviceinfo api server and reports that the configuration had failed.
     options:
       fdo_src:
         description:
@@ -74,7 +76,7 @@ argument_specs:
         description:
           - Serviceinfo api authentication token. Change to a valid API token
         type: str
-        default: TestAuthToken 
+        default: TestAuthToken
       owner_onboarding_server_owner_addresses_transport:
         description:
           - ...
@@ -82,12 +84,12 @@ argument_specs:
         default: http
       owner_onboarding_server_owner_addresses_ip_address:
         description:
-          - Owner server IP address. Change to owner server IP. 
+          - Owner server IP address. Change to owner server IP.
         type: str
-        default: 127.0.0.1 
+        default: 127.0.0.1
       owner_onboarding_server_report_to_rendezvous_endpoint_enabled:
         description:
-          - ... 
+          - ...
         type: bool
         default: true
       serviceinfo_api_server_service_info_initial_user_username:
@@ -137,7 +139,7 @@ argument_specs:
         default: /dev/vda4
       serviceinfo_api_server_device_specific_store_driver_path:
         description:
-          - Serviceinfo api devices directory path. 
+          - Serviceinfo api devices directory path.
         type: str
         default: "{{ fdo_src }}/stores/serviceinfo_api_devices"
       serviceinfo_api_server_service_info_auth_token:
@@ -149,4 +151,4 @@ argument_specs:
         description:
           - Serviceinfo api admin authorization token. Change to a valid API token.
         type: str
-        default: TestAdminToken 
+        default: TestAdminToken

@@ -9,3 +9,4 @@ argument_specs:
     description:
       - Checks RHEL subscription, installs fdo-admin-cli package with dnf, starts and enables the FDO AIO service
         and then opens the required ports.
+    options: {}
