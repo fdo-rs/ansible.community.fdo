@@ -7,7 +7,8 @@
   become: true
   gather_facts: true
   tasks:
-    - ansible.builtin.include_role:
+    - name: Set up manaufacturing server
+      ansible.builtin.include_role:
         name: community.fdo.setup_manufacturing_server
 
 - name: Provision FDO Owner Server
@@ -15,9 +16,10 @@
   become: true
   gather_facts: true
   vars:
-    - copy_manufacturer_certs: false
+    copy_manufacturer_certs: false
   tasks:
-    - ansible.builtin.include_role:
+    - name: Set up owner server
+      ansible.builtin.include_role:
         name: community.fdo.setup_owner_server
 
 - name: Provision FDO Rendezvous Server
@@ -25,7 +27,8 @@
   become: true
   gather_facts: true
   vars:
-    - copy_manufacturer_certs: false
+    copy_manufacturer_certs: false
   tasks:
-    - ansible.builtin.include_role:
+    - name: Set up rendezvous sever
+      ansible.builtin.include_role:
         name: community.fdo.setup_rendezvous_server
