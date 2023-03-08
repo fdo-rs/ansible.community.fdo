@@ -2,15 +2,25 @@
 # Copyright: (c) 2022, XLAB Steampunk <steampunk@xlab.si>
 # GNU General Public License v3.0+ (see LICENSE or https://www.gnu.org/licenses/gpl-3.0.txt)
 
-- name: Check RHEL Subscription
-  ansible.builtin.command: subscription-manager status
-  register: subscription_status
-  ignore_errors: true
-  changed_when: false # changes nothing
+- name: Gather operating system if needed
+  ansible.builtin.setup:
+    gather_subset:
+      - "distribution"
+      - "!min"
+  when: ansible_facts.distribution is not defined
 
-- name: RHEL Subscription
-  ansible.builtin.fail:
-    msg: RHEL Subscription not available.
-  when:
-    - '"Overall Status: Current" not in subscription_status.stdout'
-    - '"Content Access Mode is set to Simple Content Access" not in subscription_status.stdout'
+- name: Check for a valid subscription RHEL systems
+  when: ansible_facts.distribution == "RedHat"
+  block:
+    - name: Check RHEL Subscription
+      ansible.builtin.command: subscription-manager status
+      register: subscription_status
+      ignore_errors: true
+      changed_when: false # changes nothing
+
+    - name: RHEL Subscription
+      ansible.builtin.fail:
+        msg: RHEL Subscription not available.
+      when:
+        - '"Overall Status: Current" not in subscription_status.stdout'
+        - '"Content Access Mode is set to Simple Content Access" not in subscription_status.stdout'
