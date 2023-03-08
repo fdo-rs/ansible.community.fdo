@@ -7,5 +7,6 @@
   become: true
   gather_facts: true
   tasks:
-    - ansible.builtin.include_role:
+    - name: Copy ownership vouchers (OV) from manufacturer to owner
+      ansible.builtin.include_role:
         name: community.fdo.copy_ownership_vouchers

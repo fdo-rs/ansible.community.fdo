@@ -7,5 +7,6 @@
   become: true
   gather_facts: true
   tasks:
-    - ansible.builtin.include_role:
+    - name: Set up all-on-one server
+      ansible.builtin.include_role:
         name: community.fdo.setup_aio_server

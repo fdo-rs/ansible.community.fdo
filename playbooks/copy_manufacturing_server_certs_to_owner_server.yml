@@ -7,5 +7,6 @@
   become: true
   gather_facts: true
   tasks:
-    - ansible.builtin.include_role:
+    - name: Copy certificates to owner server
+      ansible.builtin.include_role:
         name: community.fdo.copy_manufacturing_server_certs_to_owner_server

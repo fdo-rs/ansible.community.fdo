@@ -10,3 +10,8 @@ jobs:
       uses: ansible/ansible-lint-action@v6
       with:
         path: "./roles"
+    - name: Lint Sample Playbooks
+      uses: ansible/ansible-lint-action@v6
+      with:
+        path: "./playbooks"
+

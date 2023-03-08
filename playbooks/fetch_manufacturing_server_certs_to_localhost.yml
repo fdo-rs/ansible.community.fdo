@@ -7,5 +7,6 @@
   become: true
   gather_facts: true
   tasks:
-    - ansible.builtin.include_role:
+    - name: Copy certificates from manufacturing to local host
+      ansible.builtin.include_role:
         name: community.fdo.fetch_manufacturing_server_certs_to_localhost
