@@ -11,4 +11,6 @@
 - name: RHEL Subscription
   ansible.builtin.fail:
     msg: RHEL Subscription not available.
-  when: '"Overall Status: Current" not in subscription_status.stdout'
+  when:
+    - '"Overall Status: Current" not in subscription_status.stdout'
+    - '"Content Access Mode is set to Simple Content Access" not in subscription_status.stdout'
