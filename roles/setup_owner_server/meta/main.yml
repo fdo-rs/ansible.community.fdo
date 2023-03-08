@@ -2,5 +2,14 @@
 # Copyright: (c) 2023, Red Hat
 # GNU General Public License v3.0+ (see LICENSE or https://www.gnu.org/licenses/gpl-3.0.txt)
 
+galaxy_info:
+  description: Setup FDO Owner Server
+  author: XLAB Steampunk <steampunk@xlab.si>
+  license: GPL-3.0-or-later
+  min_ansible_version: "2.9"
+  platforms:
+    - name: Fedora
+      version: all
+
 dependencies:
   - role: check_rhel_subscription
