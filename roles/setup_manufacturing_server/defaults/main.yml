@@ -4,4 +4,3 @@
 
 fdo_src: /etc/fdo
 manufacturing_server_generate_keys_and_certificates: true
-generated_certs_dir: "{{ fdo_src }}/keys"

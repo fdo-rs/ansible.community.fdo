@@ -15,6 +15,8 @@
 - name: Generate FDO keys and certificates
   ansible.builtin.import_role:
     name: generate_keys_and_certificates
+  vars:
+    generated_certs_dir: "{{ fdo_src }}/keys"
   when: manufacturing_server_generate_keys_and_certificates | bool
 
 - name: Create Manufacturer Service Keys Stores
