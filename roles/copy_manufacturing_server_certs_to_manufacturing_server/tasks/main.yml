@@ -1,0 +1,58 @@
+---
+# Copyright: (c) 2023, Red Hat
+# GNU General Public License v3.0+ (see LICENSE or https://www.gnu.org/licenses/gpl-3.0.txt)
+
+- name: Copy Manufacturing Server Device Certificate from localhost
+  ansible.posix.synchronize:
+    src: "{{ localhost_manufacturing_server_certs_dir }}/device_ca_cert.pem"
+    dest: "{{ manufacturing_server_fdo_src }}/keys/device_ca_cert.pem"
+    checksum: true
+    rsync_timeout: 60
+
+- name: Copy Manufacturing Server Device Private Key from localhost
+  ansible.posix.synchronize:
+    src: "{{ localhost_manufacturing_server_certs_dir }}/device_ca_key.der"
+    dest: "{{ manufacturing_server_fdo_src }}/keys/device_ca_key.der"
+    checksum: true
+    rsync_timeout: 60
+
+- name: Copy Manufacturing Server Owner Certificate from localhost
+  ansible.posix.synchronize:
+    src: "{{ localhost_manufacturing_server_certs_dir }}/owner_cert.pem"
+    dest: "{{ manufacturing_server_fdo_src }}/keys/owner_cert.pem"
+    checksum: true
+    rsync_timeout: 60
+
+- name: Copy Manufacturing Server Manufacturer Certificate from localhost
+  ansible.posix.synchronize:
+    src: "{{ localhost_manufacturing_server_certs_dir }}/manufacturer_cert.pem"
+    dest: "{{ manufacturing_server_fdo_src }}/keys/manufacturer_cert.pem"
+    checksum: true
+    rsync_timeout: 60
+
+- name: Copy Manufacturing Server Manufacturer Private Key from localhost
+  ansible.posix.synchronize:
+    src: "{{ localhost_manufacturing_server_certs_dir }}/manufacturer_key.der"
+    dest: "{{ manufacturing_server_fdo_src }}/keys/manufacturer_key.der"
+    checksum: true
+    rsync_timeout: 60
+
+- name: Copy Manufacturing Server DIUN Certificate from localhost
+  ansible.posix.synchronize:
+    src: "{{ localhost_manufacturing_server_certs_dir }}/diun_cert.pem"
+    dest: "{{ manufacturing_server_fdo_src }}/keys/diun_cert.pem"
+    checksum: true
+    rsync_timeout: 60
+
+- name: Copy Manufacturing Server DIUN Private Key from localhost
+  ansible.posix.synchronize:
+    src: "{{ localhost_manufacturing_server_certs_dir }}/diun_key.der"
+    dest: "{{ manufacturing_server_fdo_src }}/keys/diun_key.der"
+    checksum: true
+    rsync_timeout: 60
+
+- name: Restart Manufacturing Server
+  ansible.builtin.systemd:
+    name: fdo-manufacturing-server
+    state: restarted
+    enabled: true

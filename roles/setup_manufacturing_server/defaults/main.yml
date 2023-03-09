@@ -3,4 +3,5 @@
 # GNU General Public License v3.0+ (see LICENSE or https://www.gnu.org/licenses/gpl-3.0.txt)
 
 fdo_src: /etc/fdo
-generate_keys_and_certificates: true
+manufacturing_server_generate_keys_and_certificates: true
+generated_certs_dir: "{{ fdo_src }}/keys"

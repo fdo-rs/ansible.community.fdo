@@ -2,6 +2,5 @@
 # Copyright: (c) 2023, Red Hat
 # GNU General Public License v3.0+ (see LICENSE or https://www.gnu.org/licenses/gpl-3.0.txt)
 
-force_regenerate_certs: false
-certificate_country: US
-certificate_org: Example
+manufacturing_server_fdo_src: /etc/fdo
+localhost_manufacturing_server_certs_dir: /var/tmp/fdo

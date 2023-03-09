@@ -12,27 +12,10 @@
       - sshpass
       - rsync
 
-- name: Creates FDO Keys Directory
-  ansible.builtin.file:
-    path: "{{ fdo_src }}/keys"
-    state: directory
-    mode: "0775"
-
-- name: Check if Certs and Keys folder is empty before proceeding
-  ansible.builtin.find:
-    paths: "{{ fdo_src }}/keys"
-  register: files_found
-
-- name: Generate new FDO Certs and Keys
-  ansible.builtin.shell: |
-    for i in manufacturer owner device-ca diun ; do
-
-    fdo-admin-tool generate-key-and-cert \
-    --destination-dir "{{ fdo_src }}/keys" $i
-
-    done
-  when: files_found.matched == 0
-  changed_when: true # assume always (re-)generates when called
+- name: Generate FDO keys and certificates
+  ansible.builtin.import_role:
+    name: generate_keys_and_certificates
+  when: manufacturing_server_generate_keys_and_certificates | bool
 
 - name: Create Manufacturer Service Keys Stores
   ansible.builtin.file:
