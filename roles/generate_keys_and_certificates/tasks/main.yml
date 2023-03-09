@@ -1,0 +1,23 @@
+---
+# Copyright: (c) 2023, Red Hat
+# GNU General Public License v3.0+ (see LICENSE or https://www.gnu.org/licenses/gpl-3.0.txt)
+
+- name: Check if Certs and Keys folder is empty before proceeding
+  ansible.builtin.find:
+    paths: "{{ generated_certs_dir }}"
+  register: files_found
+
+- name: Generate new FDO Certs and Keys
+  ansible.builtin.command: |
+    fdo-admin-tool generate-key-and-cert \
+      --organization '{{ certificate_org }}' \
+      --country {{ certificate_country }} \
+      --destination-dir "{{ generated_certs_dir }}" \
+      {{ item }}
+  loop:
+    - manufacturer
+    - owner
+    - device-ca
+    - diun
+  when: files_found.matched == 0 or force_certs_regeneration
+  changed_when: true # assume always (re-)generates when called
