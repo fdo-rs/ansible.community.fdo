@@ -25,10 +25,6 @@
       --country {{ certificate_country }} \
       --destination-dir "{{ generated_certs_dir }}" \
       {{ item }}
-  loop:
-    - manufacturer
-    - owner
-    - device-ca
-    - diun
+  loop: "{{ generate_certificate_types }}"
   when: files_found.matched == 0 or force_regenerate_certs | bool
   changed_when: true # assume always (re-)generates when called

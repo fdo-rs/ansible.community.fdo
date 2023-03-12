@@ -29,3 +29,18 @@ argument_specs:
           - Organization (O) of the generated certificates' Subject.
         type: str
         default: Example
+      generate_certificate_types:
+        description:
+          - List of types of keys and certificates to generate. Each element must be one of the valid certificate types.
+        type: list
+        elements: str
+        choices:
+          - manufacturer
+          - owner
+          - device-ca
+          - diun
+        default:
+          - manufacturer
+          - owner
+          - device-ca
+          - diun

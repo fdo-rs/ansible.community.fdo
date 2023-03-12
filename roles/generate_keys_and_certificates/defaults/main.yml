@@ -6,3 +6,8 @@ force_regenerate_certs: false
 certificate_country: US
 certificate_org: Example
 generated_certs_dir: /var/tmp/fdo
+generate_certificate_types:
+  - manufacturer
+  - owner
+  - device-ca
+  - diun
