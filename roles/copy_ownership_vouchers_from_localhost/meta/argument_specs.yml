@@ -5,17 +5,17 @@
 argument_specs:
   main:
     version_added: 1.0.0
-    short_description: Copy FDO Device Owner Voucers
+    short_description: Copy FDO Device Owner Vouchers
     description:
-      - Copy FDO Device Owner Voucers from localhost to Owner server.
+      - Copy FDO Device Owner Vouchers from localhost to Owner server.
     options:
       owner_server_ownership_vouchers_dir:
         description:
-          - Device Owner Voucer directory path on Owner server.
+          - Device Owner Voucher directory path on Owner server.
         type: str
         default: /etc/fdo/stores/owner_vouchers
       localhost_ownership_vouchers_dir:
         description:
-          - Device Owner Voucer directory path on localhost.
+          - Device Owner Voucher directory path on localhost.
         type: str
         default: /var/tmp/fdo
