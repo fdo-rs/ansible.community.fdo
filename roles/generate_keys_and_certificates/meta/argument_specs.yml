@@ -1,0 +1,31 @@
+---
+# Copyright: (c) 2023, Red Hat
+# GNU General Public License v3.0+ (see LICENSE or https://www.gnu.org/licenses/gpl-3.0.txt)
+
+argument_specs:
+  main:
+    version_added: 2.0.0
+    short_description: Generate keys and certificates
+    description:
+      - Generate private keys and certificates (manufacturer, owner, device-ca, diun) into a target directory.
+    options:
+      generated_certs_dir:
+        description:
+          - Target directory on a local or remote host for generated keys and certificates.
+        type: str
+        default: /var/tmp/fdo
+      force_regenerate_certs:
+        description:
+          - Whether keys and certificates must be generated even if the target already contains key and certificate files.
+        type: bool
+        default: false
+      certificate_country:
+        description:
+          - Country (C) of the generated certificates' Subject.
+        type: str
+        default: US
+      certificate_org:
+        description:
+          - Organization (O) of the generated certificates' Subject.
+        type: str
+        default: Example
