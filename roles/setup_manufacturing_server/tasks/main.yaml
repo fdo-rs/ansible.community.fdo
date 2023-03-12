@@ -19,6 +19,13 @@
     generated_certs_dir: "{{ fdo_src }}/keys"
   when: manufacturing_server_generate_keys_and_certificates | bool
 
+- name: Creates FDO Keys Directory
+  ansible.builtin.file:
+    path: "{{ fdo_src }}/keys"
+    state: directory
+    mode: "0775"
+  when: not manufacturing_server_generate_keys_and_certificates | bool
+
 - name: Create Manufacturer Service Keys Stores
   ansible.builtin.file:
     path: "{{ item }}"
