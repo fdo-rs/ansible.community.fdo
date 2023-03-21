@@ -18,7 +18,7 @@ You need to install Ansible and `community.fdo` & `ansible.posix` collections.
   become: true
   gather_facts: true
   tasks:
-    # Role installs required packages, starts services & 
+    # Role installs required packages, starts services &
     # enables required ports for FDO AIO Server.
     - import_role:
         name: setup_aio_server
@@ -53,7 +53,7 @@ In case of the specific use-case where Manufacturing Server is located in differ
   become: true
   gather_facts: true
   tasks:
-    # Role installs required packages, starts services & 
+    # Role installs required packages, starts services &
     # enables required ports for FDO Manufacturing Server.
     - import_role:
         name: setup_manufacturing_server
@@ -89,7 +89,7 @@ In case of the specific use-case where Manufacturing Server is located in differ
 
 In case of the specific use-case where Manufacturing Server is located in different network than Owner and Rendezvous Servers - and the latter can't access the former, `update_keys_certs` variable has to be set to `false` (for Owner & Rendezvous Servers configuration).
 
-```yaml 
+```yaml
 ---
 - name: Configure Manufacturing Server
   hosts: manufacturing_server
@@ -182,7 +182,7 @@ In case of the specific use-case where Manufacturing Server is located in differ
 
 ```yaml
 ---
-- name: Fetch Ownership Voucers from Manufacturer server to localhost
+- name: Fetch Ownership Vouchers from Manufacturer server to localhost
   hosts: manufacturing_server
   become: true
   gather_facts: true
@@ -192,7 +192,7 @@ In case of the specific use-case where Manufacturing Server is located in differ
     - import_role:
         name: fetch_ownership_vouchers_to_localhost
 
-- name: Copy Ownership Voucers from localhost to Owner server
+- name: Copy Ownership Vouchers from localhost to Owner server
   hosts: owner_server
   become: true
   gather_facts: true

@@ -5,17 +5,17 @@
 argument_specs:
   main:
     version_added: 1.0.0
-    short_description: Fetch FDO Device Owner Voucers
+    short_description: Fetch FDO Device Owner Vouchers
     description:
-      - Fetch FDO Device Owner Voucers from Manufacturer server to localhost.
+      - Fetch FDO Device Owner Vouchers from Manufacturer server to localhost.
     options:
       manufacturing_server_ownership_vouchers_dir:
         description:
-          - Device Owner Voucer directory path on Manufacturing server.
+          - Device Owner Voucher directory path on Manufacturing server.
         type: str
         default: /etc/fdo/stores/owner_vouchers
       localhost_ownership_vouchers_dir:
         description:
-          - Device Owner Voucer directory path on localhost.
+          - Device Owner Voucher directory path on localhost.
         type: str
         default: /var/tmp/fdo
