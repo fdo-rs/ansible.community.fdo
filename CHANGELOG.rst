@@ -29,6 +29,8 @@ Other changes
 - Replaced the `systemctl status` command with `ansible.builtin.systemd` module for checking the status of a systemd service
 - Added `changed_when` to commands for indicating when a command causes changes
 - Used `present` instead of `latest` for packages to avoid inadvertent upgrades
+- Added support for Simple Content Access (SCA) subscriptions on RHEL
+- Allowed running the roles on non-RHEL systems that include the FDO packages
 
 v1.0.0
 ======
