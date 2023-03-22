@@ -1,0 +1,12 @@
+---
+# Copyright: (c) 2023, Red Hat
+# GNU General Public License v3.0+ (see LICENSE or https://www.gnu.org/licenses/gpl-3.0.txt)
+
+- name: Generate FDO Keys and Certificates on Local Host
+  hosts: localhost
+  become: true
+  gather_facts: true
+  tasks:
+    - name: Generate keys and certificates
+      ansible.builtin.include_role:
+        name: community.fdo.generate_keys_and_certificates

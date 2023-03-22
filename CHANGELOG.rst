@@ -31,6 +31,7 @@ Other changes
 - Used `present` instead of `latest` for packages to avoid inadvertent upgrades
 - Added support for Simple Content Access (SCA) subscriptions on RHEL
 - Allowed running the roles on non-RHEL systems that include the FDO packages
+- Enabled a user to generate FDO keys and certificates locally and use them or custom ones with FDO servers
 
 v1.0.0
 ======
