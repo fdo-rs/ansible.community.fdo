@@ -271,3 +271,69 @@ The collection also includes a role for generating all or a subset of keys and c
     - import_role:
         name: generate_keys_and_certificates
 ```
+
+## Customize ServiceInfo API
+
+In most cases you will want to customize the onboarding via a ServiceInfo API configuration. This can be done by providing the configuration
+in YAML format with two-space indentation, as either an in-line value
+
+```yaml
+---
+- name: Configure Owner Server
+  hosts: owner_server
+  become: true
+  gather_facts: true
+  vars:
+    serviceinfo_api_server_config: |-
+      initial_user:
+        username: admin
+        sshkeys:
+        - "ssh-rsa ABCDEF+EXAMPLE/PUBLICSSHKEY= fdo@example.com"
+      files:
+      - path: /root/call_home.sh
+        source_path: "/etc/fdo/store/serviceinfo_api/scripts/call_home.sh"
+        permissions: "744"
+      commands:
+      - command: /bin/bash
+        args:
+        - /root/call_home.sh
+        - api.example.com
+        return_stdout: true
+        return_stderr: true
+      diskencryption_clevis:
+      - disk_label: /dev/vda4
+        binding:
+          pin: tpm2
+          config: "{}"
+        reencrypt: true
+      additional_serviceinfo: ~
+  tasks:
+    # Role updates FDO Owner Server config files and restarts the services.
+    - import_role:
+        name: configure_owner_server
+```
+
+or a file
+
+```yaml
+---
+- name: Configure Owner Server
+  hosts: owner_server
+  become: true
+  gather_facts: true
+  vars:
+    serviceinfo_api_server_config: "{{ lookup('file', 'serviceinfo-api-config.yml') }}"
+  tasks:
+    # Role updates FDO Owner Server config files and restarts the services.
+    - import_role:
+        name: configure_owner_server
+```
+
+The custom configuration can also be a template. In that case, set all necessary `vars` and define the configuration as follows
+
+```yaml
+  vars:
+    serviceinfo_api_server_config: "{{ lookup('template', 'serviceinfo-api-config.yml.j2') }}"
+```
+
+The full list of customization options can be found under `service_info` in the [How-To documentation](https://github.com/fedora-iot/fido-device-onboard-rs/blob/main/HOWTO.md#serviceinfo_api_serveryml) for the FIDO Device Onboard implementation.

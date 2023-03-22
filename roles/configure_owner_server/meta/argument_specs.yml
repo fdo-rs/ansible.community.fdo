@@ -94,27 +94,27 @@ argument_specs:
         default: true
       serviceinfo_api_server_service_info_initial_user_username:
         description:
-          - Username of the initial user of the serviceinfo api.
+          - Deprecated, use serviceinfo_api_server_config instead. Username of the initial user of the serviceinfo api.
         type: str
         default: admin
       serviceinfo_api_server_service_info_initial_user_password:
         description:
-          - Password of the initial user of the serviceinfo api.
+          - Deprecated, use serviceinfo_api_server_config instead. Password of the initial user of the serviceinfo api.
         type: str
         default: admin
       serviceinfo_api_server_service_info_initial_user_sshkeys:
         description:
-          - SSH Keys of the initial user of the serviceinfo api.
+          - Deprecated, use serviceinfo_api_server_config instead. SSH Keys of the initial user of the serviceinfo api.
         type: str
         default: ""
       serviceinfo_api_server_service_files_path:
         description:
-          - Serviceinfo api server service files path.
+          - Deprecated, use serviceinfo_api_server_config instead. Serviceinfo api server service files path.
         type: str
         default: /root/resolv.conf
       serviceinfo_api_server_service_files_source_path:
         description:
-          - Serviceinfo api server service files source path.
+          - Deprecated, use serviceinfo_api_server_config instead. Serviceinfo api server service files source path.
         type: str
         default: /etc/resolv.conf
       serviceinfo_api_server_bind_ip:
@@ -129,12 +129,12 @@ argument_specs:
         default: "{{ owner_onboarding_server_listen_port_serviceinfo_api_server}}"
       serviceinfo_api_server_test_path:
         description:
-          - Test directory path.
+          - Deprecated, use serviceinfo_api_server_config instead. Test directory path.
         type: str
         default: /root/test
       serviceinfo_api_server_diskencryption_clevis_disk_label:
         description:
-          - ...
+          - Deprecated, use serviceinfo_api_server_config instead.
         type: str
         default: /dev/vda4
       serviceinfo_api_server_device_specific_store_driver_path:
@@ -152,3 +152,9 @@ argument_specs:
           - Serviceinfo api admin authorization token. Change to a valid API token.
         type: str
         default: TestAdminToken
+      serviceinfo_api_server_config:
+        description:
+          - Serviceinfo api sequence in YAML format with 2-spaces indentation. If defined and not empty, this configuration will override all other
+            initial_user, files, commands, diskencryption_clevis, and additional_serviceinfo settings.
+        type: str
+        required: false
