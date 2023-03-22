@@ -1,0 +1,21 @@
+---
+# Copyright: (c) 2023, Red Hat
+# GNU General Public License v3.0+ (see LICENSE or https://www.gnu.org/licenses/gpl-3.0.txt)
+
+argument_specs:
+  main:
+    version_added: 2.0.0
+    short_description: Copy FDO Manufacturing Server Keys and Certificates
+    description:
+      - Copy FDO Manufacturing Server Keys and Certificates from localhost to Manufacturing Server.
+    options:
+      manufacturing_server_fdo_src:
+        description:
+          - FDO directory path on the Manufacturing Server.
+        type: str
+        default: /etc/fdo
+      localhost_manufacturing_server_certs_dir:
+        description:
+          - Manufacturing Server Keys and Certificates directory path on localhost.
+        type: str
+        default: /var/tmp/fdo

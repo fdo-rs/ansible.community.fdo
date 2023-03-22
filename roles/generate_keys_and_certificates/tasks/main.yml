@@ -1,0 +1,30 @@
+---
+# Copyright: (c) 2023, Red Hat
+# GNU General Public License v3.0+ (see LICENSE or https://www.gnu.org/licenses/gpl-3.0.txt)
+
+- name: Install required packages
+  ansible.builtin.package:
+    name: fdo-admin-cli
+    state: present
+
+- name: Create a directory for FDO keys and certificates
+  ansible.builtin.file:
+    path: "{{ generated_certs_dir }}"
+    state: directory
+    mode: "0775"
+
+- name: Check if Certs and Keys folder is empty before proceeding
+  ansible.builtin.find:
+    paths: "{{ generated_certs_dir }}"
+  register: files_found
+
+- name: Generate new FDO Certs and Keys
+  ansible.builtin.command: |
+    fdo-admin-tool generate-key-and-cert \
+      --organization '{{ certificate_org }}' \
+      --country {{ certificate_country }} \
+      --destination-dir "{{ generated_certs_dir }}" \
+      {{ item }}
+  loop: "{{ generate_certificate_types }}"
+  when: files_found.matched == 0 or force_regenerate_certs | bool
+  changed_when: true # assume always (re-)generates when called
