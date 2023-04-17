@@ -32,6 +32,7 @@ Other changes
 - Added support for Simple Content Access (SCA) subscriptions on RHEL
 - Allowed running the roles on non-RHEL systems that include the FDO packages
 - Enabled a user to generate FDO keys and certificates locally and use them or custom ones with FDO servers
+- Made the ServiceInfo API sequence fully customizable
 
 v1.0.0
 ======

@@ -1,5 +1,8 @@
 ---
 service_info:
+{% if serviceinfo_api_server_config is defined and serviceinfo_api_server_config is not none %}
+  {{ serviceinfo_api_server_config | indent(width=2) }}
+{% else %}
   initial_user:
     username: {{ serviceinfo_api_server_service_info_initial_user_username }}
 {% if serviceinfo_api_server_service_info_initial_user_password is not none %}
@@ -25,6 +28,7 @@ service_info:
       config: "{}"
     reencrypt: true
   additional_serviceinfo: ~
+{% endif %}
 bind: "{{ serviceinfo_api_server_bind_ip }}:{{ serviceinfo_api_server_listen_port_serviceinfo_api_server }}"
 device_specific_store_driver:
   Directory:
