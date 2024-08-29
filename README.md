@@ -16,7 +16,8 @@ For collection usage examples see [this](./examples/README.md).
 Join the Ansible forum to ask questions, get help, and interact with us.
 
 - [Get Help](https://forum.ansible.com/c/help/6): get help or help others.
-  Please add appropriate tags if you start new discussions.
+  Please add appropriate tags if you start new discussions; for example,
+  use the [`edge`](https://forum.ansible.com/tags/c/help/6/none/edge) tag.
 - [Social Spaces](https://forum.ansible.com/c/chat/4): meet and interact with
   fellow enthusiasts.
 - [News & Announcements](https://forum.ansible.com/c/news/5): track project-wide
