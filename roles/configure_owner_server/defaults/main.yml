@@ -19,6 +19,7 @@ owner_onboarding_server_listen_port_owner_onboarding_server: 8081
 owner_onboarding_server_listen_port_serviceinfo_api_server: 8083
 owner_onboarding_server_service_info_api_authentication_token: TestAuthToken # change to a valid API token
 owner_onboarding_server_owner_addresses_transport: http
+owner_onboarding_server_owner_addresses_dns_name: ""
 owner_onboarding_server_owner_addresses_ip_address: 127.0.0.1 # change to owner server ip
 owner_onboarding_server_report_to_rendezvous_endpoint_enabled: true
 

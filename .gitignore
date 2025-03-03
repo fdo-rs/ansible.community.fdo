@@ -8,3 +8,4 @@ tests/output
 tests/integration/integration_config.yml
 tests/integration/inventory
 ansible_collections
+.vscode
