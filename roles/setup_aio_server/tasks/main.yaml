@@ -2,6 +2,13 @@
 # Copyright: (c) 2022, XLAB Steampunk <steampunk@xlab.si>
 # GNU General Public License v3.0+ (see LICENSE or https://www.gnu.org/licenses/gpl-3.0.txt)
 
+# Show a Deprecation warning message
+- name: Deprecation warning
+  fail:
+    msg: "Warning!!! setup_aio_server role is deprecated"
+  when: ansible_check_mode == false
+  ignore_errors: true
+
 - name: Install Packages
   ansible.builtin.dnf:
     state: present
