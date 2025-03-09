@@ -21,7 +21,11 @@ protocols:
     cert_path: {{ manufacturing_server_protocols_diun_cert_path }}
 rendezvous_info:
   - deviceport: {{ manufacturing_server_rendezvous_info_deviceport }}
+{% if manufacturing_server_rendezvous_info_dns is defined and manufacturing_server_rendezvous_info_dns | length > 0 %}
+    dns: {{ manufacturing_server_rendezvous_info_dns }}
+{% else %} 
     ip_address: {{ manufacturing_server_rendezvous_info_ip_address }}
+{% endif %}
     ownerport: {{ manufacturing_server_rendezvous_info_owner_port }}
     protocol: {{ manufacturing_server_rendezvous_info_protocol }}
 manufacturing:

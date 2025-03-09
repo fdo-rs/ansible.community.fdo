@@ -17,6 +17,7 @@ manufacturing_server_protocols_diun_key_path: "{{ fdo_src }}/keys/diun_key.der"
 manufacturing_server_protocols_diun_cert_path: "{{ fdo_src }}/keys/diun_cert.pem"
 manufacturing_server_rendezvous_info_deviceport: 8082
 manufacturing_server_rendezvous_info_ip_address: 127.0.0.1 # change to rendezvous server ip
+manufacturing_server_rendezvous_info_dns: ""
 manufacturing_server_rendezvous_info_owner_port: "{{ manufacturing_server_rendezvous_info_deviceport }}"
 manufacturing_server_rendezvous_info_protocol: http
 manufacturing_server_manufacturing_manufacturer_cert_path: "{{ fdo_src }}/keys/manufacturer_cert.pem"

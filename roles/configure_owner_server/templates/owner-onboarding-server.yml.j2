@@ -16,6 +16,10 @@ service_info_api_authentication:
 owner_addresses:
   - transport: {{ owner_onboarding_server_owner_addresses_transport }}
     addresses:
+{% if owner_onboarding_server_owner_addresses_dns_name is defined and owner_onboarding_server_owner_addresses_dns_name | length > 0 %}
+      - dns_name: {{ owner_onboarding_server_owner_addresses_dns_name }}
+{% else %}
       - ip_address: {{ owner_onboarding_server_owner_addresses_ip_address }}
+{% endif %}
     port: {{ owner_onboarding_server_listen_port_owner_onboarding_server }}
 report_to_rendezvous_endpoint_enabled: {{ owner_onboarding_server_report_to_rendezvous_endpoint_enabled | bool | lower }}
