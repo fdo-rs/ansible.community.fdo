@@ -1,0 +1,12 @@
+---
+requires_ansible: ">=2.15.4"
+namespace: community
+name: fdo
+
+dependencies: {}
+
+deprecated_roles:
+- name: configure_aio_server
+  removal_date: "2025-12-31"
+- name: setup_aio_server
+  removal_date: "2025-12-31"
