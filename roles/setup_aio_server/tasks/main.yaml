@@ -6,8 +6,8 @@
 - name: Deprecation warning
   fail:
     msg: "Warning!!! setup_aio_server role is deprecated"
-  when: ansible_check_mode == false
-  ignore_errors: true
+  when: not ansible_check_mode
+  failed_when: false
 
 - name: Install Packages
   ansible.builtin.dnf:
